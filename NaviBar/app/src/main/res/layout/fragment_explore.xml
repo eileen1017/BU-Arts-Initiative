@@ -1,13 +1,38 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cs591.mooncake.ExploreFragment">
+    android:orientation="vertical"
+    tools:context=".fragment_explore">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#e01111"
+        android:elevation="16dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        >
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Explore."
+            android:textColor="#fff"
+            android:textSize="36sp" />
+
+
+    </android.support.v7.widget.Toolbar>
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_View"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/explore" />
-
-</FrameLayout>
+        android:background="#f64e46" />
+</LinearLayout>

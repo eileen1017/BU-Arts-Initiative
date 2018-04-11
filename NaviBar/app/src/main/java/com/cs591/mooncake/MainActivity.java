@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.cs591.mooncake.explore.ExploreFragment;
+
 
 public class MainActivity extends AppCompatActivity {
 
