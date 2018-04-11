@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">BUGlobalMusicFestival</string>
+    <string name="title_explore">Explore</string>
+    <string name="title_like">Like</string>
+    <string name="title_schedule">Schedule</string>
+    <string name="title_map">Map</string>
+    <string name="title_profile">Profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="explore">Explore Page</string>
+
+</resources>
