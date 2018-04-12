@@ -19,6 +19,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".explore.EventActivity"></activity>
+        <activity android:name=".profile.AboutPage"></activity>
+        <activity android:name=".profile.SettingsPage"></activity>
+        <activity android:name=".profile.InvitePage"></activity>
+        <activity android:name=".profile.FeedbackPage"></activity>
+        <activity android:name=".profile.TicketPage"></activity>
+
+
 
     </application>
 

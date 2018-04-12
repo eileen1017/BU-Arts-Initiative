@@ -1,13 +1,82 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cs591.mooncake.LikeFragment">
+    android:orientation="vertical"
+    android:background="#f64e46">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="#F64E46"-->
+        <!--android:fitsSystemWindows="true"-->
+        <!--android:showDividers="end"-->
+        <!--android:theme="@style/AppTheme">-->
+
+        <!--<android.support.design.widget.CollapsingToolbarLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="104dp"-->
+            <!--android:background="#E01111"-->
+            <!--android:elevation="10dp"-->
+            <!--android:fitsSystemWindows="true"-->
+            <!--app:contentScrim="?attr/colorAccent"-->
+            <!--app:expandedTitleTextAppearance="@android:color/transparent"-->
+            <!--app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
+            <!--&gt;-->
+
+
+            <!--<TextView-->
+                <!--android:layout_width="69dp"-->
+                <!--android:layout_height="49dp"-->
+                <!--android:layout_marginLeft="46dp"-->
+                <!--android:layout_marginTop="40dp"-->
+                <!--android:fitsSystemWindows="true"-->
+                <!--android:fontFamily="@font/lato_bold"-->
+                <!--android:scaleType="centerCrop"-->
+                <!--android:text="Like"-->
+                <!--android:textColor="@android:color/white"-->
+                <!--android:textSize="36sp" />-->
+
+
+        <!--</android.support.design.widget.CollapsingToolbarLayout>-->
+
+    <!--</android.support.design.widget.AppBarLayout>-->
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#e01111"
+        android:elevation="16dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        >
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Like"
+            android:textColor="#fff"
+            android:textSize="36sp" />
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Like Page" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
 
-</FrameLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            ></android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>
