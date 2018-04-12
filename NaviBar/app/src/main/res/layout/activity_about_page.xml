@@ -6,4 +6,12 @@
     android:layout_height="match_parent"
     tools:context="com.cs591.mooncake.profile.AboutPage">
 
+    <TextView
+        android:id="@+id/abouttxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="This is About Page, TO BE CONTINUE..."
+        android:textSize="24sp"
+        android:textStyle="bold" />
 </LinearLayout>
