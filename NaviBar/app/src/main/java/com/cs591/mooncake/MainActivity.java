@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 
 import com.cs591.mooncake.explore.ExploreFragment;
 import com.cs591.mooncake.like.LikeFragment;
+import com.cs591.mooncake.map.MapFragment;
 import com.cs591.mooncake.schedule.ScheduleFragment;
 import com.cs591.mooncake.profile.ProfileFragment;
 
