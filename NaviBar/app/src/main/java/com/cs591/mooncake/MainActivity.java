@@ -6,15 +6,21 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.cs591.mooncake.SQLite.DataBaseUtil;
+import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.explore.ExploreFragment;
 import com.cs591.mooncake.like.LikeFragment;
+import com.cs591.mooncake.map.MapFragment;
 import com.cs591.mooncake.schedule.ScheduleFragment;
 import com.cs591.mooncake.profile.ProfileFragment;
+
+import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -29,14 +35,23 @@ public class MainActivity extends AppCompatActivity {
     private ProfileFragment profileFragment;
 
 
+<<<<<<< HEAD
+=======
+    public MySQLiteHelper myDb;
+>>>>>>> fd7d466d96f2d7f757c0a0480e10ca36d387dc50
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mainFrame = (FrameLayout) findViewById(R.id.mainFrame);
-        navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        copyDataBaseToPhone();
+        myDb = new MySQLiteHelper(this);
+        myDb.getEventList();
+        myDb.getEvent(1);
+
+        mainFrame = findViewById(R.id.mainFrame);
+        navigation = findViewById(R.id.navigation);
 
         exploreFragment = new ExploreFragment();
         likeFragment = new LikeFragment();
@@ -81,5 +96,22 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
     }
+
+    private void copyDataBaseToPhone() {
+        DataBaseUtil util = new DataBaseUtil(this);
+
+        boolean dbExist = util.checkDataBase();
+
+        if (dbExist) {
+            Log.i("tag", "The database is exist.");
+        } else {
+            try {
+                util.copyDataBase();
+            } catch (IOException e) {
+                throw new Error("Error copying database");
+            }
+        }
+    }
+
 
 }
