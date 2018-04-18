@@ -71,9 +71,9 @@ public class ExploreFragment extends Fragment {
                 false);
 
         RecyclerView recyclerView = v.findViewById(R.id.recycler_View);
-        MainAdapter adapter = new MainAdapter(getContext(), getObject());
+        MainAdapter adapter = new MainAdapter(getActivity(), getObject());
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return v;
     }
@@ -103,11 +103,13 @@ public class ExploreFragment extends Fragment {
     }
 
     private ArrayList<Object> getObject() {
-        objects.add(getHorizontalData().get(0));
-        objects.add(getHorizontalData().get(0));
-        objects.add(getHorizontalData().get(0));
-        objects.add(getHorizontalData().get(0));
-        objects.add(getHorizontalData().get(0));
+        if (objects.isEmpty()) {
+            objects.add(getHorizontalData().get(0));
+            objects.add(getHorizontalData().get(0));
+            objects.add(getHorizontalData().get(0));
+            objects.add(getHorizontalData().get(0));
+            objects.add(getHorizontalData().get(0));
+        }
         return objects;
     }
 

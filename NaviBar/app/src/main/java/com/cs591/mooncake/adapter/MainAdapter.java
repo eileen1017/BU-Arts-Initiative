@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.cs591.mooncake.explore.ExploreFragment;
 
 
 import com.cs591.mooncake.R;
@@ -24,8 +23,11 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
     private ArrayList<Object> items;
-    private final int VERTICAL = 1;
-    private final int HORIZONTAL = 2;
+    private final int ARTIST = 1;
+    private final int PERFORMANCE = 2;
+    private final int WORKSHOP = 3;
+    private final int BAZAAR = 4;
+
 
     public MainAdapter(Context context, ArrayList<Object> items) {
         this.context = context;
@@ -40,11 +42,11 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         View view;
         RecyclerView.ViewHolder holder;
         switch (viewType) {
-            case VERTICAL:
+            case ARTIST:
                 view = inflater.inflate(R.layout.vertical, parent, false);
                 holder = new VerticalViewHolder(view);
                 break;
-            case HORIZONTAL:
+            case PERFORMANCE:
                 view = inflater.inflate(R.layout.horizontal, parent, false);
                 holder = new HorizontalViewHolder(view);
                 break;
@@ -59,9 +61,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (holder.getItemViewType() == VERTICAL)
+        if (holder.getItemViewType() == ARTIST)
             verticalView((VerticalViewHolder) holder);
-        else if (holder.getItemViewType() == HORIZONTAL)
+        else if (holder.getItemViewType() == PERFORMANCE)
             horizontalView((HorizontalViewHolder) holder);
     }
 
@@ -87,9 +89,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemViewType(int position) {
         if(items.get(position) instanceof SingleVertical)
-            return VERTICAL;
+            return ARTIST;
         if(items.get(position) instanceof SingleHorizontal)
-            return HORIZONTAL;
+            return PERFORMANCE;
         return -1;
     }
 
