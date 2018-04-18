@@ -7,7 +7,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.cs591.mooncake.explore.ExploreFragment;
 import com.cs591.mooncake.like.LikeFragment;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private ScheduleFragment scheduleFragment;
     private MapFragment mapFragment;
     private ProfileFragment profileFragment;
+
 
 
     @Override
