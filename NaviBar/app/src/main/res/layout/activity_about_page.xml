@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2A3143"
     android:fitsSystemWindows="true"
     tools:context="com.cs591.mooncake.profile.AboutPage">
 
@@ -11,15 +12,14 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme">
+        android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
-            android:layout_height="410dp"
+            android:layout_height="482dp"
+            android:background="#2A3143"
             android:fitsSystemWindows="true"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <ImageView
@@ -35,11 +35,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="83dp"
                 android:layout_marginRight="83dp"
-                android:layout_marginTop="75dp"
-                android:text="“Artistic engagement brings immeasurable value to our social and academic development, impacting not only the way we perceive the world but how we approach so many disciplines, from the sciences to the humanities. The Boston University Arts Initiative ensures that the arts are fundamental to the BU student experience inside and outside of the classroom.”
-— Jean Morrison, University Provost and Chief Academic Officer"
+                android:layout_marginTop="110dp"
+                android:textColor="#ffffff"
+                android:text="“Artistic engagement brings immeasurable value to our social and academic development, impacting not only the way we perceive the world but how we approach so many disciplines, from the sciences to the humanities. The Boston University Arts Initiative ensures that the arts are fundamental to the BU student experience inside and outside of the classroom.”"
                 android:textAlignment="center" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="83dp"
+                android:layout_marginRight="83dp"
+                android:layout_marginTop="330dp"
+                android:text="— Jean Morrison, University Provost and Chief Academic Officer"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"/>
 
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -50,10 +60,182 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <TextView
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="dsda"/>
+            android:orientation="vertical">
+
+            <ImageView
+                android:scaleType="center"
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/line_ffffff"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Our Mission"
+                android:textColor="#FFFFFF"
+                android:textSize="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="Our mission at the BU Arts Initiative is to ensure the integral role of the arts in the educational experience of every BU student. We support faculty, student, and staff projects, making sure the arts are deeply embedded within the cultural and intellectual fabric of the University."
+                android:textAlignment="gravity"
+                android:textColor="#FFFFFF"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:scaleType="center"
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/line_ffffff"
+                />
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="Proud Member of ..."
+                android:textColor="#FFFFFF"
+                android:textSize="30dp"
+                android:textStyle="bold"/>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:src="@drawable/fenwaycul"/>
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:src="@drawable/masscreative"/>
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:src="@drawable/artsboston"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:src="@drawable/a2ru"/>
+
+            <ImageView
+                android:scaleType="center"
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/line_ffffff"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:textStyle="bold"
+                android:text="Contact"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="Boston University Arts Initiative"
+                android:textAlignment="gravity"
+                android:textColor="#FFFFFF"
+                android:textSize="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="775 Commonwealth Avenue, Suite 201"
+                android:textAlignment="gravity"
+                android:textColor="#FFFFFF"
+                android:textSize="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="Phone:    +1 617.358.0489"
+                android:textAlignment="gravity"
+                android:textColor="#FFFFFF"
+                android:textSize="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="80dp"
+                android:text="Email:    artsinbu@bu.edu"
+                android:textAlignment="gravity"
+                android:textColor="#FFFFFF"
+                android:textSize="16dp"
+                />
+
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>
