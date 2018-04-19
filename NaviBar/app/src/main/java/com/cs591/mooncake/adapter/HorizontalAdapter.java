@@ -11,18 +11,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cs591.mooncake.R;
+import com.cs591.mooncake.SQLite.SingleArtist;
+import com.cs591.mooncake.SQLite.SingleEvent;
 import com.cs591.mooncake.explore.EventActivity;
 import com.cs591.mooncake.explore.SingleHorizontal;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.MyViewHolder> {
 
-    ArrayList<SingleHorizontal> data;
+    List<Object> data;
     Context context;
 
-    public HorizontalAdapter(Context context, ArrayList<SingleHorizontal> data) {
+    public HorizontalAdapter(Context context, List<Object> data) {
         this.context = context;
         this.data = data;
     }
@@ -37,17 +40,34 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull HorizontalAdapter.MyViewHolder holder, int position) {
-        holder.description.setText(data.get(position).getDesc());
-        holder.title.setText(data.get(position).getTitle());
-        holder.pubDate.setText(data.get(position).getPubDate());
-        holder.image.setImageResource(data.get(position).getImagess());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, EventActivity.class);
-                context.startActivity(intent);
-            }
-        });
+
+        if (data.get(position) instanceof SingleEvent) {
+            SingleEvent singleEvent = (SingleEvent)data.get(position);
+            holder.description.setText(singleEvent.getAddress());
+            holder.title.setText(singleEvent.getName());
+            holder.pubDate.setText(singleEvent.getStart());
+            holder.image.setImageBitmap(singleEvent.getPic());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, EventActivity.class);
+                    context.startActivity(intent);
+                }
+            });
+        } else if (data.get(position) instanceof SingleArtist){
+            SingleArtist singleArtist = (SingleArtist)data.get(position);
+            holder.description.setText(singleArtist.getCountry());
+            holder.title.setText(singleArtist.getName());
+            holder.pubDate.setText(singleArtist.getWebsite());
+            holder.image.setImageBitmap(singleArtist.getPic());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, EventActivity.class);
+                    context.startActivity(intent);
+                }
+            });
+        }
     }
 
     @Override

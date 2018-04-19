@@ -7,13 +7,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 
 import com.cs591.mooncake.R;
 import com.cs591.mooncake.explore.SingleHorizontal;
 import com.cs591.mooncake.explore.SingleVertical;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.cs591.mooncake.explore.ExploreFragment.getHorizontalData;
 import static com.cs591.mooncake.explore.ExploreFragment.getVerticalData;
@@ -22,14 +27,16 @@ import static com.cs591.mooncake.explore.ExploreFragment.getVerticalData;
 public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
-    private ArrayList<Object> items;
+    private List<List<Object>> items;
     private final int ARTIST = 1;
     private final int PERFORMANCE = 2;
     private final int WORKSHOP = 3;
     private final int BAZAAR = 4;
 
+    private final String[] types = new String[]{"Artists", "Performances", "Workshops", "Bazaar"};
 
-    public MainAdapter(Context context, ArrayList<Object> items) {
+
+    public MainAdapter(Context context, List<List<Object>> items) {
         this.context = context;
         this.items = items;
     }
@@ -61,10 +68,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (holder.getItemViewType() == ARTIST)
-            verticalView((VerticalViewHolder) holder);
-        else if (holder.getItemViewType() == PERFORMANCE)
-            horizontalView((HorizontalViewHolder) holder);
+        horizontalView((HorizontalViewHolder) holder, position);
     }
 
     private void verticalView(VerticalViewHolder holder) {
@@ -74,11 +78,13 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     }
 
-    private void horizontalView(HorizontalViewHolder holder) {
-        HorizontalAdapter adapter = new HorizontalAdapter(context, getHorizontalData());
+    private void horizontalView(HorizontalViewHolder holder, int position) {
+        HorizontalAdapter adapter = new HorizontalAdapter(context, items.get(position));
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(context,
                 LinearLayoutManager.HORIZONTAL, false));
         holder.recyclerView.setAdapter(adapter);
+        holder.type.setText(types[position]);
+        holder.btnShowAll.setText("Show All " + types[position]);
     }
 
     @Override
@@ -88,19 +94,19 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        if(items.get(position) instanceof SingleVertical)
-            return ARTIST;
-        if(items.get(position) instanceof SingleHorizontal)
-            return PERFORMANCE;
-        return -1;
+        return 2;
     }
 
     public class HorizontalViewHolder extends RecyclerView.ViewHolder {
         RecyclerView recyclerView;
+        TextView type;
+        Button btnShowAll;
 
         HorizontalViewHolder(View itemView) {
             super(itemView);
+            type = itemView.findViewById(R.id.type);
             recyclerView =  itemView.findViewById(R.id.inner_recyclerView);
+            btnShowAll = itemView.findViewById(R.id.btnShowAll);
         }
     }
 

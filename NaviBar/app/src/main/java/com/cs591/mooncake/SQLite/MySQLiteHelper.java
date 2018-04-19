@@ -73,7 +73,17 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     }
 
     public List<Integer> getArtistList() {
-        return null;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("select * from " + ARTIST_TABLE_NAME, null);
+
+        List<Integer> res = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
+            res.add(cursor.getInt(0));
+        }
+
+        return res;
     }
 
     public SingleEvent getEvent(int id) {
@@ -116,8 +126,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         singleArtist.setId(id);
         singleArtist.setName(cursor.getString(1));
         singleArtist.setCountry(cursor.getString(3));
-        singleArtist.setCountry(cursor.getString(4));
-        singleArtist.setCountry(cursor.getString(5));
+        singleArtist.setWebsite(cursor.getString(4));
+        singleArtist.setBios(cursor.getString(5));
 
         byte[] image = cursor.getBlob(2);
         ByteArrayInputStream imageStream = new ByteArrayInputStream(image);

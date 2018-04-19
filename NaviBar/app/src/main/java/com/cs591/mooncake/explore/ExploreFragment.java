@@ -13,9 +13,13 @@ import android.view.ViewGroup;
 
 
 import com.cs591.mooncake.R;
+import com.cs591.mooncake.SQLite.MySQLiteHelper;
+import com.cs591.mooncake.SQLite.SingleArtist;
+import com.cs591.mooncake.SQLite.SingleEvent;
 import com.cs591.mooncake.adapter.MainAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ExploreFragment extends Fragment {
@@ -28,9 +32,14 @@ public class ExploreFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private static final String TYPE_PERFORMANCE = "Performance";
+    private static final String TYPE_WORKSHOP = "Workshop";
+    private static final String TYPE_BAZAAR = "Bazaar";
 
-    private ArrayList<Object> objects = new ArrayList<>();
+
+    private OnFragmentInteractionListener mListener;
+    private MySQLiteHelper myDb;
+    private List<List<Object>> objects;
 
     public ExploreFragment() {
         // Required empty public constructor
@@ -70,6 +79,8 @@ public class ExploreFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_explore, container,
                 false);
 
+        myDb = new MySQLiteHelper(getActivity());
+
         RecyclerView recyclerView = v.findViewById(R.id.recycler_View);
         MainAdapter adapter = new MainAdapter(getActivity(), getObject());
         recyclerView.setAdapter(adapter);
@@ -102,14 +113,40 @@ public class ExploreFragment extends Fragment {
         mListener = null;
     }
 
-    private ArrayList<Object> getObject() {
-        if (objects.isEmpty()) {
-            objects.add(getHorizontalData().get(0));
-            objects.add(getHorizontalData().get(0));
-            objects.add(getHorizontalData().get(0));
-            objects.add(getHorizontalData().get(0));
-            objects.add(getHorizontalData().get(0));
+    private List<List<Object>> getObject() {
+        List<Integer> eventIDs = myDb.getEventList();
+        List<Integer> artistIDs = myDb.getArtistList();
+        objects = new ArrayList<>();
+        List<Object> artists = new ArrayList<>();
+        List<Object> performances = new ArrayList<>();
+        List<Object> workshops = new ArrayList<>();
+        List<Object> bazaar = new ArrayList<>();
+
+        for (Integer i : artistIDs) {
+            artists.add(myDb.getArtist(i));
         }
+
+        for (Integer i : eventIDs) {
+            SingleEvent singleEvent = myDb.getEvent(i);
+            switch (singleEvent.getType()) {
+                case TYPE_PERFORMANCE:
+                    performances.add(singleEvent);
+                    break;
+                case TYPE_WORKSHOP:
+                    workshops.add(singleEvent);
+                    break;
+                case TYPE_BAZAAR:
+                    bazaar.add(singleEvent);
+            }
+
+        }
+
+        objects.add(artists);
+        objects.add(performances);
+        objects.add(workshops);
+        objects.add(bazaar);
+
+
         return objects;
     }
 

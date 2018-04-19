@@ -42,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
         copyDataBaseToPhone();
         myDb = new MySQLiteHelper(this);
-        myDb.getEventList();
-        myDb.getEvent(1);
 
         mainFrame = findViewById(R.id.mainFrame);
         navigation = findViewById(R.id.navigation);
