@@ -78,7 +78,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:id="@+id/schedulestatus"
+            android:id="@+id/item_status"
             android:background="@drawable/add"/>
 
     </LinearLayout>

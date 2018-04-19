@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.cs591.mooncake.R;
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
 
     Context mContext;
     List<Object> mList;
+    private boolean isButtonClicked = false;
 
     public scheduleAdapter(Context context, List<Object> list){
         mContext = context;
@@ -35,6 +38,7 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
         TextView item_from_time;
         TextView item_location;
         TextView item_at;
+        Button item_status;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -44,6 +48,7 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
             item_from_time = itemView.findViewById(R.id.item_from_time);
             item_location = itemView.findViewById(R.id.item_location);
             item_at = itemView.findViewById(R.id.item_at);
+            item_status = itemView.findViewById(R.id.item_status);
 
 
         }
@@ -72,6 +77,19 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
             holder.item_from_time.setText(singleEvent.getStart());
             holder.item_location.setText(singleEvent.getAddress());
             holder.item_at.setText("@");
+            holder.item_status.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    if (v.getId() == R.id.item_status){
+                        isButtonClicked = !isButtonClicked;
+                        if (isButtonClicked) {
+                            v.setBackgroundResource(R.drawable.ischecked);
+                        }else{
+                            v.setBackgroundResource(R.drawable.add);
+                        }
+                    }
+                }
+            });
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
