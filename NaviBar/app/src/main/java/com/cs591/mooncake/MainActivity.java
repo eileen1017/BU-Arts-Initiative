@@ -8,7 +8,9 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.cs591.mooncake.SQLite.DataBaseUtil;
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
@@ -33,7 +35,10 @@ public class MainActivity extends AppCompatActivity {
     private ProfileFragment profileFragment;
 
 
+<<<<<<< HEAD
+=======
     public MySQLiteHelper myDb;
+>>>>>>> fd7d466d96f2d7f757c0a0480e10ca36d387dc50
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -5,12 +5,16 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 //import android.support.v4.app.Fragment;
+//import android.support.v4.app.FragmentManager;
+//import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import com.cs591.mooncake.R;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.cs591.mooncake.R;
 
 
 /**
@@ -27,6 +31,9 @@ public class ProfileFragment extends Fragment {
     Button settings, feedback, invite, about, ticket;
     Button logout;
     Intent i;
+    ImageView image;
+    TextView name;
+
 
 
 
@@ -43,11 +50,26 @@ public class ProfileFragment extends Fragment {
         about = (Button) view.findViewById(R.id.about);
         ticket = (Button) view.findViewById(R.id.ticket);
         logout = (Button) view.findViewById(R.id.logout);
+        image = (ImageView) view.findViewById(R.id.profile_image);
+        name = (TextView) view.findViewById(R.id.profile_name);
+
+        logout.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                image.setImageResource(R.drawable.feedback);
+                name.setText("Guest");
+                logout.setEnabled(false);
+                logout.setVisibility(View.INVISIBLE);
+
+            }
+        });
+
 
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                i = new Intent(getContext(), SettingsPage.class);
+                i = new Intent(getActivity(), SettingsPage.class);
                 startActivity(i);
             }
         });
@@ -55,7 +77,7 @@ public class ProfileFragment extends Fragment {
         feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                i = new Intent(getContext(), FeedbackPage.class);
+                i = new Intent(getActivity(), FeedbackPage.class);
                 startActivity(i);
             }
         });
@@ -63,7 +85,7 @@ public class ProfileFragment extends Fragment {
         invite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                i = new Intent(getContext(), InvitePage.class);
+                i = new Intent(getActivity(), InvitePage.class);
                 startActivity(i);
             }
         });
@@ -71,7 +93,7 @@ public class ProfileFragment extends Fragment {
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                i = new Intent(getContext(), AboutPage.class);
+                i = new Intent(getActivity(), AboutPage.class);
                 startActivity(i);
             }
         });
@@ -79,7 +101,7 @@ public class ProfileFragment extends Fragment {
         ticket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                i = new Intent(getContext(), TicketPage.class);
+                i = new Intent(getActivity(), TicketPage.class);
                 startActivity(i);
             }
         });
