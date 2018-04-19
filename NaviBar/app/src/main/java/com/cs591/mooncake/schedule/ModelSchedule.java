@@ -6,11 +6,13 @@ package com.cs591.mooncake.schedule;
 
 public class ModelSchedule {
     private String name;
-    private String description;
+    private String startt;
+    private String endt;
 
-    public ModelSchedule(String name, String description) {
+    public ModelSchedule(String name, String startt, String endt) {
         this.name = name;
-        this.description = description;
+        this.startt = startt;
+        this.endt = endt;
     }
 
     public String getName() {
@@ -21,11 +23,19 @@ public class ModelSchedule {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getStartt() {
+        return startt;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setStartt(String description) {
+        this.startt = description;
+    }
+
+    public String getEndt() {
+        return startt;
+    }
+
+    public void setEndt(String description) {
+        this.startt = description;
     }
 }

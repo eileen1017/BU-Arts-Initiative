@@ -92,10 +92,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:text="Our mission at the BU Arts Initiative is to ensure the integral role of the arts in the educational experience of every BU student. We support faculty, student, and staff projects, making sure the arts are deeply embedded within the cultural and intellectual fabric of the University."
-                android:textAlignment="gravity"
+                android:textAlignment="viewStart"
                 android:textColor="#FFFFFF"
                 android:textSize="16dp" />
 
