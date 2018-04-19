@@ -6,8 +6,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.PopupMenu;
+
 import com.cs591.mooncake.R;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +39,7 @@ public class ScheduleFragment extends Fragment {
     RecyclerView recyclerView2;
     private List<Object> scheduleslist2;
     private MySQLiteHelper myDb;
+    Button menubtn;
 
 
 
@@ -46,6 +52,7 @@ public class ScheduleFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
         recyclerView = view.findViewById(R.id.rv);
         recyclerView2 = view.findViewById(R.id.rv2);
+        menubtn = view.findViewById(R.id.menubtn);
         scheduleslist = new ArrayList<>();
         scheduleslist2 = new ArrayList<>();
 
@@ -65,25 +72,66 @@ public class ScheduleFragment extends Fragment {
 
         }
 
+        menubtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(getContext(), menubtn);
+                popupMenu.getMenuInflater().inflate(R.menu.schedule_popup, popupMenu.getMenu());
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        int id = item.getItemId();
+                        switch (id) {
+                            case R.id.item1:
+                                LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+                                RecyclerView.LayoutManager rvlayoutManager = layoutManager;
+
+                                recyclerView.setLayoutManager(rvlayoutManager);
+
+                                scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist);
+                                recyclerView.setAdapter(adapter);
 
 
+                                LinearLayoutManager layoutManager2 = new LinearLayoutManager(getActivity());
+                                RecyclerView.LayoutManager rvlayoutManager2 = layoutManager2;
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        RecyclerView.LayoutManager rvlayoutManager = layoutManager;
+                                recyclerView2.setLayoutManager(rvlayoutManager2);
 
-        recyclerView.setLayoutManager(rvlayoutManager);
+                                scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2);
+                                recyclerView2.setAdapter(adapter2);
+                                return true;
 
-        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist);
-        recyclerView.setAdapter(adapter);
+                            case R.id.item2:
+                                // do more stuff
+
+                                return true;
+
+                        }
+                        return true;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
 
 
-        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getActivity());
-        RecyclerView.LayoutManager rvlayoutManager2 = layoutManager2;
-
-        recyclerView2.setLayoutManager(rvlayoutManager2);
-
-        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2);
-        recyclerView2.setAdapter(adapter2);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+//        RecyclerView.LayoutManager rvlayoutManager = layoutManager;
+//
+//        recyclerView.setLayoutManager(rvlayoutManager);
+//
+//        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist);
+//        recyclerView.setAdapter(adapter);
+//
+//
+//        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getActivity());
+//        RecyclerView.LayoutManager rvlayoutManager2 = layoutManager2;
+//
+//        recyclerView2.setLayoutManager(rvlayoutManager2);
+//
+//        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2);
+//        recyclerView2.setAdapter(adapter2);
         return view;
     }
 
