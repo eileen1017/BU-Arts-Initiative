@@ -4,13 +4,16 @@ package com.cs591.mooncake.profile;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-//import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
+
 import com.cs591.mooncake.R;
 
+import java.util.ArrayList;
 
 
 /**
@@ -27,6 +30,13 @@ public class ProfileFragment extends Fragment {
     Button settings, feedback, invite, about, ticket;
     Button logout;
     Intent i;
+    ListView mListView;
+    CustomAdapter adapter;
+    String[] Names = {"Website", "Invite Friends", "Feedback", "About", "Ticket"};
+    int[] Icons = {R.drawable.website,R.drawable.invite_friend,R.drawable.feedback,R.drawable.about,R.drawable.ticket};
+    Class[] classes = {WebsitePage.class, InvitePage.class, FeedbackPage.class,AboutPage.class,TicketPage.class};
+
+
 
 
 
@@ -36,56 +46,64 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        mListView = (ListView) view.findViewById(R.id.item_menu);
+        CustomAdapter customAdapter = new CustomAdapter(getContext(), Icons, Names);
+        mListView.setAdapter(customAdapter);
 
-        settings =  (Button) view.findViewById(R.id.settings);
-        feedback = (Button) view.findViewById(R.id.feedback);
-        invite = (Button) view.findViewById(R.id.invite);
-        about = (Button) view.findViewById(R.id.about);
-        ticket = (Button) view.findViewById(R.id.ticket);
-        logout = (Button) view.findViewById(R.id.logout);
-
-        settings.setOnClickListener(new View.OnClickListener() {
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                i = new Intent(getContext(), SettingsPage.class);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getContext(),classes[position]);
                 startActivity(i);
-            }
-        });
 
-        feedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                i = new Intent(getContext(), FeedbackPage.class);
-                startActivity(i);
-            }
-        });
-
-        invite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                i = new Intent(getContext(), InvitePage.class);
-                startActivity(i);
-            }
-        });
-
-        about.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                i = new Intent(getContext(), AboutPage.class);
-                startActivity(i);
-            }
-        });
-
-        ticket.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                i = new Intent(getContext(), TicketPage.class);
-                startActivity(i);
             }
         });
 
 
+//        settings.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                i = new Intent(getContext(), SettingsPage.class);
+//                startActivity(i);
+//            }
+//        });
+//
+//        feedback.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                i = new Intent(getContext(), FeedbackPage.class);
+//                startActivity(i);
+//            }
+//        });
+//
+//        invite.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                i = new Intent(getContext(), InvitePage.class);
+//                startActivity(i);
+//            }
+//        });
+//
+//        about.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                i = new Intent(getContext(), AboutPage.class);
+//                startActivity(i);
+//            }
+//        });
+//
+//        ticket.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                i = new Intent(getContext(), TicketPage.class);
+//                startActivity(i);
+//            }
+//        });
+//
+//
+//        return view;
         return view;
+
     }
 
 
