@@ -59,7 +59,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
 
 
@@ -160,7 +159,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         db.update(PROFILE_TABLE_NAME, cv, COLUMN_PROFILE_ID+"="+0, null);
     }
 
-    public void removeProfile() {
+    public void initProfile() {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.putNull(COLUMN_PROFILE_USERNAME);
@@ -175,7 +174,35 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     public SingleUser getProfile() {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.query(PROFILE_TABLE_NAME, new String[] { COLUMN_PROFILE_UID, COLUMN_PROFILE_USERNAME,
+
+        Cursor cursor = db.rawQuery("select DISTINCT tbl_name from sqlite_master where" +
+                " tbl_name = '"+PROFILE_TABLE_NAME+"'", null);
+        if(cursor!=null) {
+            if(cursor.getCount()>0) {
+                cursor.close();
+            } else {
+                db.execSQL(" CREATE TABLE " + PROFILE_TABLE_NAME + " (" +
+                                COLUMN_PROFILE_ID + " INTEGER, " +
+                                COLUMN_PROFILE_UID + " TEXT, " +
+                                COLUMN_PROFILE_USERNAME + " TEXT, " +
+                                COLUMN_PROFILE_PIC + " BOLB, " +
+                                COLUMN_PROFILE_SCHEDULED + " TEXT, " +
+                                COLUMN_PROFILE_LIKED + " TEXT);");
+                cursor.close();
+                ContentValues cv = new ContentValues();
+                cv.putNull(COLUMN_PROFILE_USERNAME);
+                cv.putNull(COLUMN_PROFILE_UID);
+                cv.putNull(COLUMN_PROFILE_SCHEDULED);
+                cv.putNull(COLUMN_PROFILE_LIKED);
+                cv.putNull(COLUMN_PROFILE_PIC);
+                cv.put(COLUMN_PROFILE_ID, 0);
+                db.insert(PROFILE_TABLE_NAME, null, cv);
+            }
+        }
+
+
+
+        cursor = db.query(PROFILE_TABLE_NAME, new String[] { COLUMN_PROFILE_UID, COLUMN_PROFILE_USERNAME,
                         COLUMN_PROFILE_PIC, COLUMN_PROFILE_LIKED, COLUMN_PROFILE_SCHEDULED},
                 COLUMN_PROFILE_ID + "=?",
                 new String[] { String.valueOf(0) }, null, null, null, null);

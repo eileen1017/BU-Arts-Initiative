@@ -119,6 +119,8 @@ public class ExploreFragment extends Fragment {
         List<Integer> eventIDs = myDb.getEventList();
         List<Integer> artistIDs = myDb.getArtistList();
 
+        myDb.getProfile();
+
         SingleUser singleUser = new SingleUser();
         singleUser.addScheduled(2);
         singleUser.addScheduled(3);
