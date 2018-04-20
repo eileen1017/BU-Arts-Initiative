@@ -20,8 +20,6 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.cs591.mooncake.explore.ExploreFragment.getHorizontalData;
-import static com.cs591.mooncake.explore.ExploreFragment.getVerticalData;
 
 
 public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -71,12 +69,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         horizontalView((HorizontalViewHolder) holder, position);
     }
 
-    private void verticalView(VerticalViewHolder holder) {
-        VerticalAdapter adapter1 = new VerticalAdapter(getVerticalData());
-        holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        holder.recyclerView.setAdapter(adapter1);
 
-    }
 
     private void horizontalView(HorizontalViewHolder holder, int position) {
         HorizontalAdapter adapter = new HorizontalAdapter(context, items.get(position));

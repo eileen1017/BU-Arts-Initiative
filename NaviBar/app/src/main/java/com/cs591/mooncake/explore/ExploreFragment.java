@@ -7,6 +7,7 @@ import android.app.Fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.cs591.mooncake.R;
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleArtist;
 import com.cs591.mooncake.SQLite.SingleEvent;
+import com.cs591.mooncake.SQLite.SingleUser;
 import com.cs591.mooncake.adapter.MainAdapter;
 
 import java.util.ArrayList;
@@ -116,6 +118,21 @@ public class ExploreFragment extends Fragment {
     private List<List<Object>> getObject() {
         List<Integer> eventIDs = myDb.getEventList();
         List<Integer> artistIDs = myDb.getArtistList();
+
+        SingleUser singleUser = new SingleUser();
+        singleUser.addScheduled(2);
+        singleUser.addScheduled(3);
+
+        Log.i("scheduled string", singleUser.getScheduledString(";"));
+        myDb.addProfile(singleUser);
+
+        singleUser.removeScheduled(2);
+        singleUser.addScheduled(5);
+        myDb.addProfile(singleUser);
+
+        SingleUser res = myDb.getProfile();
+        Log.i("Size", res.getScheduledString(";"));
+
         objects = new ArrayList<>();
         List<Object> artists = new ArrayList<>();
         List<Object> performances = new ArrayList<>();
@@ -165,67 +182,5 @@ public class ExploreFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public static ArrayList<SingleVertical> getVerticalData() {
-        ArrayList<SingleVertical> singleVerticals = new ArrayList<>();
-        singleVerticals.add(new SingleVertical("Charlie Chaplin",
-                "Sir Charles Spencer \"Charlie\" Chaplin, KBE was an。。。。。 ",
-                R.drawable.charlie));
-        singleVerticals.add(new SingleVertical("Mr. Bean",
-                "Mr. Bean is a British sitcom created by Rowan Atkinson and ....",
-                R.drawable.mrbean));
-        singleVerticals.add(new SingleVertical("Jim Carrey",
-                "James Eugene \"Jim\" Carrey is a Canadian-American actor, comedian, impressionist...",
-                R.drawable.jim));
-        singleVerticals.add(new SingleVertical("Charlie Chaplin",
-                "Sir Charles Spencer \"Charlie\" Chaplin, KBE was an。。。。。 ",
-                R.drawable.charlie));
-        singleVerticals.add(new SingleVertical("Mr. Bean",
-                "Mr. Bean is a British sitcom created by Rowan Atkinson and ....",
-                R.drawable.mrbean));
-        singleVerticals.add(new SingleVertical("Jim Carrey",
-                "James Eugene \"Jim\" Carrey is a Canadian-American actor, comedian, impressionist...",
-                R.drawable.jim));
 
-        singleVerticals.add(new SingleVertical("Charlie Chaplin",
-                "Sir Charles Spencer \"Charlie\" Chaplin, KBE was an。。。。。 ",
-                R.drawable.charlie));
-        singleVerticals.add(new SingleVertical("Mr. Bean",
-                "Mr. Bean is a British sitcom created by Rowan Atkinson and ....",
-                R.drawable.mrbean));
-        singleVerticals.add(new SingleVertical("Jim Carrey",
-                "James Eugene \"Jim\" Carrey is a Canadian-American actor, comedian, impressionist...",
-                R.drawable.jim));
-
-
-        return singleVerticals;
-    }
-
-    public static ArrayList<SingleHorizontal> getHorizontalData() {
-        ArrayList<SingleHorizontal> singleHorizontals = new ArrayList<>();
-        singleHorizontals.add(new SingleHorizontal(R.drawable.charlie,
-                "Charlie Chaplin",
-                "Sir Charles Spencer \"Charlie\" Chaplin, KBE was an。。。。。 ",
-                "2018/10/10"));
-        singleHorizontals.add(new SingleHorizontal(R.drawable.mrbean,
-                "Mr. Bean",
-                "Mr. Bean is a British sitcom created by Rowan Atkinson and ....",
-                "2018/10/10"));
-        singleHorizontals.add(new SingleHorizontal(R.drawable.jim,
-                "Jim Carrey",
-                "James Eugene \"Jim\" Carrey is a Canadian-American actor, comedian, impressionist...",
-                "2018/10/10"));
-        singleHorizontals.add(new SingleHorizontal(R.drawable.charlie,
-                "Charlie Chaplin",
-                "Sir Charles Spencer \"Charlie\" Chaplin, KBE was an。。。。。 ",
-                "2018/10/10"));
-        singleHorizontals.add(new SingleHorizontal(R.drawable.mrbean,
-                "Mr. Bean",
-                "Mr. Bean is a British sitcom created by Rowan Atkinson and ....",
-                "2018/10/10"));
-        singleHorizontals.add(new SingleHorizontal(R.drawable.jim,
-                "Jim Carrey",
-                "James Eugene \"Jim\" Carrey is a Canadian-American actor, comedian, impressionist...",
-                "2018/10/10"));
-        return singleHorizontals;
-    }
 }
