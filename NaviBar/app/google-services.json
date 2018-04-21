@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "228476415530",
+    "firebase_url": "https://bu-global-musical-festival.firebaseio.com",
+    "project_id": "bu-global-musical-festival",
+    "storage_bucket": "bu-global-musical-festival.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:228476415530:android:689c8badd0788319",
+        "android_client_info": {
+          "package_name": "com.cs591.mooncake"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "228476415530-rifpjgk0rsljln30fvvt1jih208bgv7g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cs591.mooncake",
+            "certificate_hash": "09416d7c7c0194deed86f8c21dbf6ff3ec47ed68"
+          }
+        },
+        {
+          "client_id": "228476415530-fk2333534dc3ovvu8rla8cri0uk4b2h3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMz5z64lVzk_0NqoXgBC_Zq5A2_d6pbAs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "228476415530-fk2333534dc3ovvu8rla8cri0uk4b2h3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
