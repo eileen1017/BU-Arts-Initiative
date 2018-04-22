@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.cs591.mooncake.SQLite.DataBaseUtil;
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
+import com.cs591.mooncake.SQLite.SingleUser;
 import com.cs591.mooncake.explore.ExploreFragment;
 import com.cs591.mooncake.like.LikeFragment;
 import com.cs591.mooncake.login.LoginActivity;
@@ -24,6 +25,13 @@ import com.cs591.mooncake.schedule.ScheduleFragment;
 import com.cs591.mooncake.profile.ProfileFragment;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.twitter.sdk.android.core.TwitterCore;
 
 import java.io.IOException;
@@ -31,6 +39,12 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String REF_PROFILE =  "Profile";
+    public static final String REF_SCHEDULED = "Scheduled";
+    public static final String REF_LIKED = "Liked";
+    public static final String REF_USERNAME = "User Name";
+    public static final String REF_EMAIL = "Email";
+    public static final String REF_PHONE_NUMBER = "Phone Number";
     private FrameLayout mainFrame;
     private BottomNavigationView navigation;
 
@@ -43,7 +57,9 @@ public class MainActivity extends AppCompatActivity {
 
     public MySQLiteHelper myDb;
 
+
     private FirebaseAuth mAuth;
+    private DatabaseReference referenceProfile;
 
     private Button btnLogout;
 
@@ -75,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                myDb.initProfile();
                 mAuth.signOut();
                 LoginManager.getInstance().logOut();
                 TwitterCore.getInstance().getSessionManager().clearActiveSession();
@@ -116,7 +133,97 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void firebaseAuthInitialize() {
+
+
+
         mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() != null) {
+            Log.i("UID", mAuth.getCurrentUser().getUid());
+            DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference().child(REF_PROFILE);
+            rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    Log.i("onDataChange", "Called");
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    if (snapshot.hasChild(user.getUid())) {
+                        Log.i("Firebase User exists", ".");
+                        SingleUser singleUser = myDb.getProfile();
+                        if (singleUser.getUID() == null || singleUser.getUID().isEmpty() ||
+                                !singleUser.getUID().equals(user.getUid())) {
+                            Log.i("Local user not exist", ".");
+                            referenceProfile = FirebaseDatabase.getInstance().
+                                    getReference().child(REF_PROFILE).child(user.getUid());
+
+                        if (user.getDisplayName() != null)
+                            singleUser.setUserName(user.getDisplayName());
+                        if (user.getPhotoUrl() != null) {
+                            singleUser.setPicUrl(user.getPhotoUrl());
+                        }
+                        singleUser.setUID(user.getUid());
+                        myDb.addProfile(singleUser);
+
+
+                            FirebaseDatabase.getInstance().getReference()
+                                    .child(REF_PROFILE)
+                                    .child(user.getUid())
+                                    .addChildEventListener(new ChildEventListener() {
+                                @Override
+                                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                                    if (dataSnapshot.getKey().equals(REF_SCHEDULED)) {
+                                        SingleUser singleUser = myDb.getProfile();
+                                        singleUser.setScheduledByString(dataSnapshot.getValue().toString());
+                                        myDb.addProfile(singleUser);
+                                    } else if (dataSnapshot.getKey().equals(REF_LIKED)) {
+                                        SingleUser singleUser = myDb.getProfile();
+                                        singleUser.setLikedByString(dataSnapshot.getValue().toString());
+                                        myDb.addProfile(singleUser);
+                                    }
+
+
+                                }
+
+                                @Override
+                                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                                }
+
+                                @Override
+                                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                                }
+
+                                @Override
+                                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
+
+                        myDb.addProfile(singleUser);
+                        } else {
+                            Log.i("Local user exists", ".");
+                        }
+                    } else {
+                        createProfile();
+                        Log.i("Firebase User not exist", ".");
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
+
+
+        }
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -126,6 +233,38 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
+    }
+
+    private void createProfile() {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null) {
+            Log.e("CreateFirebaseProfile", "current user doesn't exist");
+        } else {
+            SingleUser singleUser = myDb.getProfile();
+            singleUser.setUID(user.getUid());
+            DatabaseReference profile = FirebaseDatabase.getInstance()
+                    .getReference().child(REF_PROFILE).child(user.getUid());
+            if (user.getDisplayName() != null) {
+                singleUser.setUserName(user.getDisplayName());
+                profile.child(REF_USERNAME).setValue(user.getDisplayName());
+            }
+            if (user.getPhotoUrl() != null) {
+                singleUser.setPicUrl(user.getPhotoUrl());
+            }
+            if (user.getEmail() != null) {
+                profile.child(REF_EMAIL).setValue(user.getEmail());
+            }
+            if (user.getPhoneNumber() != null) {
+                profile.child(REF_PHONE_NUMBER).setValue(user.getPhoneNumber());
+            }
+
+            myDb.addProfile(singleUser);
+
+
+            profile.child(REF_SCHEDULED).setValue(singleUser.getScheduledString());
+            profile.child(REF_LIKED).setValue(singleUser.getLikedString());
+
+        }
     }
 
     @Override

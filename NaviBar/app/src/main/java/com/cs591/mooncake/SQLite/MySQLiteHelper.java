@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.Log;
 
 import java.io.ByteArrayInputStream;
@@ -44,7 +45,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PROFILE_SCHEDULED = "Scheduled";
     private static final String COLUMN_PROFILE_LIKED = "Liked";
     private static final String COLUMN_PROFILE_PIC = "Pic";
-    private static final String EVENT_SPLITTER = ";";
+    private static final String COLUMN_PROFILE_PIC_URI = "PicURI";
 
 
     public MySQLiteHelper(Context context) {
@@ -144,17 +145,19 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public void addProfile(SingleUser user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        if (user.getUID() != null) {
-            cv.put(COLUMN_PROFILE_USERNAME, user.getUID());
-            cv.put(COLUMN_PROFILE_UID, user.getUID());
-            cv.put(COLUMN_PROFILE_ID, 0);
+        cv.put(COLUMN_PROFILE_USERNAME, user.getUserName());
+        cv.put(COLUMN_PROFILE_UID, user.getUID());
+        cv.put(COLUMN_PROFILE_ID, 0);
+        if (user.getPic() != null) {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             user.getPic().compress(Bitmap.CompressFormat.PNG, 100, stream);
             byte[] byteArray = stream.toByteArray();
             cv.put(COLUMN_PROFILE_PIC, byteArray);
         }
-        cv.put(COLUMN_PROFILE_LIKED, user.getLikedString(EVENT_SPLITTER));
-        cv.put(COLUMN_PROFILE_SCHEDULED, user.getScheduledString(EVENT_SPLITTER));
+        cv.put(COLUMN_PROFILE_LIKED, user.getLikedString());
+        cv.put(COLUMN_PROFILE_SCHEDULED, user.getScheduledString());
+        if (user.getPicUrl() != null)
+            cv.put(COLUMN_PROFILE_PIC_URI, user.getPicUrl().toString());
 
         db.update(PROFILE_TABLE_NAME, cv, COLUMN_PROFILE_ID+"="+0, null);
     }
@@ -167,6 +170,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         cv.putNull(COLUMN_PROFILE_SCHEDULED);
         cv.putNull(COLUMN_PROFILE_LIKED);
         cv.putNull(COLUMN_PROFILE_PIC);
+        cv.putNull(COLUMN_PROFILE_PIC_URI);
         cv.put(COLUMN_PROFILE_ID, 0);
 
         db.update(PROFILE_TABLE_NAME, cv, COLUMN_PROFILE_ID+"="+0, null);
@@ -187,6 +191,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                                 COLUMN_PROFILE_USERNAME + " TEXT, " +
                                 COLUMN_PROFILE_PIC + " BOLB, " +
                                 COLUMN_PROFILE_SCHEDULED + " TEXT, " +
+                                COLUMN_PROFILE_PIC_URI + " TEXT, " +
                                 COLUMN_PROFILE_LIKED + " TEXT);");
                 cursor.close();
                 ContentValues cv = new ContentValues();
@@ -195,6 +200,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                 cv.putNull(COLUMN_PROFILE_SCHEDULED);
                 cv.putNull(COLUMN_PROFILE_LIKED);
                 cv.putNull(COLUMN_PROFILE_PIC);
+                cv.putNull(COLUMN_PROFILE_PIC_URI);
                 cv.put(COLUMN_PROFILE_ID, 0);
                 db.insert(PROFILE_TABLE_NAME, null, cv);
             }
@@ -203,15 +209,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 
         cursor = db.query(PROFILE_TABLE_NAME, new String[] { COLUMN_PROFILE_UID, COLUMN_PROFILE_USERNAME,
-                        COLUMN_PROFILE_PIC, COLUMN_PROFILE_LIKED, COLUMN_PROFILE_SCHEDULED},
+                        COLUMN_PROFILE_PIC, COLUMN_PROFILE_LIKED, COLUMN_PROFILE_SCHEDULED, COLUMN_PROFILE_PIC_URI},
                 COLUMN_PROFILE_ID + "=?",
                 new String[] { String.valueOf(0) }, null, null, null, null);
         if (cursor != null) cursor.moveToFirst();
 
         SingleUser singleUser = new SingleUser();
-        if (cursor.getString(0) != null) {
-            singleUser.setUID(cursor.getString(0));
-            singleUser.setUserName(cursor.getString(1));
+
+        singleUser.setUID(cursor.getString(0));
+        singleUser.setUserName(cursor.getString(1));
+        if (cursor.getBlob(2) != null) {
             byte[] image = cursor.getBlob(2);
             ByteArrayInputStream imageStream = new ByteArrayInputStream(image);
             Bitmap theImage = BitmapFactory.decodeStream(imageStream);
@@ -219,17 +226,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         }
 
         if (cursor.getString(3) != null) {
-            for (String event : cursor.getString(3).split(EVENT_SPLITTER)) {
-                if(event.isEmpty()) continue;
-                singleUser.addLiked(Integer.valueOf(event));
-            }
+            singleUser.setLikedByString(cursor.getString(3));
+
         }
 
         if (cursor.getString(4) != null ) {
-            for (String event : cursor.getString(4).split(EVENT_SPLITTER)) {
-                if(event.isEmpty()) continue;
-                singleUser.addScheduled(Integer.valueOf(event));
-            }
+            singleUser.setScheduledByString(cursor.getString(4));
+        }
+
+        if (cursor.getString(5) != null) {
+            singleUser.setPicUrl(Uri.parse(cursor.getString(5)));
         }
 
         return singleUser;

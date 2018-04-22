@@ -1,6 +1,7 @@
 package com.cs591.mooncake.SQLite;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,11 +11,27 @@ public class SingleUser {
     private String UID;
     private String userName;
     private Bitmap pic;
+    private Uri picUrl;
     private Set<Integer> liked;
+    private String splitter = ";";
 
     public SingleUser(){
         scheduled = new HashSet<>();
         liked = new HashSet<>();
+    }
+
+    public SingleUser(String splitter){
+        scheduled = new HashSet<>();
+        liked = new HashSet<>();
+        this.splitter = splitter;
+    }
+
+    public Uri getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(Uri picUrl) {
+        this.picUrl = picUrl;
     }
 
     public void addScheduled(int id) {
@@ -65,7 +82,7 @@ public class SingleUser {
         return userName;
     }
 
-    public String getScheduledString(String splitter) {
+    public String getScheduledString() {
         String res = "";
         if (scheduled != null) {
             for (Integer i : scheduled) {
@@ -76,7 +93,7 @@ public class SingleUser {
         return res;
     }
 
-    public String getLikedString(String splitter) {
+    public String getLikedString() {
         String res = "";
         if (liked != null) {
             for (Integer i : liked) {
@@ -85,5 +102,19 @@ public class SingleUser {
             }
         }
         return res;
+    }
+
+    public void setScheduledByString(String string) {
+        for (String event : string.split(splitter)) {
+            if(event.isEmpty()) continue;
+            this.addScheduled(Integer.valueOf(event));
+        }
+    }
+
+    public void setLikedByString(String string) {
+        for (String event : string.split(splitter)) {
+            if(event.isEmpty()) continue;
+            this.addLiked(Integer.valueOf(event));
+        }
     }
 }

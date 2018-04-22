@@ -119,22 +119,6 @@ public class ExploreFragment extends Fragment {
         List<Integer> eventIDs = myDb.getEventList();
         List<Integer> artistIDs = myDb.getArtistList();
 
-        myDb.getProfile();
-
-        SingleUser singleUser = new SingleUser();
-        singleUser.addScheduled(2);
-        singleUser.addScheduled(3);
-
-        Log.i("scheduled string", singleUser.getScheduledString(";"));
-        myDb.addProfile(singleUser);
-
-        singleUser.removeScheduled(2);
-        singleUser.addScheduled(5);
-        myDb.addProfile(singleUser);
-
-        SingleUser res = myDb.getProfile();
-        Log.i("Size", res.getScheduledString(";"));
-
         objects = new ArrayList<>();
         List<Object> artists = new ArrayList<>();
         List<Object> performances = new ArrayList<>();
