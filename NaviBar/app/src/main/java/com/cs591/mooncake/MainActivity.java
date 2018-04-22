@@ -195,6 +195,19 @@ public class MainActivity extends AppCompatActivity {
 
                         @Override
                         public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                            Log.i("onChildChanged", ".");
+                            if (dataSnapshot.getKey().equals(REF_SCHEDULED)) {
+                                SingleUser singleUser = myDb.getProfile();
+                                singleUser.setScheduledByString(dataSnapshot.getValue().toString());
+                                myDb.addProfile(singleUser);
+                            } else if (dataSnapshot.getKey().equals(REF_LIKED)) {
+                                SingleUser singleUser = myDb.getProfile();
+                                singleUser.setLikedByString(dataSnapshot.getValue().toString());
+                                myDb.addProfile(singleUser);
+                            }
+
+                            Log.i("Scheduled:", myDb.getProfile().getScheduledString());
+                            Log.i("Liked", myDb.getProfile().getLikedString());
 
                         }
 
@@ -257,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void updateLikedScheduled(SingleUser singleUser) {
+    public void updateLikedScheduled(SingleUser singleUser) {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null) {
             Log.e("CreateFirebaseProfile", "current user doesn't exist");
