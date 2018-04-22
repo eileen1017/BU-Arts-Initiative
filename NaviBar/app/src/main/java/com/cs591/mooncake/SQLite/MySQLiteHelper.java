@@ -227,7 +227,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
         if (cursor.getString(3) != null) {
             singleUser.setLikedByString(cursor.getString(3));
-
         }
 
         if (cursor.getString(4) != null ) {

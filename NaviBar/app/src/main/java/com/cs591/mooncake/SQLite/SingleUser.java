@@ -105,6 +105,7 @@ public class SingleUser {
     }
 
     public void setScheduledByString(String string) {
+        scheduled.clear();
         for (String event : string.split(splitter)) {
             if(event.isEmpty()) continue;
             this.addScheduled(Integer.valueOf(event));
@@ -112,6 +113,7 @@ public class SingleUser {
     }
 
     public void setLikedByString(String string) {
+        liked.clear();
         for (String event : string.split(splitter)) {
             if(event.isEmpty()) continue;
             this.addLiked(Integer.valueOf(event));

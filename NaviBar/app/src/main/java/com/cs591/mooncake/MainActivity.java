@@ -137,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
+
         if (mAuth.getCurrentUser() != null) {
             Log.i("UID", mAuth.getCurrentUser().getUid());
             DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference().child(REF_PROFILE);
@@ -148,12 +149,8 @@ public class MainActivity extends AppCompatActivity {
                     if (snapshot.hasChild(user.getUid())) {
                         Log.i("Firebase User exists", ".");
                         SingleUser singleUser = myDb.getProfile();
-                        if (singleUser.getUID() == null || singleUser.getUID().isEmpty() ||
-                                !singleUser.getUID().equals(user.getUid())) {
-                            Log.i("Local user not exist", ".");
-                            referenceProfile = FirebaseDatabase.getInstance().
-                                    getReference().child(REF_PROFILE).child(user.getUid());
-
+                        referenceProfile = FirebaseDatabase.getInstance().
+                                getReference().child(REF_PROFILE).child(user.getUid());
                         if (user.getDisplayName() != null)
                             singleUser.setUserName(user.getDisplayName());
                         if (user.getPhotoUrl() != null) {
@@ -161,53 +158,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                         singleUser.setUID(user.getUid());
                         myDb.addProfile(singleUser);
-
-
-                            FirebaseDatabase.getInstance().getReference()
-                                    .child(REF_PROFILE)
-                                    .child(user.getUid())
-                                    .addChildEventListener(new ChildEventListener() {
-                                @Override
-                                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                                    if (dataSnapshot.getKey().equals(REF_SCHEDULED)) {
-                                        SingleUser singleUser = myDb.getProfile();
-                                        singleUser.setScheduledByString(dataSnapshot.getValue().toString());
-                                        myDb.addProfile(singleUser);
-                                    } else if (dataSnapshot.getKey().equals(REF_LIKED)) {
-                                        SingleUser singleUser = myDb.getProfile();
-                                        singleUser.setLikedByString(dataSnapshot.getValue().toString());
-                                        myDb.addProfile(singleUser);
-                                    }
-
-
-                                }
-
-                                @Override
-                                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                                }
-
-                                @Override
-                                public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                                }
-
-                                @Override
-                                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                }
-                            });
-
-
-                        myDb.addProfile(singleUser);
-                        } else {
-                            Log.i("Local user exists", ".");
-                        }
                     } else {
                         createProfile();
                         Log.i("Firebase User not exist", ".");
@@ -220,8 +170,49 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+            FirebaseDatabase.getInstance().getReference()
+                    .child(REF_PROFILE)
+                    .child(mAuth.getCurrentUser().getUid())
+                    .addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                            Log.i("onChildAdded", ".");
+                            if (dataSnapshot.getKey().equals(REF_SCHEDULED)) {
+                                SingleUser singleUser = myDb.getProfile();
+                                singleUser.setScheduledByString(dataSnapshot.getValue().toString());
+                                myDb.addProfile(singleUser);
+                            } else if (dataSnapshot.getKey().equals(REF_LIKED)) {
+                                SingleUser singleUser = myDb.getProfile();
+                                singleUser.setLikedByString(dataSnapshot.getValue().toString());
+                                myDb.addProfile(singleUser);
+                            }
+
+                            Log.i("Scheduled:", myDb.getProfile().getScheduledString());
+                            Log.i("Liked", myDb.getProfile().getLikedString());
 
 
+                        }
+
+                        @Override
+                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                        }
+
+                        @Override
+                        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
 
         }
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -261,9 +252,20 @@ public class MainActivity extends AppCompatActivity {
             myDb.addProfile(singleUser);
 
 
+            updateLikedScheduled(singleUser);
+
+        }
+    }
+
+    private void updateLikedScheduled(SingleUser singleUser) {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null) {
+            Log.e("CreateFirebaseProfile", "current user doesn't exist");
+        } else {
+            DatabaseReference profile = FirebaseDatabase.getInstance()
+                    .getReference().child(REF_PROFILE).child(user.getUid());
             profile.child(REF_SCHEDULED).setValue(singleUser.getScheduledString());
             profile.child(REF_LIKED).setValue(singleUser.getLikedString());
-
         }
     }
 
