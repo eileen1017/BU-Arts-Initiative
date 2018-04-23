@@ -1,41 +1,24 @@
 package com.cs591.mooncake.schedule;
 
+import java.util.List;
+
 /**
  * Created by LinLi on 4/9/18.
  */
 
 public class ModelSchedule {
-    private String name;
-    private String startt;
-    private String endt;
+    private List<Integer> scheduledint;
 
-    public ModelSchedule(String name, String startt, String endt) {
-        this.name = name;
-        this.startt = startt;
-        this.endt = endt;
+    public ModelSchedule(List<Integer> scheduledint) {
+        this.scheduledint = scheduledint;
+
     }
 
-    public String getName() {
-        return name;
+    public List<Integer> getScheduledint() {
+        return scheduledint;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getStartt() {
-        return startt;
-    }
-
-    public void setStartt(String description) {
-        this.startt = description;
-    }
-
-    public String getEndt() {
-        return startt;
-    }
-
-    public void setEndt(String description) {
-        this.startt = description;
+    public void setScheduledint(List<Integer> scheduledint) {
+        this.scheduledint = scheduledint;
     }
 }
