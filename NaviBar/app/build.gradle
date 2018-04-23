@@ -44,7 +44,7 @@ dependencies {
     implementation 'com.twitter.sdk.android:twitter:3.1.1'
     implementation 'com.twitter.sdk.android:twitter-mopub:3.1.1'
     implementation 'com.google.firebase:firebase-auth:15.0.0'
-    // zoome feature for map
+    // zoom feature for map
     implementation 'com.github.chrisbanes:PhotoView:1.2.6'
 
 }
