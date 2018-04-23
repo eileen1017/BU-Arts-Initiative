@@ -44,7 +44,7 @@ public class ScheduleFragment extends Fragment {
     Button menubtn;
     private List<Object> scheduleslist3;
     private List<Object> scheduleslist4;
-    ModelSchedule modelSchedule;
+    private boolean isButtonClicked = false;
 
 
     @Override
@@ -66,11 +66,6 @@ public class ScheduleFragment extends Fragment {
         List<Integer> eventIDs = myDb.getEventList();
         SingleUser singleUser = myDb.getProfile();
 
-//        List<Integer> scheduleIDs = modelSchedule.getScheduledint();
-//
-//        for (Integer i:scheduleIDs){
-//            singleUser.addScheduled(i);
-//        }
 
 
         for (Integer i : eventIDs) {
@@ -110,48 +105,34 @@ public class ScheduleFragment extends Fragment {
 
         recyclerView2.setLayoutManager(rvlayoutManager2);
 
+
+        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist);
+        recyclerView.setAdapter(adapter);
+        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2);
+        recyclerView2.setAdapter(adapter2);
+
+
         menubtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                PopupMenu popupMenu = new PopupMenu(getContext(), menubtn);
-                popupMenu.getMenuInflater().inflate(R.menu.schedule_popup, popupMenu.getMenu());
-
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        int id = item.getItemId();
-                        switch (id) {
-                            case R.id.item1:
-
+                if (v.getId() == R.id.menubtn){
+                    isButtonClicked = !isButtonClicked;
+                    if (isButtonClicked) {
+                        v.setBackgroundResource(R.drawable.myschedule);
+                        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist);
+                        recyclerView.setAdapter(adapter);
+                        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2);
+                        recyclerView2.setAdapter(adapter2);
 
 
-                                scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist);
-                                recyclerView.setAdapter(adapter);
-
-
-
-                                scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2);
-                                recyclerView2.setAdapter(adapter2);
-                                return true;
-
-                            case R.id.item2:
-                                // do more stuff
-
-                                scheduleAdapter adapter3 = new scheduleAdapter(getActivity(), scheduleslist3);
-                                recyclerView.setAdapter(adapter3);
-
-
-
-                                scheduleAdapter adapter4 = new scheduleAdapter(getActivity(), scheduleslist4);
-                                recyclerView2.setAdapter(adapter4);
-
-                                return true;
-
-                        }
-                        return true;
+                    }else{
+                        v.setBackgroundResource(R.drawable.allschedule);
+                        scheduleAdapter adapter3 = new scheduleAdapter(getActivity(), scheduleslist3);
+                        recyclerView.setAdapter(adapter3);
+                        scheduleAdapter adapter4 = new scheduleAdapter(getActivity(), scheduleslist4);
+                        recyclerView2.setAdapter(adapter4);
                     }
-                });
-                popupMenu.show();
+                }
             }
         });
 

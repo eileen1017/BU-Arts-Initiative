@@ -26,7 +26,6 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
     List<Object> mList;
     private boolean isButtonClicked = false;
     List<Integer> res = new ArrayList<>();
-    ModelSchedule modelSchedule;
 
 
 
