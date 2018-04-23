@@ -20,6 +20,8 @@ allprojects {
     repositories {
         google()
         jcenter()
+        //zoom feature for map
+        maven { url "https://jitpack.io" }
     }
 }
 

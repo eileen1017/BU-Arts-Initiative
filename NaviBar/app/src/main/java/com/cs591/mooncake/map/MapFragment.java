@@ -156,6 +156,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     private void moveCamera(LatLng latLng, float zoom){
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
     }
+
     private void getDeviceLocation(){
         // FusedLocationApi is deprecated so now we should use the FusedLocationProviderClient
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
