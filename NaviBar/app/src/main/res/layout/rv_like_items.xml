@@ -32,19 +32,19 @@
                 android:id="@+id/item_name"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
-                android:text="Jupiter and Okwess"
                 android:layout_marginLeft="2dp"
-                android:textSize="24sp"
                 android:fontFamily="@font/lato_bold"
-                android:textColor="#FFFFFF"/>
+                android:text="Jupiter and Okwess"
+                android:textColor="#FFFFFF"
+                android:textSize="23.5sp" />
 
             <Button
                 android:id="@+id/likebtn"
-                android:layout_width="30dp"
-                android:layout_height="26dp"
+                android:layout_width="38dp"
+                android:layout_height="33dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"
-                android:background="@drawable/like" />
+                android:background="@drawable/liked" />
 
 
 
