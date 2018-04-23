@@ -1,9 +1,15 @@
 package com.cs591.mooncake.like;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,11 +91,41 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
         holder.likebtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+
                 ModelLike itemLabel = mList.get(position);
-                mList.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position,mList.size());
-                Toast.makeText(mContext, "You have dislike "+ itemLabel.getName(), Toast.LENGTH_SHORT).show();
+
+                String normalText1 = "Are you sure you want to remove ";
+                String boldText = itemLabel.getName();
+                String normalText2 = "?";
+
+                SpannableString str = new SpannableString(normalText1 + boldText + normalText2);
+                str.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), normalText1.length(), normalText1.length() + boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                // Create a dialog box for user to decide whether to unlike an event or not.
+                AlertDialog.Builder altUnlike = new AlertDialog.Builder(mContext);
+                // The dialog box cannot be canceled by clicking the back button.
+                // Set the "Yes" button and then remove the item from the Like page
+                altUnlike.setMessage(str).setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mList.remove(position);
+                                notifyItemRemoved(position);
+                                notifyItemRangeChanged(position,mList.size());
+
+                            }
+                        })
+                        // close the dialog box when click on "No"
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = altUnlike.create();
+                alert.setTitle("");
+                alert.show();
+
 
             }
         });

@@ -98,7 +98,7 @@ public class LikeFragment extends Fragment {
 
         recyclerView.setLayoutManager(rvlayoutManager);
 
-        LikeAdapter adapter = new LikeAdapter(getContext(),likeslist);
+        LikeAdapter adapter = new LikeAdapter(getActivity(),likeslist);
         recyclerView.setAdapter(adapter);
 
         return view;
