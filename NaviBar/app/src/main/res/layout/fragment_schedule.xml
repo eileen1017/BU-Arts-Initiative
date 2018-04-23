@@ -22,11 +22,11 @@
             android:layout_height="wrap_content"
             android:text="Schedule"
             android:textColor="#fff"
-            android:textSize="36sp" />
+            android:textSize="36sp"/>
 
         <Button
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_marginRight="10dp"
             android:id="@+id/menubtn"
             android:background="@drawable/myschedule"/>
