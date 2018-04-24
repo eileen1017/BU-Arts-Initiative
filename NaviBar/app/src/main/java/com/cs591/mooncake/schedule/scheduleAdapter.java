@@ -14,7 +14,7 @@ import com.cs591.mooncake.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cs591.mooncake.SQLite.SingleArtist;
+
 import com.cs591.mooncake.SQLite.SingleEvent;
 import com.cs591.mooncake.explore.EventActivity;
 
@@ -25,6 +25,9 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
     Context mContext;
     List<Object> mList;
     private boolean isButtonClicked = false;
+    List<Integer> res = new ArrayList<>();
+
+
 
     public scheduleAdapter(Context context, List<Object> list){
         mContext = context;
@@ -39,6 +42,7 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
         TextView item_location;
         TextView item_at;
         Button item_status;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -62,17 +66,18 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
         View view = layoutInflater.inflate(R.layout.rv_schedule_items,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
 
+
+
         return viewHolder;
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-
+    public void onBindViewHolder(@NonNull ViewHolder holder,final int position) {
 
 
         if (mList.get(position) instanceof  SingleEvent) {
-            SingleEvent singleEvent = (SingleEvent) mList.get(position);
+            final SingleEvent singleEvent = (SingleEvent) mList.get(position);
             holder.item_name.setText(singleEvent.getName());
             holder.item_from_time.setText(singleEvent.getStart());
             holder.item_location.setText(singleEvent.getAddress());
@@ -84,6 +89,8 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
                         isButtonClicked = !isButtonClicked;
                         if (isButtonClicked) {
                             v.setBackgroundResource(R.drawable.ischecked);
+                            res.add(1);
+
                         }else{
                             v.setBackgroundResource(R.drawable.add);
                         }
@@ -98,6 +105,10 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
                 }
             });
         }
+
+
+
+
 
 
 

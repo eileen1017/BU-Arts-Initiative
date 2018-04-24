@@ -87,16 +87,8 @@ public class MainActivity extends AppCompatActivity {
         firebaseAuthInitialize();
 
         btnLogout = findViewById(R.id.btnLogout);
+        btnLogout.setVisibility(View.INVISIBLE);
 
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myDb.initProfile();
-                mAuth.signOut();
-                LoginManager.getInstance().logOut();
-                TwitterCore.getInstance().getSessionManager().clearActiveSession();
-            }
-        });
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -131,6 +123,14 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
     }
+
+    public void logout(){
+        myDb.initProfile();
+        mAuth.signOut();
+        LoginManager.getInstance().logOut();
+        TwitterCore.getInstance().getSessionManager().clearActiveSession();
+    }
+
 
     private void firebaseAuthInitialize() {
 

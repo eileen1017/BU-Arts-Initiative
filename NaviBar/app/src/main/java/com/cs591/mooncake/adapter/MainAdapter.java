@@ -77,7 +77,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 LinearLayoutManager.HORIZONTAL, false));
         holder.recyclerView.setAdapter(adapter);
         holder.type.setText(types[position]);
-        holder.btnShowAll.setText("Show All " + types[position]);
+        //holder.btnShowAll.setText("Show All " + types[position]);
     }
 
     @Override
@@ -99,7 +99,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(itemView);
             type = itemView.findViewById(R.id.type);
             recyclerView =  itemView.findViewById(R.id.inner_recyclerView);
-            btnShowAll = itemView.findViewById(R.id.btnShowAll);
+            //btnShowAll = itemView.findViewById(R.id.btnShowAll);
         }
     }
 

@@ -48,19 +48,25 @@ public class CustomAdapter extends ArrayAdapter<String> {
                 @Override
                 public void onClick(View v) {
                     switch(position) {
+<<<<<<< HEAD
                         case 0:
                             Log.i("onClick", ""+position);
                             break;
                         case 1:
                             Log.i("onClick", ""+position);
                             break;
+=======
+>>>>>>> d3d96473404ba288036908dae87993222a9b39e9
                         case 2:
                             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.surveymonkey.com/r/523GWBK"));
                             getContext().startActivity(browserIntent);
                             break;
+<<<<<<< HEAD
                         case 3:
                             Log.i("onClick", ""+position);
                             break;
+=======
+>>>>>>> d3d96473404ba288036908dae87993222a9b39e9
                         case 4:
                             Intent browserTic = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ticketmaster.com"));
                             getContext().startActivity(browserTic);
