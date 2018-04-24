@@ -52,6 +52,10 @@ public class CustomAdapter extends ArrayAdapter<String> {
                             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.surveymonkey.com/r/523GWBK"));
                             getContext().startActivity(browserIntent);
                             break;
+                        case 3:
+                            Intent aboutIntent = new Intent(getContext(),AboutPage.class);
+                            getContext().startActivity(aboutIntent);
+                            break;
                         case 4:
                             Intent browserTic = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ticketmaster.com"));
                             getContext().startActivity(browserTic);
