@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String REF_USERNAME = "User Name";
     public static final String REF_EMAIL = "Email";
     public static final String REF_PHONE_NUMBER = "Phone Number";
+
     private FrameLayout mainFrame;
     private BottomNavigationView navigation;
 
