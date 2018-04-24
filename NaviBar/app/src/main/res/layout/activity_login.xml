@@ -16,6 +16,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -69,6 +70,8 @@
         app:layout_constraintTop_toBottomOf="@+id/btnTwitterLogin" />
 
 </android.support.constraint.ConstraintLayout>
+=======
+>>>>>>> 2c5e6fd0fb3e15914b3801fc51b9f519888dbe05
         android:layout_height="match_parent"
         tools:context=".login.LoginActivity">
 

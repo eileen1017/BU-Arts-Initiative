@@ -34,6 +34,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.twitter.sdk.android.core.TwitterCore;
 
+import com.cs591.mooncake.profile.ProfileFragment;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.io.IOException;
 
 
@@ -71,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
         copyDataBaseToPhone();
         myDb = new MySQLiteHelper(this);
 
+        AdView mAdView = (AdView) findViewById(R.id.adView_bottom);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
         mainFrame = findViewById(R.id.mainFrame);
         navigation = findViewById(R.id.navigation);
 
@@ -86,8 +96,6 @@ public class MainActivity extends AppCompatActivity {
 
         firebaseAuthInitialize();
 
-        btnLogout = findViewById(R.id.btnLogout);
-        btnLogout.setVisibility(View.INVISIBLE);
 
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -114,6 +122,41 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        AdListener listener = new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                Log.i("TAG", "onAdClosed");
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                super.onAdFailedToLoad(errorCode);
+                Log.i("TAG", "onAdFailedToLoad");
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                super.onAdLeftApplication();
+                Log.i("TAG", "onAdLeftApplication");
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+                Log.i("TAG", "onAdOpened");
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                Log.i("TAG", "onAdLoaded");
+            }
+        };
+
+        mAdView.setAdListener(listener);
+        mAdView.loadAd(adRequest);
 
     }
 
