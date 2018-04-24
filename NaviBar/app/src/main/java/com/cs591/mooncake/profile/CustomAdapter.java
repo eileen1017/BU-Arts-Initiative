@@ -41,6 +41,25 @@ public class CustomAdapter extends ArrayAdapter<String> {
         if(convertView == null) {
             LayoutInflater mInflator = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = mInflator.inflate(R.layout.customlist, parent, false);
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch(position) {
+                        case 2:
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.surveymonkey.com/r/523GWBK"));
+                            getContext().startActivity(browserIntent);
+                            break;
+                        case 4:
+                            Intent browserTic = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ticketmaster.com"));
+                            getContext().startActivity(browserTic);
+                            break;
+
+                        default:
+                            Log.i("onClick", "");
+                            break;
+                    }
+                }
+            });
             mViewHolder.mIcon = (ImageView) convertView.findViewById(R.id.item_icon);
             mViewHolder.mName = (TextView) convertView.findViewById(R.id.item_title);
             convertView.setTag(mViewHolder);
