@@ -35,6 +35,7 @@ dependencies {
     implementation 'com.android.support:design:27.1.1'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.google.android.gms:play-services-auth:15.0.0'
+    implementation 'com.google.android.gms:play-services-ads:15.0.0'
 
     // Add services to your project
     // Google play service set up and the line below is for google map especially

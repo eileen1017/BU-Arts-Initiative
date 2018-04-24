@@ -11,9 +11,17 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.cs591.mooncake.MainActivity;
 import com.cs591.mooncake.R;
+import com.cs591.mooncake.SQLite.MySQLiteHelper;
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.twitter.sdk.android.core.TwitterCore;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 /**
@@ -47,13 +55,25 @@ public class ProfileFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         mListView = (ListView) view.findViewById(R.id.item_menu);
-        CustomAdapter customAdapter = new CustomAdapter(getContext(), Icons, Names);
+        CustomAdapter customAdapter = new CustomAdapter(getActivity(), Icons, Names);
         mListView.setAdapter(customAdapter);
+
+
+
+        view.findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new MySQLiteHelper(getActivity()).initProfile();
+                FirebaseAuth.getInstance().signOut();
+                LoginManager.getInstance().logOut();
+                TwitterCore.getInstance().getSessionManager().clearActiveSession();
+            }
+        });
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(getContext(),classes[position]);
+                Intent i = new Intent(getActivity(),classes[position]);
                 startActivity(i);
 
             }

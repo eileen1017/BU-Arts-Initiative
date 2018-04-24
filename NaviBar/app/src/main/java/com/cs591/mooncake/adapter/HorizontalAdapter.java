@@ -42,7 +42,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
     public void onBindViewHolder(@NonNull HorizontalAdapter.MyViewHolder holder, int position) {
 
         if (data.get(position) instanceof SingleEvent) {
-            SingleEvent singleEvent = (SingleEvent)data.get(position);
+            final SingleEvent singleEvent = (SingleEvent)data.get(position);
             holder.description.setText(singleEvent.getAddress());
             holder.title.setText(singleEvent.getName());
             holder.pubDate.setText(singleEvent.getStart());
@@ -51,6 +51,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, EventActivity.class);
+                    intent.putExtra("eventID", singleEvent.getID());
                     context.startActivity(intent);
                 }
             });
