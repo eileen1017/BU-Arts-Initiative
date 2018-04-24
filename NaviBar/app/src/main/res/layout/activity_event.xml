@@ -19,20 +19,21 @@
             android:layout_width="match_parent"
             android:layout_height="350dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:contentScrim="@color/colorPrimary"
+            app:contentScrim="@color/red"
             app:expandedTitleTextAppearance="@android:color/transparent"
             android:fitsSystemWindows="true"
             >
 
             <ImageView
-                app:layout_collapseMode="parallax"
-                android:src="@drawable/mrbean"
-                android:contentDescription="@string/app_name"
+                android:id="@+id/ivEvent"
                 android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:contentDescription="@string/app_name"
                 android:scaleType="centerCrop"
-                android:layout_height="350dp" />
+                app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar
+                android:id="@+id/tbEventTitle"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
@@ -104,6 +105,7 @@
                             android:layout_gravity="center_vertical"/>
 
                         <TextView
+                            android:id="@+id/tvEventTime"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="9"
@@ -161,6 +163,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="9"
                             android:padding="12dp"
+                            android:id="@+id/tvEventArtist"
                             android:text="Mr. Bean"
                             android:textAlignment="textStart"
                             android:textColor="@color/colorPrimaryText"
@@ -211,6 +214,7 @@
                                 android:layout_height="wrap_content"
                                 android:padding="12dp"
                                 android:text="Metcalf Ballroom"
+                                android:id="@+id/tvEventLocationRoom"
                                 android:textAlignment="textStart"
                                 android:textColor="@color/colorPrimaryText"
                                 android:textSize="14sp"
@@ -220,6 +224,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="12dp"
+                                android:id="@+id/tvEventLocationAddress"
                                 android:text="775 Commonwealth Avenue, Floor 2\nBoston, MA 02215"
                                 android:textAlignment="textStart"
                                 android:textColor="@color/colorPrimaryText"
@@ -256,7 +261,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="15dp"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@android:color/holo_red_light"
+        app:backgroundTint="@color/red"
         app:elevation="8dp"
         app:layout_anchor="@id/app_bar_layout"
         app:layout_anchorGravity="bottom|right|end"

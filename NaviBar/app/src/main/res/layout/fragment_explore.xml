@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment_explore">
+    tools:context=".explore.EventActivity">
 
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="#e01111"
+        android:background="@color/titleBarBkg"
         android:elevation="16dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -34,5 +34,5 @@
         android:id="@+id/recycler_View"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#f64e46" />
+        android:background="#fff" />
 </LinearLayout>
