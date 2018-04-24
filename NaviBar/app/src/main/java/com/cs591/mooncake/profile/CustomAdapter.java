@@ -5,7 +5,10 @@ package com.cs591.mooncake.profile;
  */
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,11 +39,39 @@ public class CustomAdapter extends ArrayAdapter<String> {
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder mViewHolder = new ViewHolder();
         if(convertView == null) {
             LayoutInflater mInflator = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = mInflator.inflate(R.layout.customlist, parent, false);
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch(position) {
+                        case 0:
+                            Log.i("onClick", ""+position);
+                            break;
+                        case 1:
+                            Log.i("onClick", ""+position);
+                            break;
+                        case 2:
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.surveymonkey.com/r/523GWBK"));
+                            getContext().startActivity(browserIntent);
+                            break;
+                        case 3:
+                            Log.i("onClick", ""+position);
+                            break;
+                        case 4:
+                            Intent browserTic = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ticketmaster.com"));
+                            getContext().startActivity(browserTic);
+                            break;
+
+                        default:
+                            Log.i("onClick", "");
+                            break;
+                    }
+                }
+            });
             mViewHolder.mIcon = (ImageView) convertView.findViewById(R.id.item_icon);
             mViewHolder.mName = (TextView) convertView.findViewById(R.id.item_title);
             convertView.setTag(mViewHolder);
