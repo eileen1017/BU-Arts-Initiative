@@ -21,6 +21,8 @@ import com.twitter.sdk.android.core.TwitterCore;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +57,8 @@ public class ProfileFragment extends Fragment {
         mListView = (ListView) view.findViewById(R.id.item_menu);
         CustomAdapter customAdapter = new CustomAdapter(getActivity(), Icons, Names);
         mListView.setAdapter(customAdapter);
+
+
 
         view.findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
             @Override

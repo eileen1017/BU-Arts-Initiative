@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -323,6 +324,11 @@ public class MainActivity extends AppCompatActivity {
             profile.child(REF_SCHEDULED).setValue(singleUser.getScheduledString());
             profile.child(REF_LIKED).setValue(singleUser.getLikedString());
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.moveTaskToBack(true);
     }
 
     @Override
