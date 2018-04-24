@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
@@ -16,7 +16,6 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-<<<<<<< HEAD
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -29,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.22">
 
-    </com.google.android.gms.common.SignInButton>
+    </android.support.constraint.ConstraintLayout>
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/btnFacebookLogin"
@@ -70,7 +69,6 @@
         app:layout_constraintTop_toBottomOf="@+id/btnTwitterLogin" />
 
 </android.support.constraint.ConstraintLayout>
-=======
         android:layout_height="match_parent"
         tools:context=".login.LoginActivity">
 
@@ -149,4 +147,3 @@
 
 
 </FrameLayout>
->>>>>>> d3d96473404ba288036908dae87993222a9b39e9
