@@ -45,10 +45,8 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
             super(itemView);
 
             likebtn = itemView.findViewById(R.id.likebtn);
-
             item_image = itemView.findViewById(R.id.item_image);
             item_name = itemView.findViewById(R.id.item_name);
-
 
         }
     }
