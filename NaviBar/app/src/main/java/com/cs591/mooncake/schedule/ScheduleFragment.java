@@ -44,7 +44,6 @@ public class ScheduleFragment extends Fragment {
     Button menubtn;
     private List<Object> scheduleslist3;
     private List<Object> scheduleslist4;
-    private boolean isButtonClicked = false;
 
     private final int ALL_SCHEDULE = 0;
     private final int MY_SCHEDULE = 1;

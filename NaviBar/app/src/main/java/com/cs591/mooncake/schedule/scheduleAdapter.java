@@ -117,16 +117,6 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
                     new FirebaseProfile().updateLikedScheduled(singleUser);
                     mydb.addProfile(singleUser);
 
-//                    if (v.getId() == R.id.item_status){
-//                        isButtonClicked = !isButtonClicked;
-//                        if (isButtonClicked) {
-//                            v.setBackgroundResource(R.drawable.ischecked);
-//                            res.add(1);
-//
-//                        }else{
-//                            v.setBackgroundResource(R.drawable.add);
-//                        }
-//                    }
                 }
             });
             holder.itemView.setOnClickListener(new View.OnClickListener() {
