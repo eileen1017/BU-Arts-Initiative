@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cs591.mooncake.FirebaseUtils.FirebaseProfile;
 import com.cs591.mooncake.MainActivity;
 import com.cs591.mooncake.R;
 import java.util.ArrayList;
@@ -113,6 +114,7 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
                         v.setBackgroundResource(R.drawable.ischecked);
                         singleUser.addScheduled(singleEvent.getID());
                     }
+                    new FirebaseProfile().updateLikedScheduled(singleUser);
                     mydb.addProfile(singleUser);
 
 //                    if (v.getId() == R.id.item_status){
