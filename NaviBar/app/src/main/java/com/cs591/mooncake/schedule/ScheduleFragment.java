@@ -126,6 +126,15 @@ public class ScheduleFragment extends Fragment {
         }
     }
 
+    public void addToCalenderHanlder(int eventID) {
+        
+    }
+
+    public void removeCalenderHandler(int eventID) {
+        // 如果可行的话。不知道可不可以删除calender里的东西
+    }
+
+
 
     private void refreshAllschedulePage() {
         if (scheduleslist == null) {
