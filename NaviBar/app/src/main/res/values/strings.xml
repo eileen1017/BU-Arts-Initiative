@@ -24,4 +24,11 @@
 
     <string name="banner_ad_unit_id">ca-app-pub-4149307760842545/7262330703</string>
 
+    <!--About Page Strings-->
+    <string name="aboutheader">“Artistic engagement brings immeasurable value to our social and academic development, impacting not only the way we perceive the world but how we approach so many disciplines, from the sciences to the humanities. The Boston University Arts Initiative ensures that the arts are fundamental to the BU student experience inside and outside of the classroom.”\n\n<b>— Jean Morrison, University Provost and Chief Academic Officer</b></string>
+    <string name="missiontitle">Our Mission</string>
+    <string name="mission">Our mission at the BU Arts Initiative is to ensure the integral role of the arts in the educational experience of every BU student. We support faculty, student, and staff projects, making sure the arts are deeply embedded within the cultural and intellectual fabric of the University.</string>
+    <string name="member">Pround Member of...</string>
+    <string name="contacttitle">Contact</string>
+    <string name="BUArts">Boston University Arts Initiative\n775 Commonwealth Avenue, Suite 201\n\nPhone:   +1 617.358.0489\nEmail: artsinbu@bu.edu</string>
 </resources>
