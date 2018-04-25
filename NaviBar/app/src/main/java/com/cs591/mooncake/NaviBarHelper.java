@@ -11,6 +11,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.util.Log;
 import java.lang.reflect.Field;
 
+// Helper class to disable the default animation for items of bottom navigation view
 public class NaviBarHelper {
     public static void disableShiftMode(BottomNavigationView view) {
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
