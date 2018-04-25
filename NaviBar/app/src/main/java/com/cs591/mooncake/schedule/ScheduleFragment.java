@@ -66,12 +66,6 @@ public class ScheduleFragment extends Fragment {
         scheduleslist4 = new ArrayList<>();
 
 
-
-
-
-
-
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         RecyclerView.LayoutManager rvlayoutManager = layoutManager;
 
@@ -124,6 +118,15 @@ public class ScheduleFragment extends Fragment {
             refreshMySchedulePage();
         }
     }
+
+    public void addToCalenderHanlder(int eventID) {
+
+    }
+
+    public void removeCalenderHandler(int eventID) {
+        // 如果可行的话。不知道可不可以删除calender里的东西
+    }
+
 
 
     private void refreshAllschedulePage() {

@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
 
     @Override
     public void onProfileChangedListener() {
-        if (scheduleFragment!=null)
+        if (scheduleFragment!=null && scheduleFragment.isVisible())
             scheduleFragment.scheduleChangedHandler();
     }
 }
