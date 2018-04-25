@@ -74,7 +74,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="20dp"
-                android:src="@drawable/line_ffffff"
+                android:src="@drawable/whiteline"
                 />
 
             <TextView
@@ -107,7 +107,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="20dp"
-                android:src="@drawable/line_ffffff"
+                android:src="@drawable/whiteline"
                 />
             
             <TextView
@@ -166,7 +166,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="20dp"
-                android:src="@drawable/line_ffffff"
+                android:src="@drawable/whiteline"
                 />
 
             <TextView

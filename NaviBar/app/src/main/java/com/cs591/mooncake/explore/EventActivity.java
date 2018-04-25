@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
+import com.cs591.mooncake.FirebaseUtils.FirebaseProfile;
 import com.cs591.mooncake.R;
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleEvent;
@@ -33,10 +35,13 @@ public class EventActivity extends AppCompatActivity {
             public void onClick(View view) {
                 SingleUser singleUser = myDb.getProfile();
                 if (singleUser.getScheduled().contains(eventID)) {
-                    singleUser.addScheduled(eventID);
-                } else {
                     singleUser.removeScheduled(eventID);
+                    Toast.makeText(EventActivity.this,"Removed", Toast.LENGTH_SHORT).show();
+                } else {
+                    singleUser.addScheduled(eventID);
+                    Toast.makeText(EventActivity.this,"Added", Toast.LENGTH_SHORT).show();
                 }
+                new FirebaseProfile().updateLikedScheduled(singleUser);
                 myDb.addProfile(singleUser);
             }
         });
@@ -65,10 +70,5 @@ public class EventActivity extends AppCompatActivity {
         tvEventArtist.setText(singleEvent.getArtist());
 
     }
-
-
-
-
-
 
 }

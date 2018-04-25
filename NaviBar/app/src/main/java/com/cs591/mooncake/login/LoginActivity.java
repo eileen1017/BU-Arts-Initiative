@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
 
-        // Initialize Firebase auth
+        // FirebaseInitialize Firebase auth
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -81,13 +81,13 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-        // Initialize Twitter Login
+        // FirebaseInitialize Twitter Login
         twitterSignInInitialize();
 
-        // Initialize Google Login
+        // FirebaseInitialize Google Login
         googleSignInInitialize();
 
-        // Initialize Facebook Login button
+        // FirebaseInitialize Facebook Login button
         facebookSignInInitialize();
 
         Button btnGuest = findViewById(R.id.btnGuestLogin);
