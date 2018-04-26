@@ -11,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import com.cs591.mooncake.R;
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleEvent;
@@ -31,6 +33,7 @@ public class LikeFragment extends Fragment {
     }
 
 
+    TextView txtEmptyLike;
     RecyclerView recyclerView;
     private List<Object> likesList;
     private MySQLiteHelper myDb;
@@ -88,7 +91,7 @@ public class LikeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_like, container, false);
 
         recyclerView = view.findViewById(R.id.rv);
-
+        txtEmptyLike = view.findViewById(R.id.txtEmptyLike);
 
         likesList = new ArrayList<>();
 
@@ -143,13 +146,20 @@ public class LikeFragment extends Fragment {
 
         likesList.clear();
         SingleUser singleUser = myDb.getProfile();
+
+        if (singleUser.getLiked().isEmpty()){
+            txtEmptyLike.setVisibility(View.VISIBLE);
+        } else {
+            txtEmptyLike.setVisibility(View.INVISIBLE);
+        }
+
+
         for (Integer i : singleUser.getLiked()){
             SingleEvent singleLiked = myDb.getEvent(i);
             likesList.add(singleLiked);
-
-            LikeAdapter adapter = new LikeAdapter(getActivity(),likesList);
-            recyclerView.setAdapter(adapter);
         }
+        LikeAdapter adapter = new LikeAdapter(getActivity(),likesList);
+        recyclerView.setAdapter(adapter);
     }
 
 }
