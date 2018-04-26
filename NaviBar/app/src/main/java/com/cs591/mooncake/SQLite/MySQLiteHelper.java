@@ -74,6 +74,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             res.add(cursor.getInt(0));
         }
 
+        cursor.close();
         return res;
     }
 
@@ -88,6 +89,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             res.add(cursor.getInt(0));
         }
 
+        cursor.close();
         return res;
     }
 
@@ -115,6 +117,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         Bitmap theImage = BitmapFactory.decodeStream(imageStream);
         singleEvent.setPic(theImage);
 
+        cursor.close();
         return singleEvent;
     }
 
@@ -139,6 +142,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         Bitmap theImage = BitmapFactory.decodeStream(imageStream);
         singleArtist.setPic(theImage);
 
+        cursor.close();
         return singleArtist;
     }
 
@@ -237,6 +241,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             singleUser.setPicUrl(Uri.parse(cursor.getString(5)));
         }
 
+        cursor.close();
         return singleUser;
     }
 }
