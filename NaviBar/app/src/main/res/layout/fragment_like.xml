@@ -66,11 +66,31 @@
     </android.support.v7.widget.Toolbar>
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
 
-        ></android.support.v7.widget.RecyclerView>
+            ></android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/txtEmptyLike"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="45dp"
+            android:fontFamily="serif"
+            android:lineSpacingExtra="3sp"
+            android:text="@string/txtEmptyLike"
+            android:textAlignment="viewStart"
+            android:textSize="17sp"
+            android:visibility="visible" />
+
+    </FrameLayout>
+
 
 </LinearLayout>
