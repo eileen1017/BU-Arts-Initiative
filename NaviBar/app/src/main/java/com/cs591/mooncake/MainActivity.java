@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.cs591.mooncake.FirebaseUtils.FirebaseInitialize;
 import com.cs591.mooncake.FirebaseUtils.FirebaseProfile;
@@ -25,6 +26,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 
 
 public class MainActivity extends AppCompatActivity implements FirebaseProfile.profile{
@@ -41,6 +43,9 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
     private FirebaseProfile firebaseProfile;
 
     public MySQLiteHelper myDb;
+    ImageView imageView;
+    String url = "https://www.reka.in/pres/1258167031.jpg";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,8 +137,52 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
 
         mAdView.setAdListener(listener);
         mAdView.loadAd(adRequest);
+//        imageView = (ImageView) findViewById(R.id.profile_image);
+//
+//
+//        loadImageFromUrl(url);
+
+
 
     }
+//
+//    public Bitmap getBitmapFromURL(String src){
+//        java.net.URL url = new java.net.URL(src);
+//        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//        connection.setDoInput(true);
+//        connection
+//    }
+//
+//    private void loadImageFromUrl(String url) {
+//
+//
+//        // add to database
+//        SingleUser singleUser = myDb.getProfile();
+//
+//        // download image as Bitmap object as "userPic"
+//        singleUser.setPic(userPic);
+//
+//        myDb.addProfile(singleUser);
+//
+//
+//        // load image
+//        SingleUser singleUser1 = myDb.getProfile();
+//        Bitmap userPic = singleUser1.getPic();
+//
+//
+//        Picasso.with(this).load(url).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(imageView,new com.squareup.picasso.Callback(){
+//
+//            @Override
+//            public void onSuccess() {
+//
+//            }
+//
+//            @Override
+//            public void onError() {
+//
+//            }
+//        });
+
 
     private void setFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
