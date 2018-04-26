@@ -1,13 +1,10 @@
 package com.cs591.mooncake.FirebaseUtils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
-import com.cs591.mooncake.MainActivity;
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleUser;
-import com.cs591.mooncake.schedule.ScheduleFragment;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,7 +32,8 @@ public class FirebaseProfile {
 
     private profile OCL;
     public interface profile {
-        void onProfileChangedListener();
+        void onScheduledChangedListener();
+        void onLikedChangedListener();
     }
 
     public FirebaseProfile(){
@@ -95,15 +93,17 @@ public class FirebaseProfile {
                                 SingleUser singleUser = myDb.getProfile();
                                 singleUser.setScheduledByString(dataSnapshot.getValue().toString());
                                 myDb.addProfile(singleUser);
+                                OCL.onScheduledChangedListener();
                             } else if (dataSnapshot.getKey().equals(REF_LIKED)) {
                                 SingleUser singleUser = myDb.getProfile();
                                 singleUser.setLikedByString(dataSnapshot.getValue().toString());
                                 myDb.addProfile(singleUser);
+                                OCL.onLikedChangedListener();
                             }
 
                             Log.i("Scheduled:", myDb.getProfile().getScheduledString());
                             Log.i("Liked", myDb.getProfile().getLikedString());
-                            OCL.onProfileChangedListener();
+
                         }
 
                         @Override
@@ -113,15 +113,16 @@ public class FirebaseProfile {
                                 SingleUser singleUser = myDb.getProfile();
                                 singleUser.setScheduledByString(dataSnapshot.getValue().toString());
                                 myDb.addProfile(singleUser);
+                                OCL.onScheduledChangedListener();
                             } else if (dataSnapshot.getKey().equals(REF_LIKED)) {
                                 SingleUser singleUser = myDb.getProfile();
                                 singleUser.setLikedByString(dataSnapshot.getValue().toString());
                                 myDb.addProfile(singleUser);
+                                OCL.onLikedChangedListener();
                             }
 
                             Log.i("Scheduled:", myDb.getProfile().getScheduledString());
                             Log.i("Liked", myDb.getProfile().getLikedString());
-                            OCL.onProfileChangedListener();
 
 
                         }

@@ -28,8 +28,8 @@ import com.cs591.mooncake.explore.EventActivity;
 
 public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHolder> {
 
-    Context mContext;
-    List<Object> mList;
+    private Context mContext;
+    private List<Object> mList;
     private boolean isButtonClicked = false;
     List<Integer> res = new ArrayList<>();
 
@@ -78,9 +78,6 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
 
     }
 
-    private void updateScheduled() {
-
-    }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder,final int position) {
@@ -109,7 +106,6 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
                     if (singleUser.getScheduled().contains(singleEvent.getID())) {
                         singleUser.removeScheduled(singleEvent.getID());
                         v.setBackgroundResource(R.drawable.add);
-                        updateScheduled();
                     } else {
                         v.setBackgroundResource(R.drawable.ischecked);
                         singleUser.addScheduled(singleEvent.getID());

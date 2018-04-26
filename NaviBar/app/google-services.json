@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "228476415530-9j5ul5fe1r347mce8retv1tp6s2om9gp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cs591.mooncake",
+            "certificate_hash": "260dd0c8c6c5beb86e71c64fa915bce57d99e5d2"
+          }
+        },
+        {
           "client_id": "228476415530-rifpjgk0rsljln30fvvt1jih208bgv7g.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

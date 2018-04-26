@@ -17,10 +17,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.cs591.mooncake.FirebaseUtils.FirebaseProfile;
 import com.cs591.mooncake.R;
+import com.cs591.mooncake.SQLite.MySQLiteHelper;
+import com.cs591.mooncake.SQLite.SingleEvent;
+import com.cs591.mooncake.SQLite.SingleUser;
 import com.cs591.mooncake.explore.EventActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by LinLi on 4/8/18.
@@ -29,8 +35,9 @@ import java.util.ArrayList;
 public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
 
     private Context mContext;
-    private ArrayList<ModelLike> mList;
-    LikeAdapter(Context context, ArrayList<ModelLike> list){
+    private List<Object> mList;
+
+    LikeAdapter(Context context, List<Object> list){
         mContext = context;
         mList = list;
     }
@@ -66,17 +73,13 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
 
+        final SingleEvent singleEvent = (SingleEvent) mList.get(position);
 
 
-        ModelLike likeItem = mList.get(position);
+        holder.item_name.setText(singleEvent.getName());
+        holder.item_image.setImageBitmap(singleEvent.getPic());
 
-        ImageView image = holder.item_image;
-        TextView name = holder.item_name;
-
-        image.setImageResource(mList.get(position).getImage());
-
-        name.setText(likeItem.getName());
-
+        // go to the specific event page when click on the liked item
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,11 +93,12 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
             @Override
             public void onClick(View view){
 
-                ModelLike itemLabel = mList.get(position);
+                final MySQLiteHelper mydb = new MySQLiteHelper(view.getContext());
+                final SingleUser singleUser = mydb.getProfile();
 
-                String normalText1 = "Are you sure you want to remove ";
-                String boldText = itemLabel.getName();
-                String normalText2 = "?";
+                String normalText1 = mContext.getString(R.string.unlike_check);
+                String boldText = singleEvent.getName();
+                String normalText2 = mContext.getString(R.string.question_mark);
 
                 SpannableString str = new SpannableString(normalText1 + boldText + normalText2);
                 str.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), normalText1.length(), normalText1.length() + boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -107,6 +111,12 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                // remove the event from the user database
+                                SingleUser singleUser = mydb.getProfile();
+                                singleUser.removeLiked(singleEvent.getID());
+                                mydb.addProfile(singleUser);
+
+                                new FirebaseProfile().updateLikedScheduled(singleUser);
                                 mList.remove(position);
                                 notifyItemRemoved(position);
                                 notifyItemRangeChanged(position,mList.size());
