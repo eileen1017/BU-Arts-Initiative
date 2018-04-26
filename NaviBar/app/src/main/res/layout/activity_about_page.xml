@@ -4,52 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2A3143"
-    android:fitsSystemWindows="true"
-    tools:context="com.cs591.mooncake.profile.AboutPage">
+    android:orientation="vertical"
+    android:elevation="0dp"
+    android:background="#2a3143">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBarLayout"
+        android:id="@+id/app_bar_about_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        android:fitsSystemWindows="true"
+        >
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
-            android:layout_height="482dp"
-            android:background="#2A3143"
+            android:layout_height="480dp"
+            android:background="@drawable/header"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:expandedTitleTextAppearance="@android:color/transparent"
             android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            >
 
-            <ImageView
-                android:id="@+id/imageViewCollapsing"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitStart"
-                android:src="@drawable/header"
-                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="83dp"
-                android:layout_marginRight="83dp"
-                android:layout_marginTop="110dp"
+                app:layout_collapseMode="parallax"
+                android:layout_margin="80dp"
                 android:textColor="#ffffff"
-                android:text="“Artistic engagement brings immeasurable value to our social and academic development, impacting not only the way we perceive the world but how we approach so many disciplines, from the sciences to the humanities. The Boston University Arts Initiative ensures that the arts are fundamental to the BU student experience inside and outside of the classroom.”"
+                android:padding="10dp"
+                android:background="@drawable/rectangle"
+                android:text="@string/aboutheader"
                 android:textAlignment="center" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="83dp"
-                android:layout_marginRight="83dp"
-                android:layout_marginTop="330dp"
-                android:text="— Jean Morrison, University Provost and Chief Academic Officer"
-                android:textAlignment="center"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"/>
 
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -59,6 +46,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -80,7 +68,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Our Mission"
+                android:text="@string/missiontitle"
                 android:textColor="#FFFFFF"
                 android:textSize="30dp"
                 android:layout_marginLeft="20dp"
@@ -94,7 +82,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="Our mission at the BU Arts Initiative is to ensure the integral role of the arts in the educational experience of every BU student. We support faculty, student, and staff projects, making sure the arts are deeply embedded within the cultural and intellectual fabric of the University."
+                android:text="@string/mission"
                 android:textAlignment="viewStart"
                 android:textColor="#FFFFFF"
                 android:textSize="16dp" />
@@ -116,7 +104,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
-                android:text="Proud Member of ..."
+                android:text="@string/member"
                 android:textColor="#FFFFFF"
                 android:textSize="30dp"
                 android:textStyle="bold"/>
@@ -177,62 +165,18 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginBottom="20dp"
                 android:textStyle="bold"
-                android:text="Contact"
+                android:text="@string/contacttitle"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:text="Boston University Arts Initiative"
+                android:layout_margin="20dp"
+                android:text="@string/BUArts"
                 android:textAlignment="gravity"
                 android:textColor="#FFFFFF"
                 android:textSize="16dp"
                 />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="20dp"
-                android:text="775 Commonwealth Avenue, Suite 201"
-                android:textAlignment="gravity"
-                android:textColor="#FFFFFF"
-                android:textSize="16dp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:text="Phone:    +1 617.358.0489"
-                android:textAlignment="gravity"
-                android:textColor="#FFFFFF"
-                android:textSize="16dp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="80dp"
-                android:text="Email:    artsinbu@bu.edu"
-                android:textAlignment="gravity"
-                android:textColor="#FFFFFF"
-                android:textSize="16dp"
-                />
-
-
-
-
-
-
-
-
 
 
         </LinearLayout>
