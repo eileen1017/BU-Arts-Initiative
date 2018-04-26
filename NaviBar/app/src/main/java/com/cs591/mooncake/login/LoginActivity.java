@@ -62,9 +62,10 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
 
-        // Initialize Firebase auth
+        // FirebaseInitialize Firebase auth
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -80,13 +81,13 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-        // Initialize Twitter Login
+        // FirebaseInitialize Twitter Login
         twitterSignInInitialize();
 
-        // Initialize Google Login
+        // FirebaseInitialize Google Login
         googleSignInInitialize();
 
-        // Initialize Facebook Login button
+        // FirebaseInitialize Facebook Login button
         facebookSignInInitialize();
 
         Button btnGuest = findViewById(R.id.btnGuestLogin);
@@ -122,6 +123,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
 
         mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.moveTaskToBack(true);
     }
 
     private void twitterSignInInitialize(){

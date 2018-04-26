@@ -12,10 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.cs591.mooncake.R;
-import com.cs591.mooncake.explore.ExploreFragment;
-import com.cs591.mooncake.schedule.ScheduleFragment;
+import com.cs591.mooncake.SQLite.MySQLiteHelper;
+import com.cs591.mooncake.SQLite.SingleEvent;
+import com.cs591.mooncake.SQLite.SingleUser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -30,8 +32,8 @@ public class LikeFragment extends Fragment {
 
 
     RecyclerView recyclerView;
-    ArrayList<ModelLike> likeslist;
-
+    private List<Object> likesList;
+    private MySQLiteHelper myDb;
     private LikeFragment.OnFragmentInteractionListener mListener;
 
     LikeFragment.OnFragmentInteractionListener OnFragmentInteractionListener;
@@ -82,27 +84,28 @@ public class LikeFragment extends Fragment {
         // Inflate the layout for this fragment
 
 
+        myDb = new MySQLiteHelper(getActivity());
         View view = inflater.inflate(R.layout.fragment_like, container, false);
 
         recyclerView = view.findViewById(R.id.rv);
 
 
-        likeslist = new ArrayList<>();
+        likesList = new ArrayList<>();
 
-        likeslist.add(new ModelLike(R.drawable.jupiter_okwess, "Jupiter & Okwess"));
-        likeslist.add(new ModelLike(R.drawable.lamada, "Lamada"));
-        likeslist.add(new ModelLike(R.drawable.orquesta_el_macabeo, "Orquesta El Macabeo"));
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         RecyclerView.LayoutManager rvlayoutManager = layoutManager;
 
         recyclerView.setLayoutManager(rvlayoutManager);
 
-        LikeAdapter adapter = new LikeAdapter(getActivity(),likeslist);
-        recyclerView.setAdapter(adapter);
+        refreshLikedPage();
+
+
+        //LikeAdapter adapter = new LikeAdapter(getActivity(),likesList);
+        //recyclerView.setAdapter(adapter);
 
         return view;
     }
+
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
@@ -127,6 +130,26 @@ public class LikeFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public void likeChangedHandler() {
+        refreshLikedPage();
+    }
+    private void refreshLikedPage() {
+        if (likesList == null) {
+            return;
+        }
+
+
+        likesList.clear();
+        SingleUser singleUser = myDb.getProfile();
+        for (Integer i : singleUser.getLiked()){
+            SingleEvent singleLiked = myDb.getEvent(i);
+            likesList.add(singleLiked);
+
+            LikeAdapter adapter = new LikeAdapter(getActivity(),likesList);
+            recyclerView.setAdapter(adapter);
+        }
     }
 
 }

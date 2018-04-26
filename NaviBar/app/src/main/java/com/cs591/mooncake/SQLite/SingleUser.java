@@ -66,13 +66,11 @@ public class SingleUser {
         return pic;
     }
 
-    public Set<Integer> getLiked() {
-        return liked;
-    }
-
     public Set<Integer> getScheduled() {
         return scheduled;
     }
+
+    public Set<Integer> getLiked() { return liked; }
 
     public String getUID() {
         return UID;

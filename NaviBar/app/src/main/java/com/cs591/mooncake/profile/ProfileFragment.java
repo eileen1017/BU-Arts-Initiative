@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.cs591.mooncake.MainActivity;
@@ -20,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.twitter.sdk.android.core.TwitterCore;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 /**
@@ -37,11 +40,12 @@ public class ProfileFragment extends Fragment {
     Button logout;
     Intent i;
     ListView mListView;
+    ImageView userphoto;
     CustomAdapter adapter;
     String[] Names = {"Website", "Invite Friends", "Feedback", "About", "Ticket"};
     int[] Icons = {R.drawable.website,R.drawable.invite_friend,R.drawable.feedback,R.drawable.about,R.drawable.ticket};
     Class[] classes = {WebsitePage.class, InvitePage.class, FeedbackPage.class,AboutPage.class,TicketPage.class};
-
+    String url = "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/GooglePay_Lockup.max-2800x2800.png";
 
 
 
@@ -51,10 +55,16 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
+
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+
         mListView = (ListView) view.findViewById(R.id.item_menu);
         CustomAdapter customAdapter = new CustomAdapter(getActivity(), Icons, Names);
         mListView.setAdapter(customAdapter);
+
+
 
         view.findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +84,14 @@ public class ProfileFragment extends Fragment {
 
             }
         });
+
+        userphoto =  view.findViewById(R.id.profile_image);
+//        loadImageFromUrl(url);
+//        private void loadImageFromUrl(String url){
+//
+//        }
+
+
 
 
 //        settings.setOnClickListener(new View.OnClickListener() {

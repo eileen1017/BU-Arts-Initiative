@@ -121,8 +121,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        MarkerOptions gsu = new MarkerOptions().position(BU_GSU).title("BU_GSU").snippet("Click me for more info");
+        MarkerOptions gsu = new MarkerOptions().position(BU_GSU).title("BU_GSU").snippet("Click for indoor map");
         mMap.addMarker(gsu).showInfoWindow();
+
+        MarkerOptions tsai = new MarkerOptions().position(BU_Tsai).title("BU_Tsai").snippet("Click for indoor map");
+        mMap.addMarker(tsai).showInfoWindow();
 
         mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(getActivity()));
         mMap.setOnInfoWindowClickListener(this);
@@ -144,12 +147,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             //mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
         }
+
+        // move carmera to the center between GSU and Tsai
+        moveCamera(new LatLng(42.3505165, -71.1067625), DEFAULT_ZOOM);
     }
 
 
     private void moveCamera(LatLng latLng, float zoom){
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
     }
+
     private void getDeviceLocation(){
         // FusedLocationApi is deprecated so now we should use the FusedLocationProviderClient
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -163,7 +170,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                         if (task.isSuccessful()){
                             Location currentLocation = (Location) task.getResult();
 
-                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM);
+                            //moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM);
                         } else {
 
                         }
@@ -220,6 +227,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public void onInfoWindowClick(Marker marker) {
         Toast.makeText(getActivity(), "Info window clicked", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getActivity(), ShowInfo.class);
+        String locationTitle = marker.getTitle();
+        //Log.w(TAG,locationTitle);
+        intent.putExtra("location", locationTitle);
         startActivity(intent);
     }
 

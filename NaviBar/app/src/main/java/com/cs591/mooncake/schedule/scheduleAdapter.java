@@ -1,5 +1,6 @@
 package com.cs591.mooncake.schedule;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -10,20 +11,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.cs591.mooncake.FirebaseUtils.FirebaseProfile;
+import com.cs591.mooncake.MainActivity;
 import com.cs591.mooncake.R;
 import java.util.ArrayList;
 import java.util.List;
 
 
+import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleEvent;
+import com.cs591.mooncake.SQLite.SingleUser;
 import com.cs591.mooncake.explore.EventActivity;
 
 
 
 public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHolder> {
 
-    Context mContext;
-    List<Object> mList;
+    private Context mContext;
+    private List<Object> mList;
     private boolean isButtonClicked = false;
     List<Integer> res = new ArrayList<>();
 
@@ -72,6 +78,7 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
 
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder,final int position) {
 
@@ -82,19 +89,30 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
             holder.item_from_time.setText(singleEvent.getStart());
             holder.item_location.setText(singleEvent.getAddress());
             holder.item_at.setText("@");
+
+            final MySQLiteHelper myDb = new MySQLiteHelper(mContext);
+            SingleUser singleUser = myDb.getProfile();
+            if (singleUser.getScheduled().contains(singleEvent.getID())) {
+               holder.item_status.setBackgroundResource(R.drawable.ischecked);
+            } else {
+                holder.item_status.setBackgroundResource(R.drawable.add);
+            }
+
             holder.item_status.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    if (v.getId() == R.id.item_status){
-                        isButtonClicked = !isButtonClicked;
-                        if (isButtonClicked) {
-                            v.setBackgroundResource(R.drawable.ischecked);
-                            res.add(1);
-
-                        }else{
-                            v.setBackgroundResource(R.drawable.add);
-                        }
+                    MySQLiteHelper mydb = new MySQLiteHelper(v.getContext());
+                    SingleUser singleUser = mydb.getProfile();
+                    if (singleUser.getScheduled().contains(singleEvent.getID())) {
+                        singleUser.removeScheduled(singleEvent.getID());
+                        v.setBackgroundResource(R.drawable.add);
+                    } else {
+                        v.setBackgroundResource(R.drawable.ischecked);
+                        singleUser.addScheduled(singleEvent.getID());
                     }
+                    new FirebaseProfile().updateLikedScheduled(singleUser);
+                    mydb.addProfile(singleUser);
+
                 }
             });
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +136,8 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
     public int getItemCount() {
         return mList.size();
     }
+
+
 
 
 }

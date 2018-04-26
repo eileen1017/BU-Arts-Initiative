@@ -10,11 +10,11 @@
         android:orientation="vertical">
 
         <ImageButton
-            android:id="@+id/gsu_2nfloor"
+            android:id="@+id/tsai"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/map_gsu_2ndfloor"/>
+            android:src="@drawable/map_tsai"/>
 
     </LinearLayout>
 

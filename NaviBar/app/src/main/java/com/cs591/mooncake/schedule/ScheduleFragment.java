@@ -44,14 +44,17 @@ public class ScheduleFragment extends Fragment {
     Button menubtn;
     private List<Object> scheduleslist3;
     private List<Object> scheduleslist4;
-    private boolean isButtonClicked = false;
+
+    private final int ALL_SCHEDULE = 0;
+    private final int MY_SCHEDULE = 1;
+    private int currentPage = ALL_SCHEDULE;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        myDb = new MySQLiteHelper(getActivity());
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
         recyclerView = view.findViewById(R.id.rv);
@@ -61,38 +64,6 @@ public class ScheduleFragment extends Fragment {
         scheduleslist2 = new ArrayList<>();
         scheduleslist3 = new ArrayList<>();
         scheduleslist4 = new ArrayList<>();
-
-
-        List<Integer> eventIDs = myDb.getEventList();
-        SingleUser singleUser = myDb.getProfile();
-
-
-
-        for (Integer i : eventIDs) {
-            SingleEvent singleEvent = myDb.getEvent(i);
-
-            switch (singleEvent.getDate()) {
-                case 5:
-                    scheduleslist.add(singleEvent);
-                    break;
-                case 6:
-                    scheduleslist2.add(singleEvent);
-            }
-        }
-
-
-        for (Integer j : singleUser.getScheduled()){
-            SingleEvent singleSchedule = myDb.getEvent(j);
-            switch (singleSchedule.getDate()){
-                case 5:
-                    scheduleslist3.add(singleSchedule);
-                    break;
-                case 6:
-                    scheduleslist4.add(singleSchedule);
-            }
-        }
-        myDb.addProfile(singleUser);
-
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -106,6 +77,12 @@ public class ScheduleFragment extends Fragment {
         recyclerView2.setLayoutManager(rvlayoutManager2);
 
 
+        if (currentPage == ALL_SCHEDULE)
+            refreshAllschedulePage();
+        else
+            refreshMySchedulePage();
+
+
         scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist);
         recyclerView.setAdapter(adapter);
         scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2);
@@ -116,21 +93,14 @@ public class ScheduleFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (v.getId() == R.id.menubtn){
-                    isButtonClicked = !isButtonClicked;
-                    if (isButtonClicked) {
+                    if (currentPage == MY_SCHEDULE) {
+                        currentPage = ALL_SCHEDULE;
                         v.setBackgroundResource(R.drawable.myschedule);
-                        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist);
-                        recyclerView.setAdapter(adapter);
-                        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2);
-                        recyclerView2.setAdapter(adapter2);
-
-
+                        refreshAllschedulePage();
                     }else{
+                        currentPage = MY_SCHEDULE;
                         v.setBackgroundResource(R.drawable.allschedule);
-                        scheduleAdapter adapter3 = new scheduleAdapter(getActivity(), scheduleslist3);
-                        recyclerView.setAdapter(adapter3);
-                        scheduleAdapter adapter4 = new scheduleAdapter(getActivity(), scheduleslist4);
-                        recyclerView2.setAdapter(adapter4);
+                        refreshMySchedulePage();
                     }
                 }
             }
@@ -141,6 +111,70 @@ public class ScheduleFragment extends Fragment {
         return view;
     }
 
+    public void scheduleChangedHandler() {
+        if (currentPage == ALL_SCHEDULE) {
+            refreshAllschedulePage();
+        } else {
+            refreshMySchedulePage();
+        }
+    }
+
+    public void addToCalenderHanlder(int eventID) {
+
+    }
+
+    public void removeCalenderHandler(int eventID) {
+        // 如果可行的话。不知道可不可以删除calender里的东西
+    }
+
+
+
+    private void refreshAllschedulePage() {
+        if (scheduleslist == null) {
+            return;
+        }
+        myDb = new MySQLiteHelper(getActivity());
+        List<Integer> eventIDs = myDb.getEventList();
+        scheduleslist.clear();
+        scheduleslist2.clear();
+        for (Integer i : eventIDs) {
+            SingleEvent singleEvent = myDb.getEvent(i);
+
+            switch (singleEvent.getDate()) {
+                case 5:
+                    scheduleslist.add(singleEvent);
+                    break;
+                case 6:
+                    scheduleslist2.add(singleEvent);
+            }
+        }
+
+        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist);
+        recyclerView.setAdapter(adapter);
+        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2);
+        recyclerView2.setAdapter(adapter2);
+    }
+
+    private void refreshMySchedulePage() {
+        if (scheduleslist3 == null) return;
+        scheduleslist3.clear();
+        scheduleslist4.clear();
+        SingleUser singleUser = myDb.getProfile();
+        for (Integer j : singleUser.getScheduled()){
+            SingleEvent singleSchedule = myDb.getEvent(j);
+            switch (singleSchedule.getDate()){
+                case 5:
+                    scheduleslist3.add(singleSchedule);
+                    break;
+                case 6:
+                    scheduleslist4.add(singleSchedule);
+            }
+        }
+        scheduleAdapter adapter3 = new scheduleAdapter(getActivity(), scheduleslist3);
+        recyclerView.setAdapter(adapter3);
+        scheduleAdapter adapter4 = new scheduleAdapter(getActivity(), scheduleslist4);
+        recyclerView2.setAdapter(adapter4);
+    }
 
 
 

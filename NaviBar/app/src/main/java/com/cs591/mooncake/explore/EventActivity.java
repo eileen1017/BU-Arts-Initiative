@@ -3,19 +3,24 @@ package com.cs591.mooncake.explore;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
+import com.cs591.mooncake.FirebaseUtils.FirebaseProfile;
 import com.cs591.mooncake.R;
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleEvent;
+import com.cs591.mooncake.SQLite.SingleUser;
 
 public class EventActivity extends AppCompatActivity {
 
     MySQLiteHelper myDb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
 
@@ -23,8 +28,23 @@ public class EventActivity extends AppCompatActivity {
 
         Intent extras = getIntent();
         Bundle bundle = extras.getExtras();
-        int eventID = bundle.getInt("eventID");
+        final int eventID = bundle.getInt("eventID");
         populateUI(myDb.getEvent(eventID));
+        findViewById(R.id.btnAddEventSchedule).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SingleUser singleUser = myDb.getProfile();
+                if (singleUser.getScheduled().contains(eventID)) {
+                    singleUser.removeScheduled(eventID);
+                    Toast.makeText(EventActivity.this,"Removed", Toast.LENGTH_SHORT).show();
+                } else {
+                    singleUser.addScheduled(eventID);
+                    Toast.makeText(EventActivity.this,"Added", Toast.LENGTH_SHORT).show();
+                }
+                new FirebaseProfile().updateLikedScheduled(singleUser);
+                myDb.addProfile(singleUser);
+            }
+        });
     }
 
     private void populateUI(SingleEvent singleEvent) {
@@ -50,10 +70,5 @@ public class EventActivity extends AppCompatActivity {
         tvEventArtist.setText(singleEvent.getArtist());
 
     }
-
-
-
-
-
 
 }
