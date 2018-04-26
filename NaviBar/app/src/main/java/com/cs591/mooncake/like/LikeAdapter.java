@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cs591.mooncake.FirebaseUtils.FirebaseProfile;
 import com.cs591.mooncake.R;
@@ -24,8 +23,6 @@ import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleEvent;
 import com.cs591.mooncake.SQLite.SingleUser;
 import com.cs591.mooncake.explore.EventActivity;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -114,8 +111,10 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
                                 // remove the event from the user database
                                 SingleUser singleUser = mydb.getProfile();
                                 singleUser.removeLiked(singleEvent.getID());
+                                // update the local database
                                 mydb.addProfile(singleUser);
 
+                                // update Firebase real time data
                                 new FirebaseProfile().updateLikedScheduled(singleUser);
                                 mList.remove(position);
                                 notifyItemRemoved(position);

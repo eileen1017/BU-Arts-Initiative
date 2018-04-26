@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cs591.mooncake.FirebaseUtils.FirebaseProfile;
@@ -73,7 +72,6 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
         ViewHolder viewHolder = new ViewHolder(view);
 
 
-
         return viewHolder;
 
     }
@@ -123,12 +121,6 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
                 }
             });
         }
-
-
-
-
-
-
 
     }
 

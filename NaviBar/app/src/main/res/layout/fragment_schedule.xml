@@ -70,7 +70,7 @@
                         android:paddingRight="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp">
+                        android:gravity="top">
 
                         <TextView
                             android:layout_width="wrap_content"
