@@ -67,6 +67,24 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         // Required empty public constructor
     }
 
+    @Override
+    public void onPause() {
+        mapView.onPause();
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        mapView.onResume();
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        mapView.onDestroy();
+        mapView = null;
+        super.onDestroy();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -47,6 +47,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:15.0.0'
     // zoom feature for map
     implementation 'com.github.chrisbanes:PhotoView:1.2.6'
+    //implementation 'com.squareup.picasso:picassso:2.5.2'
 
 }
 
