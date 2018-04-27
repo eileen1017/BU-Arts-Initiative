@@ -29,6 +29,7 @@ import com.cs591.mooncake.FirebaseUtils.FirebaseInitialize;
 import com.cs591.mooncake.FirebaseUtils.FirebaseProfile;
 import com.cs591.mooncake.SQLite.DataBaseUtil;
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
+import com.cs591.mooncake.SQLite.SingleUser;
 import com.cs591.mooncake.explore.ExploreFragment;
 import com.cs591.mooncake.like.LikeFragment;
 import com.cs591.mooncake.map.MapFragment;
@@ -45,6 +46,9 @@ import java.util.Map;
 import java.net.HttpURLConnection;
 import java.util.Random;
 import java.util.TimerTask;
+
+import static android.app.PendingIntent.getActivity;
+import static com.cs591.mooncake.profile.ProfileFragment.downloadImage;
 
 
 public class MainActivity extends AppCompatActivity implements FirebaseProfile.profile{
@@ -63,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
 
     public MySQLiteHelper myDb;
     ImageView adView;
-    String url = "https://www.reka.in/pres/1258167031.jpg";
+
 
 
 
@@ -154,6 +158,10 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
             }
         });
 
+        SingleUser singleUser = myDb.getProfile();
+        singleUser.setPic(downloadImage("https://www.reka.in/pres/1258167031.jpg"));
+        myDb.addProfile(singleUser);
+
 
     }
 
@@ -185,43 +193,6 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
 
 
     }
-//
-//    public Bitmap getBitmapFromURL(String src){
-//        java.net.URL url = new java.net.URL(src);
-//        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//        connection.setDoInput(true);
-//        connection
-//    }
-//
-//    private void loadImageFromUrl(String url) {
-//
-//
-//        // add to database
-//        SingleUser singleUser = myDb.getProfile();
-//
-//        // download image as Bitmap object as "userPic"
-//        singleUser.setPic(userPic);
-//
-//        myDb.addProfile(singleUser);
-//
-//
-//        // load image
-//        SingleUser singleUser1 = myDb.getProfile();
-//        Bitmap userPic = singleUser1.getPic();
-//
-//
-//        Picasso.with(this).load(url).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(imageView,new com.squareup.picasso.Callback(){
-//
-//            @Override
-//            public void onSuccess() {
-//
-//            }
-//
-//            @Override
-//            public void onError() {
-//
-//            }
-//        });
 
     private void copyDataBaseToPhone() {
         DataBaseUtil util = new DataBaseUtil(this);
