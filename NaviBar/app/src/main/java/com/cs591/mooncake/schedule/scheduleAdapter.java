@@ -23,6 +23,7 @@ import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleEvent;
 import com.cs591.mooncake.SQLite.SingleUser;
 import com.cs591.mooncake.explore.EventActivity;
+import com.cs591.mooncake.schedule.ScheduleFragment;
 
 
 
@@ -48,6 +49,8 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
         TextView item_location;
         TextView item_at;
         Button item_status;
+        TextView item_to_time;
+        ImageView item_type;
 
 
         public ViewHolder(View itemView) {
@@ -59,6 +62,8 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
             item_location = itemView.findViewById(R.id.item_location);
             item_at = itemView.findViewById(R.id.item_at);
             item_status = itemView.findViewById(R.id.item_status);
+            item_to_time = itemView.findViewById(R.id.item_to_time);
+            item_type = itemView.findViewById(R.id.item_type);
 
 
         }
@@ -73,7 +78,6 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
         ViewHolder viewHolder = new ViewHolder(view);
 
 
-
         return viewHolder;
 
     }
@@ -84,11 +88,28 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
 
 
         if (mList.get(position) instanceof  SingleEvent) {
+            String[] type = {"Workshop","Bazaar","Performance"};
             final SingleEvent singleEvent = (SingleEvent) mList.get(position);
+
             holder.item_name.setText(singleEvent.getName());
             holder.item_from_time.setText(singleEvent.getStart());
             holder.item_location.setText(singleEvent.getAddress());
-            holder.item_at.setText("@");
+            holder.item_at.setText("To");
+
+            String currentType = singleEvent.getType();
+
+            switch(currentType){
+                case "Workshop":
+                    holder.item_type.setImageResource(R.drawable.workshop);
+                    break;
+                case "Bazaar":
+                    holder.item_type.setImageResource(R.drawable.bazzar);
+                    break;
+                case "Performance":
+                    holder.item_type.setImageResource(R.drawable.performance);
+                    break;
+
+            }
 
             final MySQLiteHelper myDb = new MySQLiteHelper(mContext);
             SingleUser singleUser = myDb.getProfile();
@@ -123,12 +144,6 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
                 }
             });
         }
-
-
-
-
-
-
 
     }
 

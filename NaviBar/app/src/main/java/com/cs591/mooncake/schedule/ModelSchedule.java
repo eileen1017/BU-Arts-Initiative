@@ -21,4 +21,6 @@ public class ModelSchedule {
     public void setScheduledint(List<Integer> scheduledint) {
         this.scheduledint = scheduledint;
     }
+
+
 }
