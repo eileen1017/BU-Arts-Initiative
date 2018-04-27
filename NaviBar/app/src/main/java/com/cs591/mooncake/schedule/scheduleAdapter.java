@@ -23,6 +23,7 @@ import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleEvent;
 import com.cs591.mooncake.SQLite.SingleUser;
 import com.cs591.mooncake.explore.EventActivity;
+import com.cs591.mooncake.schedule.ScheduleFragment;
 
 
 
