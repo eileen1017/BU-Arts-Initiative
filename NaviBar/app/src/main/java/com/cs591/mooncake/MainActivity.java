@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
     protected void onStart() {
         super.onStart();
 
-        insertDummyContactsWrapper();
+        AskPermissions();
         MobileAds.initialize(this,
                 "ca-app-pub-6996605839799649~8321977534");
         mAdView = (AdView) findViewById(R.id.adView_bottom);
@@ -279,7 +279,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
 
 
     //  Check for Permission Request
-    private void insertDummyContactsWrapper(){
+    private void AskPermissions(){
         List<String> permissionsNeeded = new ArrayList<String>();
         final List<String> permissionsList = new ArrayList<String>();
 

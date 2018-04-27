@@ -1,15 +1,11 @@
 package com.cs591.mooncake.schedule;
 
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
+
 import android.app.Fragment;
-import android.content.ContentProvider;
 import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,36 +16,22 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.PopupMenu;
 import android.widget.Toast;
 
-import com.cs591.mooncake.Manifest;
 import com.cs591.mooncake.R;
 
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import java.util.TimeZone;
-import java.util.UUID;
-import java.util.concurrent.TimeoutException;
 
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleArtist;
 import com.cs591.mooncake.SQLite.SingleEvent;
 import com.cs591.mooncake.SQLite.SingleUser;
-import com.cs591.mooncake.schedule.scheduleAdapter;
 
 
 
@@ -79,8 +61,8 @@ public class ScheduleFragment extends Fragment {
 
     Button addEvent;
     Button delete;
-    long starttime;
-    long endtime;
+    long starttime = 0;
+    long endtime = 0;
 
 
     @Override
@@ -187,23 +169,21 @@ public class ScheduleFragment extends Fragment {
             // Creates an empty set to store a set of values that the ContentResolver can process
             ContentValues calEvent = new ContentValues();
             int actualdate = singleEvent.getDate();
-            String startt = getTimeString(singleEvent.getStart());
-            String endt = getTimeString(singleEvent.getEnd());
+            String st = singleEvent.getStart();
+            String et = singleEvent.getEnd();
 
-            String toParse = Integer.toString(actualdate) +"-10-2018" + " " + startt;
-            String toParse2 = Integer.toString(actualdate) +"-10-2018" + " " + endt;
+            String [] stringSTime =  getTimeString(st).split(":");
+            String [] stringETime = getTimeString(et).split(":");
 
-            try {
-                SimpleDateFormat formatter = new SimpleDateFormat("d-M-yyyy hh:mm");
-                Date date = formatter.parse(toParse);
-                Date date2 = formatter.parse(toParse2);
-                starttime = date.getTime();
-                endtime = date2.getTime();
+            int[] startt = {actualdate,Integer.parseInt(stringSTime[0]),Integer.parseInt(stringSTime[1])};
+            int[] endt = {actualdate,Integer.parseInt(stringETime[0]),Integer.parseInt(stringETime[1])};
 
-            } catch (ParseException pe) {
-
-            }
-
+            Calendar beginTime = Calendar.getInstance();
+            beginTime.set(2018,Calendar.OCTOBER,startt[0],startt[1],startt[2]);
+            Calendar endTime = Calendar.getInstance();
+            endTime.set(2018,Calendar.OCTOBER,endt[0],endt[1],endt[2]);
+            starttime = beginTime.getTimeInMillis();
+            endtime = endTime.getTimeInMillis();
 
 
             TimeZone timeZone = TimeZone.getDefault();
@@ -314,13 +294,26 @@ public class ScheduleFragment extends Fragment {
         String[] SplitTime;
         String TimeString;
         SplitString = string.split("\\s+");
-        if (SplitString[1].equals("pm")) {
+        SplitTime = SplitString[0].split(":");
+        if (!SplitTime[0].equals("12")) {
+            if (SplitString[1].equals("pm")) {
 
-            SplitTime = SplitString[0].split(":");
-            TimeString = Integer.toString(Integer.parseInt(SplitTime[0])+ 12) + ":" + SplitTime[1];
-
+                TimeString = Integer.toString(Integer.parseInt(SplitTime[0]) + 12) + ":" + SplitTime[1];
+            } else {
+                TimeString = SplitString[0];
+            }
         } else {
-            TimeString = SplitString[0];
+            if (SplitString[1].equals("am")) {
+
+                TimeString = "00:00";
+            } else {
+                TimeString = "12:00";
+            }
+            Log.i("MyAdd", "string is "+string);
+            Log.i("MyAdd", "SplitString[1] is " + SplitString[1]);
+            Log.i("MyAdd", "SplitTime[0] is "+ SplitTime[0]);
+            Log.i("MyAdd", "TimeString is " + TimeString);
+
         }
         return TimeString;
     }
