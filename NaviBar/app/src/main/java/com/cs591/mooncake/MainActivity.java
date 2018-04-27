@@ -19,11 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-<<<<<<< HEAD
 import android.widget.Toast;
-=======
 import android.widget.ImageView;
->>>>>>> becea764a6b7d342697a2d090a80a53c84248a54
 
 import com.cs591.mooncake.FirebaseUtils.FirebaseInitialize;
 import com.cs591.mooncake.FirebaseUtils.FirebaseProfile;
@@ -41,14 +38,12 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
 import java.io.IOException;
-<<<<<<< HEAD
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-=======
 import java.net.HttpURLConnection;
->>>>>>> becea764a6b7d342697a2d090a80a53c84248a54
 
 
 public class MainActivity extends AppCompatActivity implements FirebaseProfile.profile{
@@ -209,8 +204,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
 
         mAdView.setAdListener(listener);
         mAdView.loadAd(adRequest);
-<<<<<<< HEAD
-=======
+
 //        imageView = (ImageView) findViewById(R.id.profile_image);
 //
 //
@@ -257,33 +251,6 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
 //            }
 //        });
 
-
-    private void setFragment(Fragment fragment){
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.mainFrame, fragment);
-        fragmentTransaction.commit();
-
-    }
-
-
-
-
-
-
-
-
-    @Override
-    public void onBackPressed() {
-        this.moveTaskToBack(true);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
->>>>>>> becea764a6b7d342697a2d090a80a53c84248a54
-        FirebaseInitialize.Initialize(this);
-    }
-
     private void copyDataBaseToPhone() {
         DataBaseUtil util = new DataBaseUtil(this);
 
@@ -308,7 +275,6 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
             scheduleFragment.scheduleChangedHandler();
     }
 
-<<<<<<< HEAD
 
 
 
@@ -365,10 +331,9 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
-        switch (requestCode){
-            case REQUEST_CODE_ASK_PERMISSIONS:
-            {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS: {
                 Map<String, Integer> perms = new HashMap<String, Integer>();
                 // Initial
                 perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
@@ -391,14 +356,14 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
             }
             break;
             default:
-                super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+    }
 
-=======
     @Override
     public void onLikedChangedListener() {
         if (likeFragment!=null && likeFragment.isVisible())
             likeFragment.likeChangedHandler();
->>>>>>> becea764a6b7d342697a2d090a80a53c84248a54
+
     }
 }
