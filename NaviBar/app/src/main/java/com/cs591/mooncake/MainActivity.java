@@ -7,8 +7,11 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -32,10 +35,6 @@ import com.cs591.mooncake.map.MapFragment;
 import com.cs591.mooncake.schedule.ScheduleFragment;
 import com.cs591.mooncake.profile.ProfileFragment;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 
 import java.io.IOException;
 
@@ -44,6 +43,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.net.HttpURLConnection;
+import java.util.Random;
+import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity implements FirebaseProfile.profile{
@@ -58,13 +59,10 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
     private MapFragment mapFragment;
     private ProfileFragment profileFragment;
     private FirebaseProfile firebaseProfile;
-    private AdView mAdView;
-    private AdRequest adRequest;
-
     private Button closeAds;
 
     public MySQLiteHelper myDb;
-    ImageView imageView;
+    ImageView adView;
     String url = "https://www.reka.in/pres/1258167031.jpg";
 
 
@@ -83,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
 
         mainFrame = findViewById(R.id.mainFrame);
         navigation = findViewById(R.id.navigation);
+        adView = findViewById(R.id.adView);
 
         exploreFragment = new ExploreFragment();
         likeFragment = new LikeFragment();
@@ -125,10 +124,32 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
             }
         });
 
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Random random = new Random();
+                int i = random.nextInt(5);
+                int[] backg = {R.drawable.bufinearts,R.drawable.buglobalprogram,R.drawable.buhumanities,R.drawable.bupardeelogo,R.drawable.wbur_logo};
+                String[] link = {"http://www.bu.edu/cfa/","http://www.bu.edu/globalprograms/","http://www.bu.edu/humanities/","http://www.bu.edu/pardeeschool/","http://www.wbur.org/"};
+                adView.setImageResource(backg[i]);
+                final Uri uri = Uri.parse(link[i]);
+                adView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
+                        getApplicationContext().startActivity(browserIntent);
+                    }
+                });
+                handler.postDelayed(this,30000);
+            }
+        },20000);
+
         findViewById(R.id.closeAds).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAdView.setVisibility(View.GONE);
+                adView.setVisibility(View.GONE);
                 findViewById(R.id.closeAds).setVisibility(View.GONE);
             }
         });
@@ -147,9 +168,6 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
     @Override
     public void onDestroy()
     {
-        findViewById(R.id.adView_bottom).setVisibility(mAdView.GONE);
-        mAdView.removeAllViews();
-        mAdView.destroy();
         super.onDestroy();
     }
 
@@ -163,52 +181,6 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
         super.onStart();
 
         AskPermissions();
-        MobileAds.initialize(this,
-                "ca-app-pub-6996605839799649~8321977534");
-        mAdView = (AdView) findViewById(R.id.adView_bottom);
-        adRequest = new AdRequest.Builder().addTestDevice("DAE593B5C72B2D6265E20F227970A023")
-                .build();
-        AdListener listener = new AdListener() {
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-                mAdView.setVisibility(View.GONE);
-                Log.i("TAG", "onAdClosed");
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                super.onAdFailedToLoad(errorCode);
-//                mAdView.loadAd(adRequest);
-                Log.i("TAG", "onAdFailedToLoad");
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                super.onAdLeftApplication();
-                Log.i("TAG", "onAdLeftApplication");
-            }
-
-            @Override
-            public void onAdOpened() {
-                super.onAdOpened();
-                Log.i("TAG", "onAdOpened");
-            }
-
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-                Log.i("TAG", "onAdLoaded");
-            }
-        };
-
-        mAdView.setAdListener(listener);
-        mAdView.loadAd(adRequest);
-
-//        imageView = (ImageView) findViewById(R.id.profile_image);
-//
-//
-//        loadImageFromUrl(url);
 
 
 
@@ -275,6 +247,25 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
             scheduleFragment.scheduleChangedHandler();
     }
 
+
+
+
+//    private void showAds(){
+//        Random random = new Random();
+//        int i = random.nextInt(5);
+//        int[] backg = {R.drawable.bufinearts,R.drawable.buglobalprogram,R.drawable.buhumanities,R.drawable.bupardeelogo,R.drawable.wbur_logo};
+//        String[] link = {"http://www.bu.edu/cfa/","http://www.bu.edu/globalprograms/","http://www.bu.edu/humanities/","http://www.bu.edu/pardeeschool/","http://www.wbur.org/"};
+//        adView.setImageResource(backg[i]);
+//        final Uri uri = Uri.parse(link[i]);
+//        adView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
+//                getApplicationContext().startActivity(browserIntent);
+//            }
+//        });
+//
+//    }
 
 
 
