@@ -2,22 +2,22 @@ package com.cs591.mooncake.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import com.cs591.mooncake.R;
-import com.cs591.mooncake.explore.SingleHorizontal;
-import com.cs591.mooncake.explore.SingleVertical;
+import com.cs591.mooncake.SQLite.SingleArtist;
+import com.cs591.mooncake.SQLite.SingleEvent;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,12 +26,11 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
     private List<List<Object>> items;
-    private final int ARTIST = 1;
-    private final int PERFORMANCE = 2;
+    private final int BAZAAR = 1;
+    private final int OTHER = 2;
     private final int WORKSHOP = 3;
-    private final int BAZAAR = 4;
 
-    private final String[] types = new String[]{"Artists", "Performances", "Workshops", "Bazaar"};
+    private final String[] types = new String[]{"Artists", "Workshops", "Bazaar"};
 
 
     public MainAdapter(Context context, List<List<Object>> items) {
@@ -47,11 +46,11 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         View view;
         RecyclerView.ViewHolder holder;
         switch (viewType) {
-            case ARTIST:
-                view = inflater.inflate(R.layout.vertical, parent, false);
+            case BAZAAR:
+                view = inflater.inflate(R.layout.bazaar, parent, false);
                 holder = new VerticalViewHolder(view);
                 break;
-            case PERFORMANCE:
+            case OTHER:
                 view = inflater.inflate(R.layout.horizontal, parent, false);
                 holder = new HorizontalViewHolder(view);
                 break;
@@ -66,10 +65,23 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        horizontalView((HorizontalViewHolder) holder, position);
+        if (holder.getItemViewType() == BAZAAR) {
+            singleCardView(holder, position);
+        } else
+            horizontalView((HorizontalViewHolder) holder, position);
     }
 
+    private void singleCardView(RecyclerView.ViewHolder holder, int position) {
+        View itemView = holder.itemView;
 
+        SingleEvent singleEvent = (SingleEvent) items.get(position).get(0);
+
+        ((ImageView)itemView.findViewById(R.id.image_view)).setImageBitmap(singleEvent.getPic());
+        ((TextView)itemView.findViewById(R.id.description)).setText(singleEvent.getAddress());
+        ((TextView)itemView.findViewById(R.id.title)).setText(singleEvent.getName());
+        ((TextView)itemView.findViewById(R.id.published_date)).setText(singleEvent.getStart());
+        ((TextView)itemView.findViewById(R.id.type)).setText(types[position]);
+    }
 
     private void horizontalView(HorizontalViewHolder holder, int position) {
         HorizontalAdapter adapter = new HorizontalAdapter(context, items.get(position));
@@ -87,6 +99,17 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
+        if (items.get(position).get(0) instanceof SingleArtist) {
+            return 2;
+        }
+        if (items.get(position).get(0) instanceof SingleEvent) {
+
+            if (((SingleEvent)(items.get(position).get(0))).getType().equals("Bazaar")) {
+                return 1;
+            } else {
+                return 2;
+            }
+        }
         return 2;
     }
 

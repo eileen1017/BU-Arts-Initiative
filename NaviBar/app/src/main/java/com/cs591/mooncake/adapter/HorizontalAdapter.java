@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.cs591.mooncake.R;
 import com.cs591.mooncake.SQLite.SingleArtist;
 import com.cs591.mooncake.SQLite.SingleEvent;
+import com.cs591.mooncake.explore.ArtistActivity;
 import com.cs591.mooncake.explore.EventActivity;
 import com.cs591.mooncake.explore.SingleHorizontal;
 
@@ -56,7 +57,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
                 }
             });
         } else if (data.get(position) instanceof SingleArtist){
-            SingleArtist singleArtist = (SingleArtist)data.get(position);
+            final SingleArtist singleArtist = (SingleArtist)data.get(position);
             holder.description.setText(singleArtist.getCountry());
             holder.title.setText(singleArtist.getName());
             holder.pubDate.setText(singleArtist.getWebsite());
@@ -64,7 +65,8 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, EventActivity.class);
+                    Intent intent = new Intent(context, ArtistActivity.class);
+                    intent.putExtra("artistID", singleArtist.getId());
                     context.startActivity(intent);
                 }
             });

@@ -69,15 +69,10 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:paddingLeft="20dp"
-<<<<<<< HEAD
+
                         android:layout_gravity="top"
                         android:paddingRight="20dp">
-=======
-                        android:paddingRight="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp">
->>>>>>> 12b5ad9c9bdfd2e9c30ea6dc7ffe8d493cfa137b
+
 
                         <TextView
                             android:layout_width="wrap_content"

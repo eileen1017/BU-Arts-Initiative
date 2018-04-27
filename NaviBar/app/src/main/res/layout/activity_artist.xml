@@ -25,7 +25,7 @@
             >
 
             <ImageView
-                android:id="@+id/ivEvent"
+                android:id="@+id/artist_page_image"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:contentDescription="@string/app_name"
@@ -33,25 +33,14 @@
                 app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/tbEventTitle"
+                android:id="@+id/artist_page_title"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:title="Event One"
                 app:layout_collapseMode="pin"
-                >
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title="Event One">
 
             </android.support.v7.widget.Toolbar>
-
-            <ImageButton
-                android:id="@+id/imageButton2"
-                android:layout_width="wrap_content"
-                android:layout_gravity="top|right"
-                android:layout_margin="15dp"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/ic_share"
-                android:elevation="10dp" />
 
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -66,136 +55,10 @@
         >
 
         <LinearLayout
+            android:id="@+id/llArtistEvents"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="5dp"
-                app:cardUseCompatPadding="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:padding="12dp"
-                        android:text="Artist"
-                        android:textColor="@color/colorPrimaryText"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:orientation="horizontal"
-                        android:padding="12dp"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:src="@drawable/ic_artist_name"
-                            android:layout_gravity="center_vertical"/>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="9"
-                            android:padding="12dp"
-                            android:id="@+id/tvEventArtist"
-                            android:text="Mr. Bean"
-                            android:textAlignment="textStart"
-                            android:textColor="@color/colorPrimaryText"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="5dp"
-                app:cardUseCompatPadding="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:padding="12dp"
-                        android:text="Location"
-                        android:textColor="@color/colorPrimaryText"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:orientation="horizontal"
-                        android:padding="12dp"
-                        android:layout_height="wrap_content">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="9"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="12dp"
-                                android:text="Metcalf Ballroom"
-                                android:id="@+id/tvEventLocationRoom"
-                                android:textAlignment="textStart"
-                                android:textColor="@color/colorPrimaryText"
-                                android:textSize="14sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="12dp"
-                                android:id="@+id/tvEventLocationAddress"
-                                android:text="775 Commonwealth Avenue, Floor 2\nBoston, MA 02215"
-                                android:textAlignment="textStart"
-                                android:textColor="@color/colorPrimaryText"
-                                android:textSize="14sp" />
-
-                        </LinearLayout>
-
-
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:src="@drawable/ic_location"
-                            android:layout_gravity="center_vertical"/>
-
-
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
 
 
         </LinearLayout>
