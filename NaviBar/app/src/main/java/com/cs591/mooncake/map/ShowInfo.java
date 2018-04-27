@@ -24,6 +24,7 @@ public class ShowInfo extends AppCompatActivity{
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
         String result = extras.getString("location");

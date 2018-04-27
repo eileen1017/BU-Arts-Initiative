@@ -19,7 +19,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+<<<<<<< HEAD
 import android.widget.Toast;
+=======
+import android.widget.ImageView;
+>>>>>>> becea764a6b7d342697a2d090a80a53c84248a54
 
 import com.cs591.mooncake.FirebaseUtils.FirebaseInitialize;
 import com.cs591.mooncake.FirebaseUtils.FirebaseProfile;
@@ -37,10 +41,14 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
 import java.io.IOException;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+=======
+import java.net.HttpURLConnection;
+>>>>>>> becea764a6b7d342697a2d090a80a53c84248a54
 
 
 public class MainActivity extends AppCompatActivity implements FirebaseProfile.profile{
@@ -61,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
     private Button closeAds;
 
     public MySQLiteHelper myDb;
+    ImageView imageView;
+    String url = "https://www.reka.in/pres/1258167031.jpg";
+
 
 
     final private int REQUEST_CODE_ASK_PERMISSIONS = 124;
@@ -198,6 +209,78 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
 
         mAdView.setAdListener(listener);
         mAdView.loadAd(adRequest);
+<<<<<<< HEAD
+=======
+//        imageView = (ImageView) findViewById(R.id.profile_image);
+//
+//
+//        loadImageFromUrl(url);
+
+
+
+    }
+//
+//    public Bitmap getBitmapFromURL(String src){
+//        java.net.URL url = new java.net.URL(src);
+//        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//        connection.setDoInput(true);
+//        connection
+//    }
+//
+//    private void loadImageFromUrl(String url) {
+//
+//
+//        // add to database
+//        SingleUser singleUser = myDb.getProfile();
+//
+//        // download image as Bitmap object as "userPic"
+//        singleUser.setPic(userPic);
+//
+//        myDb.addProfile(singleUser);
+//
+//
+//        // load image
+//        SingleUser singleUser1 = myDb.getProfile();
+//        Bitmap userPic = singleUser1.getPic();
+//
+//
+//        Picasso.with(this).load(url).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(imageView,new com.squareup.picasso.Callback(){
+//
+//            @Override
+//            public void onSuccess() {
+//
+//            }
+//
+//            @Override
+//            public void onError() {
+//
+//            }
+//        });
+
+
+    private void setFragment(Fragment fragment){
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.mainFrame, fragment);
+        fragmentTransaction.commit();
+
+    }
+
+
+
+
+
+
+
+
+    @Override
+    public void onBackPressed() {
+        this.moveTaskToBack(true);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+>>>>>>> becea764a6b7d342697a2d090a80a53c84248a54
         FirebaseInitialize.Initialize(this);
     }
 
@@ -220,11 +303,12 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
 
 
     @Override
-    public void onProfileChangedListener() {
+    public void onScheduledChangedListener() {
         if (scheduleFragment!=null && scheduleFragment.isVisible())
             scheduleFragment.scheduleChangedHandler();
     }
 
+<<<<<<< HEAD
 
 
 
@@ -310,5 +394,11 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
                 super.onRequestPermissionsResult(requestCode,permissions,grantResults);
         }
 
+=======
+    @Override
+    public void onLikedChangedListener() {
+        if (likeFragment!=null && likeFragment.isVisible())
+            likeFragment.likeChangedHandler();
+>>>>>>> becea764a6b7d342697a2d090a80a53c84248a54
     }
 }

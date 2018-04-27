@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cs591.mooncake.FirebaseUtils.FirebaseProfile;
@@ -29,8 +28,8 @@ import com.cs591.mooncake.schedule.ScheduleFragment;
 
 public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHolder> {
 
-    Context mContext;
-    List<Object> mList;
+    private Context mContext;
+    private List<Object> mList;
     private boolean isButtonClicked = false;
     List<Integer> res = new ArrayList<>();
 
@@ -74,14 +73,10 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
         ViewHolder viewHolder = new ViewHolder(view);
 
 
-
         return viewHolder;
 
     }
 
-    private void updateScheduled() {
-
-    }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder,final int position) {
@@ -110,7 +105,6 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
                     if (singleUser.getScheduled().contains(singleEvent.getID())) {
                         singleUser.removeScheduled(singleEvent.getID());
                         v.setBackgroundResource(R.drawable.add);
-                        updateScheduled();
                     } else {
                         v.setBackgroundResource(R.drawable.ischecked);
                         singleUser.addScheduled(singleEvent.getID());
@@ -128,12 +122,6 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
                 }
             });
         }
-
-
-
-
-
-
 
     }
 
