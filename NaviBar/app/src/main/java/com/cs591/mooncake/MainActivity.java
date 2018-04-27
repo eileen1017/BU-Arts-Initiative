@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
                 });
                 handler.postDelayed(this,30000);
             }
-        },20000);
+        },30000);
 
         findViewById(R.id.closeAds).setOnClickListener(new View.OnClickListener() {
             @Override

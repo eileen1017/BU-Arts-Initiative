@@ -86,56 +86,7 @@ public class ProfileFragment extends Fragment {
         });
 
         userphoto =  view.findViewById(R.id.profile_image);
-//        loadImageFromUrl(url);
-//        private void loadImageFromUrl(String url){
-//
-//        }
 
-
-
-
-//        settings.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                i = new Intent(getContext(), SettingsPage.class);
-//                startActivity(i);
-//            }
-//        });
-//
-//        feedback.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                i = new Intent(getContext(), FeedbackPage.class);
-//                startActivity(i);
-//            }
-//        });
-//
-//        invite.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                i = new Intent(getContext(), InvitePage.class);
-//                startActivity(i);
-//            }
-//        });
-//
-//        about.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                i = new Intent(getContext(), AboutPage.class);
-//                startActivity(i);
-//            }
-//        });
-//
-//        ticket.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                i = new Intent(getContext(), TicketPage.class);
-//                startActivity(i);
-//            }
-//        });
-//
-//
-//        return view;
         return view;
 
     }
