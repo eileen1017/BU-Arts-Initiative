@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import android.app.Fragment;
@@ -94,6 +95,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             mView = inflater.inflate(R.layout.fragment_map, container, false);
             getLocationPermission();
         }
+
+
+
         return mView;
     }
 
@@ -140,10 +144,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         MarkerOptions gsu = new MarkerOptions().position(BU_GSU).title("BU_GSU").snippet("Click for indoor map");
-        mMap.addMarker(gsu).showInfoWindow();
+        mMap.addMarker(gsu);
 
         MarkerOptions tsai = new MarkerOptions().position(BU_Tsai).title("BU_Tsai").snippet("Click for indoor map");
-        mMap.addMarker(tsai).showInfoWindow();
+        mMap.addMarker(tsai);
 
         mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(getActivity()));
         mMap.setOnInfoWindowClickListener(this);
@@ -160,12 +164,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             // it will put a blue dot on our current location
             mMap.setMyLocationEnabled(true);
 
-
-
             //mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
-        }
+            mMap.getUiSettings().setMapToolbarEnabled(true);
 
+        }
         // move carmera to the center between GSU and Tsai
         moveCamera(new LatLng(42.3505165, -71.1067625), DEFAULT_ZOOM);
     }
@@ -243,7 +246,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-        Toast.makeText(getActivity(), "Info window clicked", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "Info window clicked", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getActivity(), ShowInfo.class);
         String locationTitle = marker.getTitle();
         //Log.w(TAG,locationTitle);
