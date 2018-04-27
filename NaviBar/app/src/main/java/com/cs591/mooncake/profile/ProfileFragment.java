@@ -110,10 +110,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-<<<<<<< HEAD
-        userphoto =  view.findViewById(R.id.profile_image);
-=======
->>>>>>> f0ec4dca2364da52a46f52e0e90c627eaaadcc24
+
 
         return view;
 
