@@ -55,6 +55,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
                         Intent intent = new Intent(context, ArtistActivity.class);
                         intent.putExtra("workshopOnTop", true);
                         intent.putExtra("artistID", -1);
+                        intent.putExtra("highlight", singleEvent.getID());
                         intent.putExtra("artistName", singleEvent.getArtist());
                         context.startActivity(intent);
                     }
@@ -71,6 +72,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
                 public void onClick(View v) {
                     Intent intent = new Intent(context, ArtistActivity.class);
                     intent.putExtra("artistID", singleArtist.getId());
+                    intent.putExtra("highlight", -1);
                     context.startActivity(intent);
                 }
             });

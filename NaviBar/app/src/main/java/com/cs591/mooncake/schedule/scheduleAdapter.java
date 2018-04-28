@@ -33,10 +33,12 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
     private List<Object> mList;
     private boolean isButtonClicked = false;
     List<Integer> res = new ArrayList<>();
+    ScheduleFragment.OnScheduledEventClikedListener oscl;
 
 
 
-    public scheduleAdapter(Context context, List<Object> list){
+    public scheduleAdapter(Context context, List<Object> list, ScheduleFragment.OnScheduledEventClikedListener oscl){
+        this.oscl = oscl;
         mContext = context;
         mList = list;
     }
@@ -139,8 +141,7 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext,EventActivity.class);
-                    mContext.startActivity(intent);
+                    oscl.openEvent(singleEvent.getID());
                 }
             });
         }

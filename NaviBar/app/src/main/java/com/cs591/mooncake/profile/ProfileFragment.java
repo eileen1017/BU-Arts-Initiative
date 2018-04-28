@@ -60,7 +60,7 @@ public class ProfileFragment extends Fragment {
     Class[] classes = {WebsitePage.class, InvitePage.class, FeedbackPage.class,AboutPage.class,TicketPage.class};
     CircleImageView userPic;
     private MySQLiteHelper myDb;
-    public String url = "https://www.reka.in/pres/1258167031.jpg";
+
 
 
 

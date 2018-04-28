@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -33,7 +34,7 @@ public class ArtistActivity extends AppCompatActivity {
     private boolean expanded;
     MySQLiteHelper myDb;
     SingleArtist singleArtist;
-    private int pY;
+    private int highlight = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class ArtistActivity extends AppCompatActivity {
                     break;
                 }
             }
+            highlight = extras.getInt("highlight");
         }
 
         boolean workshopAtTop = extras.getBoolean("workshopOnTop");
@@ -73,7 +75,7 @@ public class ArtistActivity extends AppCompatActivity {
 
         ((ImageView)(findViewById(R.id.artist_page_image))).setImageBitmap(singleArtist.getPic());
         ((Toolbar)(findViewById(R.id.artist_page_title))).setTitle(singleArtist.getName());
-
+        View highlightView = null;
         // generate bios
         final View biosView = LayoutInflater.from(this).inflate(R.layout.description_card, null);
         final String content = singleArtist.getBios();
@@ -115,17 +117,25 @@ public class ArtistActivity extends AppCompatActivity {
                 } else {
                     date = DATE_6;
                 }
+
                 ((TextView) (currentView.findViewById(R.id.event_card_date))).setText(date);
                 String time = singleEvent.getStart();
                 if (singleEvent.getEnd() != null) time += (" : " + singleEvent.getEnd());
                 ((TextView) (currentView.findViewById(R.id.event_card_time))).setText(time);
                 ((TextView) (currentView.findViewById(R.id.event_card_type))).setText(singleEvent.getType());
-                if (singleEvent.getType().equals("Workshop")) {
-                    //((TextView) (workshopView.findViewById(R.id.event_card_description))).setText();
-                    workshopViews.add(currentView);
+                if (singleEvent.getID() == highlight) {
+                    highlightView = currentView;
+                    ((currentView.findViewById(R.id.event_card_highlight)))
+                            .setVisibility(View.VISIBLE);
                 } else {
-                    ((TextView) (currentView.findViewById(R.id.event_card_description))).setText("");
-                    ((TextView) (currentView.findViewById(R.id.event_card_description))).setVisibility(View.GONE);                   performanceViews.add(currentView);
+                    if (singleEvent.getType().equals("Workshop")) {
+                        //((TextView) (workshopView.findViewById(R.id.event_card_description))).setText();
+                        workshopViews.add(currentView);
+                    } else {
+                        ((TextView) (currentView.findViewById(R.id.event_card_description))).setText("");
+                        ((TextView) (currentView.findViewById(R.id.event_card_description))).setVisibility(View.GONE);
+                        performanceViews.add(currentView);
+                    }
                 }
 
             }
@@ -133,14 +143,15 @@ public class ArtistActivity extends AppCompatActivity {
 
         LinearLayout llArtistEvents = findViewById(R.id.llArtistEvents);
 
+        if (highlight != -1) {
+            llArtistEvents.addView(highlightView);
+        }
         if (workshopAtTop) {
-
             for (View v : workshopViews) {
                 llArtistEvents.addView(v);
             }
             llArtistEvents.addView(biosView);
             for (View v : performanceViews) {
-                pY = v.getScrollX();
                 llArtistEvents.addView(v);
             }
         } else {
@@ -149,7 +160,6 @@ public class ArtistActivity extends AppCompatActivity {
                 llArtistEvents.addView(v);
             }
             for (View v : workshopViews) {
-                pY = v.getScrollX();
                 llArtistEvents.addView(v);
             }
         }
@@ -157,6 +167,7 @@ public class ArtistActivity extends AppCompatActivity {
     }
 
     public void changingBiosContent(View view, String content) {
+
         if (expanded) {
             view.findViewById(R.id.description_card_button).setBackgroundResource(R.drawable.ic_description_card_expand);
             ((TextView)(view.findViewById(R.id.description_card_text))).setText(content.substring(0, 500) + " ...");
