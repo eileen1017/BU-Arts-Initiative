@@ -317,6 +317,8 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
 
     }
 
+
+
     @Override
     public void openLikeEvent(int id) {
         SingleEvent singleEvent = myDb.getEvent(id);

@@ -10,7 +10,8 @@
     <string name="unlike_check">Are you sure you want to remove\u0020</string>
     <string name="question_mark">\?</string>
     <string name="txtEmptyLike">Start adding your favorite music events! Tap the heart on any event page to start saving your favorites here.</string>
-
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <!--Share Function Strings-->
     <string name="shareSms">Check out this great event:\u0020</string>
@@ -39,5 +40,11 @@
     <!--Ad Banner Strings-->
     <string name="partner_wbur">WBUR</string>
     <string name="partner_gp">Global Program</string>
+
+
+    <string name="googlelogin">Login with Google</string>
+    <string name="facebooklogin">Login with Facebook</string>
+    <string name="twitterlogin">Login with Twitter</string>
+    <string name="guestlogin">Login with Guest</string>
 
 </resources>
