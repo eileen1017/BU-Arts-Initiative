@@ -17,6 +17,7 @@ import com.cs591.mooncake.R;
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleEvent;
 import com.cs591.mooncake.SQLite.SingleUser;
+import com.cs591.mooncake.schedule.ScheduleFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,10 @@ public class LikeFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private  OnLikedEventClickedListener OLCL;
+    public interface OnLikedEventClickedListener {
+        void openEvent(int id);
+    }
 
     TextView txtEmptyLike;
     RecyclerView recyclerView;
@@ -68,6 +73,17 @@ public class LikeFragment extends Fragment {
         refreshLikedPage();
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnLikedEventClickedListener) {
+            OLCL = (OnLikedEventClickedListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnLikedEventClickedListener");
+        }
+    }
+
     private void refreshLikedPage() {
         if (likesList == null) {
             return;
@@ -88,7 +104,7 @@ public class LikeFragment extends Fragment {
             SingleEvent singleLiked = myDb.getEvent(i);
             likesList.add(singleLiked);
         }
-        LikeAdapter adapter = new LikeAdapter(getActivity(),likesList);
+        LikeAdapter adapter = new LikeAdapter(getActivity(),likesList, OLCL);
         recyclerView.setAdapter(adapter);
     }
 

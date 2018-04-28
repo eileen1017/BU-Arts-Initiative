@@ -53,7 +53,9 @@ import static android.app.PendingIntent.getActivity;
 import static com.cs591.mooncake.profile.ProfileFragment.downloadImage;
 
 
-public class MainActivity extends AppCompatActivity implements FirebaseProfile.profile, ScheduleFragment.OnScheduledEventClikedListener{
+public class MainActivity extends AppCompatActivity implements FirebaseProfile.profile,
+        ScheduleFragment.OnScheduledEventClikedListener,
+        LikeFragment.OnLikedEventClickedListener{
 
 
     private FrameLayout mainFrame;
@@ -201,6 +203,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
         if (scheduleFragment!=null && scheduleFragment.isVisible())
             scheduleFragment.scheduleChangedHandler();
     }
+
 
 
 
