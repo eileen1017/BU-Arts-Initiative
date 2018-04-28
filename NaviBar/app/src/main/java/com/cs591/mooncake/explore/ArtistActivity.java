@@ -107,7 +107,8 @@ public class ArtistActivity extends AppCompatActivity {
                     //((TextView) (workshopView.findViewById(R.id.event_card_description))).setText();
                     workshopViews.add(currentView);
                 } else {
-                    performanceViews.add(currentView);
+                    ((TextView) (currentView.findViewById(R.id.event_card_description))).setText("");
+                    ((TextView) (currentView.findViewById(R.id.event_card_description))).setVisibility(View.GONE);                   performanceViews.add(currentView);
                 }
 
             }
