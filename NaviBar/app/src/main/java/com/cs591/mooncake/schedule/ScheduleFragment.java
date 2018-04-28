@@ -65,8 +65,7 @@ public class ScheduleFragment extends Fragment {
     private final int MY_SCHEDULE = 1;
     private int currentPage = ALL_SCHEDULE;
 
-    Button addEvent;
-    Button delete;
+
     long starttime = 0;
     long endtime = 0;
 
@@ -81,8 +80,6 @@ public class ScheduleFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rv);
         recyclerView2 = view.findViewById(R.id.rv2);
         menubtn = view.findViewById(R.id.menubtn);
-        addEvent = view.findViewById(R.id.addEvent);
-        delete = view.findViewById(R.id.delete);
         scheduleslist = new ArrayList<>();
         scheduleslist2 = new ArrayList<>();
         scheduleslist3 = new ArrayList<>();
@@ -129,22 +126,6 @@ public class ScheduleFragment extends Fragment {
             }
         });
 
-        addEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addToCalenderHandler(2);
-                Toast.makeText(getActivity(), "event added", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                removeCalenderHandler(2);
-                removeCalenderHandler(5);
-                Toast.makeText(getActivity(), "Event removed", Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
         return view;

@@ -37,19 +37,6 @@
             android:layout_alignParentRight="true"
             android:background="@drawable/myschedule"/>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/addEvent"
-                android:text="Add"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/addEvent"
-                android:id="@+id/delete"
-                android:text="Delete"/>
-
         </RelativeLayout>
 
 
