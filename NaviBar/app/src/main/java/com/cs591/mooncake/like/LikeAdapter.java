@@ -91,7 +91,7 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
             public void onClick(View view){
 
                 final MySQLiteHelper mydb = new MySQLiteHelper(view.getContext());
-                final SingleUser singleUser = mydb.getProfile();
+               // final SingleUser singleUser = mydb.getProfile();
 
                 String normalText1 = mContext.getString(R.string.unlike_check);
                 String boldText = singleEvent.getName();

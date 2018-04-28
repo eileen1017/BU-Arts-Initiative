@@ -2,17 +2,40 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100">
+        
+        <Button
+            android:layout_weight="50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GSU_Basement"
+            android:id="@+id/btnGSUBase"/>
+        
+        <Button
+            android:layout_weight="50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GSU_2ndFloor"
+            android:id="@+id/btn2ndFloor"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
+
 
         <ImageButton
             android:id="@+id/gsu_2nfloor"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/map_gsu_2ndfloor"/>
 
