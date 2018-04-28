@@ -42,6 +42,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //Called when RecyclerView needs a new RecyclerView.ViewHolder of the given type to represent an item.
+
         LayoutInflater inflater = LayoutInflater.from(context);
         View view;
         RecyclerView.ViewHolder holder;
@@ -65,6 +67,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        //Called by RecyclerView to display the data at the specified position. This method should update the contents of the itemView to reflect the item at the given position.
+
         if (holder.getItemViewType() == BAZAAR) {
             singleCardView(holder, position);
         } else
@@ -72,6 +76,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     private void singleCardView(RecyclerView.ViewHolder holder, int position) {
+//     CardView uses elevation property on Lollipop for shadows and falls back to a custom emulated shadow implementation on older platforms.
         View itemView = holder.itemView;
 
         SingleEvent singleEvent = (SingleEvent) items.get(position).get(0);
@@ -84,6 +89,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     private void horizontalView(HorizontalViewHolder holder, int position) {
+//        Layout container for a view hierarchy that can be scrolled by the user, allowing it to be larger than the physical display.
+//        A HorizontalScrollView is a FrameLayout, meaning you should place one child in it containing the entire contents to scroll
         HorizontalAdapter adapter = new HorizontalAdapter(context, items.get(position));
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(context,
                 LinearLayoutManager.HORIZONTAL, false));
@@ -99,6 +106,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
+//        get the type of an ItemView
         if (items.get(position).get(0) instanceof SingleArtist) {
             return 2;
         }
@@ -114,6 +122,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public class HorizontalViewHolder extends RecyclerView.ViewHolder {
+//        A ViewGroup that shows items in a horizontal scrolling list. The items come from the RecyclerView.Adapter associated with this view.
         RecyclerView recyclerView;
         TextView type;
         Button btnShowAll;
@@ -127,6 +136,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public class VerticalViewHolder extends RecyclerView.ViewHolder {
+//        A ViewGroup that shows items in a Vertical scrolling list. The items come from the RecyclerView.Adapter associated with this view.
         RecyclerView recyclerView;
 
         VerticalViewHolder(View itemView) {
