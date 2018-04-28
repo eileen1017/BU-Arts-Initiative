@@ -12,16 +12,31 @@
         
         <Button
             android:layout_weight="50"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="208dp"
+            android:layout_height="55dp"
+            android:layout_margin="5dp"
             android:text="GSU_Basement"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:paddingLeft="55dp"
+            android:background="@drawable/basement"
+
             android:id="@+id/btnGSUBase"/>
         
         <Button
             android:layout_weight="50"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="208dp"
+            android:layout_height="55dp"
+            android:layout_margin="5dp"
             android:text="GSU_2ndFloor"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:paddingLeft="55dp"
+            android:background="@drawable/basement"
             android:id="@+id/btn2ndFloor"/>
 
     </LinearLayout>
