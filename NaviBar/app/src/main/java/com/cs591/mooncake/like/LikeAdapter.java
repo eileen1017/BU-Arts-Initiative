@@ -33,8 +33,10 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
 
     private Context mContext;
     private List<Object> mList;
+    LikeFragment.OnLikedEventClickedListener olcl;
 
-    LikeAdapter(Context context, List<Object> list){
+    LikeAdapter(Context context, List<Object> list, LikeFragment.OnLikedEventClickedListener OLCL){
+        this.olcl = OLCL;
         mContext = context;
         mList = list;
     }
@@ -80,8 +82,7 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, EventActivity.class);
-                mContext.startActivity(intent);
+                olcl.openEvent(singleEvent.getID());
             }
         });
 

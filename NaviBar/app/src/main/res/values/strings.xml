@@ -40,4 +40,10 @@
     <string name="partner_wbur">WBUR</string>
     <string name="partner_gp">Global Program</string>
 
+
+    <string name="googlelogin">Login with Google</string>
+    <string name="facebooklogin">Login with Facebook</string>
+    <string name="twitterlogin">Login with Twitter</string>
+    <string name="guestlogin">Login with Guest</string>
+
 </resources>
