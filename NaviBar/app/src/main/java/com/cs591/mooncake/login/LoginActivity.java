@@ -21,6 +21,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -48,6 +49,7 @@ import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -63,6 +65,10 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     TwitterLoginButton btnTwitterLogin;
     public ProgressDialog mProgressDialog;
+    private LoginButton loginButton;
+    private Button fb;
+    private Button google;
+    private Button twitter;
 
 
     @Override
@@ -132,6 +138,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     @Override
@@ -176,7 +184,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         setContentView(R.layout.activity_login);
-
+        twitter = findViewById(R.id.twitter);
         btnTwitterLogin = findViewById(R.id.btnTwitterLogin);
         btnTwitterLogin.setCallback(new Callback<TwitterSession>(){
             @Override
@@ -196,11 +204,21 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+        twitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnTwitterLogin.performClick();
+
+            }
+        });
+
+
 
     }
     private void googleSignInInitialize(){
+        google = findViewById(R.id.google);
         btnGoogleSignIn = findViewById(R.id.btnGoogleSignin);
-        btnGoogleSignIn.setOnClickListener(new View.OnClickListener() {
+        google.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 googleSignIn();
@@ -216,10 +234,13 @@ public class LoginActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
+
+
     }
     private void facebookSignInInitialize() {
         mCallbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = findViewById(R.id.btnFacebookLogin);
+        fb = findViewById(R.id.fb);
+        loginButton = findViewById(R.id.btnFacebookLogin);
         loginButton.setReadPermissions("email", "public_profile");
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -240,7 +261,37 @@ public class LoginActivity extends AppCompatActivity {
                 // ...
             }
         });
+
+
+        LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+
+                handleFacebookAccessToken(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
+
+        fb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile","email"));
+            }
+        });
+
     }
+
+
+
 
     private void handleTwitterSession(TwitterSession session) {
         Log.d(TAG, "handleTwitterSession:" + session);

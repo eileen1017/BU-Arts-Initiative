@@ -23,4 +23,10 @@
         <item name="android:shadowRadius">5</item>
     </style>
 
+
+
+    <style name="Theme"></style>
+
+
+    <dimen name="smallTxtSize" />
 </resources>
