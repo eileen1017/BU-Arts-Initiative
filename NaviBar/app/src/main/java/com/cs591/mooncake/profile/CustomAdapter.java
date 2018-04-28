@@ -51,9 +51,18 @@ public class CustomAdapter extends ArrayAdapter<String> {
                 public void onClick(View v) {
                     switch(position) {
                         case 1:
+<<<<<<< HEAD
+
+                            Intent inviteIntent = new Intent(getContext(),InvitePage.class);
+                            getContext().startActivity(inviteIntent);
+
+                            share.inviteFriend();
+
+=======
                             Intent inviteIntent = new Intent(getContext(),InvitePage.class);
                             getContext().startActivity(inviteIntent);
                             share.inviteFriend();
+>>>>>>> 58af0ae87d07839e98f3b4811b595bb3254e7aa8
                             break;
                         case 2:
                             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.surveymonkey.com/r/523GWBK"));
@@ -64,7 +73,7 @@ public class CustomAdapter extends ArrayAdapter<String> {
                             getContext().startActivity(aboutIntent);
                             break;
                         case 4:
-                            Intent browserTic = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ticketmaster.com"));
+                            Intent browserTic = new Intent(Intent.ACTION_VIEW, Uri.parse("https://concerts1.livenation.com/event/01005383E6B14115?crosssite=TM_US:734408:9044&_ga=2.245148812.888577874.1524944987-1940939807.1522715659"));
                             getContext().startActivity(browserTic);
                             break;
 
