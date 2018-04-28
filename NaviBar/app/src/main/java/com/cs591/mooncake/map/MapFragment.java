@@ -62,9 +62,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     private View mView = null;
 
 
-
     public MapFragment() {
         // Required empty public constructor
+
     }
 
     @Override
