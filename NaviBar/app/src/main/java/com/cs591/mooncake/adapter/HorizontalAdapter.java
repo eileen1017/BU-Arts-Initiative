@@ -48,14 +48,18 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
             holder.title.setText(singleEvent.getName());
             holder.pubDate.setText(singleEvent.getStart());
             holder.image.setImageBitmap(singleEvent.getPic());
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, EventActivity.class);
-                    intent.putExtra("eventID", singleEvent.getID());
-                    context.startActivity(intent);
-                }
-            });
+            if (singleEvent.getType().equals("Workshop")) {
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, ArtistActivity.class);
+                        intent.putExtra("workshopOnTop", true);
+                        intent.putExtra("artistID", -1);
+                        intent.putExtra("artistName", singleEvent.getArtist());
+                        context.startActivity(intent);
+                    }
+                });
+            }
         } else if (data.get(position) instanceof SingleArtist){
             final SingleArtist singleArtist = (SingleArtist)data.get(position);
             holder.description.setText(singleArtist.getCountry());

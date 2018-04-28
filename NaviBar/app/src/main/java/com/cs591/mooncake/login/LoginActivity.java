@@ -83,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 MySQLiteHelper myDb = new MySQLiteHelper(LoginActivity.this);
+
                 SingleUser singleUser = myDb.getProfile();
 
                 if (user != null) {

@@ -6,17 +6,17 @@
     <string name="title_map">Map</string>
     <string name="title_profile">Profile</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="explore">Explore Page</string>
-
-
-    <string name="unlike_check">Are you sure you want to remove </string>
+    <!--Like Page Strings-->
+    <string name="unlike_check">Are you sure you want to remove\u0020</string>
     <string name="question_mark">\?</string>
     <string name="txtEmptyLike">Start adding your favorite music events! Tap the heart on any event page to start saving your favorites here.</string>
 
-    <string name="event_name">Mr. Bean</string>
-    <string name="event_description">Mr. Bean is a British sitcom created by Rowan Atkinson and ....Mr. Bean is a British sitcom created by Rowan Atkinson and ....Mr. Bean is a British sitcom created by Rowan Atkinson and ....Mr. Bean is a British sitcom created by Rowan Atkinson and ....</string>
-    <string name="event_date">2018-10-10</string>
+
+    <!--Share Function Strings-->
+    <string name="shareSms">Check out this great event:\u0020</string>
+    <string name="hashTag">\! \#BUGlobablMusicFestival</string>
+    <string name="chooser">Choose app to share</string>
+    <string name="appUrl">Check out BUGMF App at: https://play.google.com/store/apps</string>
 
     <string name="twitter_consumer_key" translatable="false">riVQO4XGOSDVQOlVC452KOQJA</string>
     <string name="twitter_consumer_secret" translatable="false">PqlE1QGltlR2OuK996PJJypwDKk4FxDBanSorjIGOCJ7dFuRTJ</string>
@@ -35,4 +35,9 @@
     <string name="member">Pround Member of...</string>
     <string name="contacttitle">Contact</string>
     <string name="BUArts">Boston University Arts Initiative\n775 Commonwealth Avenue, Suite 201\n\nPhone:   +1 617.358.0489\nEmail: artsinbu@bu.edu</string>
+
+    <!--Ad Banner Strings-->
+    <string name="partner_wbur">WBUR</string>
+    <string name="partner_gp">Global Program</string>
+
 </resources>

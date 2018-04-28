@@ -12,6 +12,9 @@ public class SingleEvent {
     private String end;
     private int date;
     private String type;
+    private String building;
+    private String venue;
+    private String level;
 
 
     SingleEvent(){
@@ -90,4 +93,27 @@ public class SingleEvent {
         return start;
     }
 
+    public void setBuilding(String building) {
+        this.building = building;
+    }
+
+    public String getBuilding() {
+        return building;
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
 }
