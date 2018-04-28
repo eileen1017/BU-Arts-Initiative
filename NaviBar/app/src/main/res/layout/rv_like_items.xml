@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="136dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/jupiter_okwess"
             />
 
         <RelativeLayout
@@ -35,7 +34,6 @@
                 android:layout_marginLeft="10dp"
                 android:fontFamily="@font/lato_bold"
                 android:layout_alignParentLeft="true"
-                android:text="Jupiter and Okwess"
                 android:textColor="#FFFFFF"
                 android:textSize="23.5sp" />
 
@@ -47,11 +45,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/liked" />
-
-
-
-
-
 
 
 
