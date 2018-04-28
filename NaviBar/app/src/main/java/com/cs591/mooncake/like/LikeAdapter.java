@@ -132,7 +132,6 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
                             }
                         });
                 AlertDialog alert = altUnlike.create();
-                //alert.setTitle("");
                 alert.show();
 
 
