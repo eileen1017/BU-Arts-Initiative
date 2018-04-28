@@ -1,5 +1,6 @@
 package com.cs591.mooncake.map;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.cs591.mooncake.R;
+import com.cs591.mooncake.SQLite.MySQLiteHelper;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -25,6 +27,7 @@ public class ShowInfo extends AppCompatActivity{
     ImageView mImageView;
     public Button btnBase;
     public Button btn2ndFloor;
+    MySQLiteHelper myDb;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,6 +70,10 @@ public class ShowInfo extends AppCompatActivity{
             PhotoViewAttacher photoView = new PhotoViewAttacher(mImageView);
             photoView.update();
         }
+
+
+        //myDb = new MySQLiteHelper(this);
+
 
     }
 
