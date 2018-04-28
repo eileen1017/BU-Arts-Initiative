@@ -114,9 +114,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         singleEvent.setType(cursor.getString(5));
         singleEvent.setDate(cursor.getInt(6));
         singleEvent.setStart(cursor.getString(7));
-        singleEvent.setBuilding(cursor.getString(8));
-        singleEvent.setVenue(cursor.getString(9));
-        singleEvent.setLevel(cursor.getString(10));
+        singleEvent.setEnd(cursor.getString(8));
+        singleEvent.setBuilding(cursor.getString(9));
+        singleEvent.setVenue(cursor.getString(10));
+        singleEvent.setLevel(cursor.getString(11));
 
 
         byte[] image = cursor.getBlob(4);

@@ -44,7 +44,7 @@ public class ScheduleFragment extends Fragment {
     private OnScheduledEventClikedListener OSCL;
 
     public interface OnScheduledEventClikedListener{
-        void openEvent(int id);
+        void openScheduleEvent(int id);
     }
 
     public ScheduleFragment() {
@@ -66,9 +66,8 @@ public class ScheduleFragment extends Fragment {
     private int currentPage = ALL_SCHEDULE;
 
 
-    long starttime = 0;
-    long endtime = 0;
-
+    static long starttime = 0;
+    static long endtime = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,6 +79,7 @@ public class ScheduleFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rv);
         recyclerView2 = view.findViewById(R.id.rv2);
         menubtn = view.findViewById(R.id.menubtn);
+
         scheduleslist = new ArrayList<>();
         scheduleslist2 = new ArrayList<>();
         scheduleslist3 = new ArrayList<>();
@@ -139,25 +139,27 @@ public class ScheduleFragment extends Fragment {
         }
     }
 
-    public void addToCalenderHandler(int eventID) {
-        if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.WRITE_CALENDAR)
-                + ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_CALENDAR)
+    public static void addToCalenderHandler(int eventID, Context context) {
+        MySQLiteHelper myDb;
+        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_CALENDAR)
+                + ContextCompat.checkSelfPermission(context, android.Manifest.permission.READ_CALENDAR)
                 != PackageManager.PERMISSION_GRANTED)  {
         } else {
 
             try {
-                myDb = new MySQLiteHelper(getActivity());
+                myDb = new MySQLiteHelper(context);
             SingleEvent singleEvent = myDb.getEvent(eventID);
             // Inserts a row into a table at the given URL.
             // Content_URI: The content:// style URL for interacting with events.
 
-            ContentResolver cr = getActivity().getContentResolver();
+            ContentResolver cr = context.getContentResolver();
             // Creates an empty set to store a set of values that the ContentResolver can process
             ContentValues calEvent = new ContentValues();
             int actualdate = singleEvent.getDate();
             String st = singleEvent.getStart();
             String et = singleEvent.getEnd();
 
+            Log.i("end time ", et);
             String [] stringSTime =  getTimeString(st).split(":");
             String [] stringETime = getTimeString(et).split(":");
 
@@ -195,18 +197,17 @@ public class ScheduleFragment extends Fragment {
 //        }
         } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(getActivity(), "Exception: " + e.getMessage(),
+                Toast.makeText(context, "Exception: " + e.getMessage(),
                         Toast.LENGTH_SHORT).show();
             }
         }
 
     }
 
-    public void removeCalenderHandler(int eventID) {
-
-        if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.WRITE_CALENDAR)!= PackageManager.PERMISSION_GRANTED) {
+    public static void removeCalenderHandler(int eventID, Context context) {
+        MySQLiteHelper myDb = new MySQLiteHelper(context);
+        if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_CALENDAR)!= PackageManager.PERMISSION_GRANTED) {
         } else {
-        myDb = new MySQLiteHelper(getActivity());
         SingleEvent singleEvent = myDb.getEvent(eventID);
 
 
@@ -217,7 +218,7 @@ public class ScheduleFragment extends Fragment {
         Uri uri = CalendarContract.Events.CONTENT_URI;
         String mSelectionClause = CalendarContract.Events.TITLE + " = ?";
         String[] mSelectionArgs = {singleEvent.getName()};
-        getActivity().getContentResolver().delete(uri,mSelectionClause,mSelectionArgs);
+        context.getContentResolver().delete(uri,mSelectionClause,mSelectionArgs);
 
 
     }
@@ -285,7 +286,7 @@ public class ScheduleFragment extends Fragment {
     }
 
 
-    private String getTimeString(String string){
+    private static String getTimeString(String string){
         String[] SplitString;
         String[] SplitTime;
         String TimeString;

@@ -3,9 +3,7 @@ package com.cs591.mooncake.like;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -22,11 +20,11 @@ import com.cs591.mooncake.R;
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleEvent;
 import com.cs591.mooncake.SQLite.SingleUser;
-import com.cs591.mooncake.explore.EventActivity;
+
 import java.util.List;
 
 /**
- * Created by LinLi on 4/8/18.
+ * Created by LinLi on 4/8/18, modified by MingyangYan, QifanHe.
  */
 
 public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
@@ -82,7 +80,7 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                olcl.openEvent(singleEvent.getID());
+                olcl.openLikeEvent(singleEvent.getID());
             }
         });
 
@@ -107,7 +105,7 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
                 // The dialog box cannot be canceled by clicking the back button.
                 // Set the "Yes" button and then remove the item from the Like page
                 altUnlike.setMessage(str).setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(mContext.getString(R.string.yes), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // remove the event from the user database
@@ -125,14 +123,13 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
                             }
                         })
                         // close the dialog box when click on "No"
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(mContext.getString(R.string.no), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
                             }
                         });
                 AlertDialog alert = altUnlike.create();
-                alert.setTitle("");
                 alert.show();
 
 
