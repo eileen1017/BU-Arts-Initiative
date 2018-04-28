@@ -39,7 +39,7 @@ public class ShareUtil {
         // Get all the app infos.
         List<ResolveInfo> resInfos = mContext.getPackageManager().queryIntentActivities(sendIntent, 0);
         if(!resInfos.isEmpty()){
-            // Check all the app's packageName to select from just twitter and facebook.
+            // Check all the app's packageName to select from just twitter, facebook, gmail, and sms.
             for(ResolveInfo resInfo : resInfos){
                 String pacName=resInfo.activityInfo.packageName;
                 if(pacName.contains("com.twitter.android") || pacName.contains("com.facebook")
@@ -49,8 +49,10 @@ public class ShareUtil {
                     // Explicity set the component to handle the intent.
                     intent.setComponent(new ComponentName(pacName, resInfo.activityInfo.name));
                     intent.setAction(Intent.ACTION_SEND);
+
                     // Send the BU website for research; the url will be a specific event's url.
                     intent.putExtra(Intent.EXTRA_TEXT, url);
+                    
                     intent.setType("text/plain");
                     // Set the app package name that limits the components this intent will resolve to.
                     intent.setPackage(pacName);
