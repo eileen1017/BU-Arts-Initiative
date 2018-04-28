@@ -5,6 +5,7 @@ package com.cs591.mooncake.schedule;
 import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -40,6 +41,11 @@ import com.cs591.mooncake.SQLite.SingleUser;
  */
 public class ScheduleFragment extends Fragment {
 
+    private OnScheduledEventClikedListener OSCL;
+
+    public interface OnScheduledEventClikedListener{
+        void openEvent(int id);
+    }
 
     public ScheduleFragment() {
         // Required empty public constructor
@@ -100,9 +106,9 @@ public class ScheduleFragment extends Fragment {
             refreshMySchedulePage();
 
 
-        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist);
+        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist,OSCL);
         recyclerView.setAdapter(adapter);
-        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2);
+        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2,OSCL);
         recyclerView2.setAdapter(adapter2);
 
 
@@ -151,7 +157,6 @@ public class ScheduleFragment extends Fragment {
             refreshMySchedulePage();
         }
     }
-
 
     public void addToCalenderHandler(int eventID) {
         if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.WRITE_CALENDAR)
@@ -240,6 +245,16 @@ public class ScheduleFragment extends Fragment {
 
 
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnScheduledEventClikedListener) {
+            OSCL = (OnScheduledEventClikedListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnScheduledEventClikedListener");
+        }
+    }
 
     private void refreshAllschedulePage() {
         if (scheduleslist == null) {
@@ -261,9 +276,9 @@ public class ScheduleFragment extends Fragment {
             }
         }
 
-        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist);
+        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist, OSCL);
         recyclerView.setAdapter(adapter);
-        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2);
+        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2, OSCL);
         recyclerView2.setAdapter(adapter2);
     }
 
@@ -282,9 +297,9 @@ public class ScheduleFragment extends Fragment {
                     scheduleslist4.add(singleSchedule);
             }
         }
-        scheduleAdapter adapter3 = new scheduleAdapter(getActivity(), scheduleslist3);
+        scheduleAdapter adapter3 = new scheduleAdapter(getActivity(), scheduleslist3,OSCL);
         recyclerView.setAdapter(adapter3);
-        scheduleAdapter adapter4 = new scheduleAdapter(getActivity(), scheduleslist4);
+        scheduleAdapter adapter4 = new scheduleAdapter(getActivity(), scheduleslist4,OSCL);
         recyclerView2.setAdapter(adapter4);
     }
 

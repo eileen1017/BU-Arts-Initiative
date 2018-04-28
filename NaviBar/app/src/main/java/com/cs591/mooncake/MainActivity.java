@@ -29,7 +29,9 @@ import com.cs591.mooncake.FirebaseUtils.FirebaseInitialize;
 import com.cs591.mooncake.FirebaseUtils.FirebaseProfile;
 import com.cs591.mooncake.SQLite.DataBaseUtil;
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
+import com.cs591.mooncake.SQLite.SingleEvent;
 import com.cs591.mooncake.SQLite.SingleUser;
+import com.cs591.mooncake.explore.ArtistActivity;
 import com.cs591.mooncake.explore.ExploreFragment;
 import com.cs591.mooncake.like.LikeFragment;
 import com.cs591.mooncake.map.MapFragment;
@@ -51,7 +53,7 @@ import static android.app.PendingIntent.getActivity;
 import static com.cs591.mooncake.profile.ProfileFragment.downloadImage;
 
 
-public class MainActivity extends AppCompatActivity implements FirebaseProfile.profile{
+public class MainActivity extends AppCompatActivity implements FirebaseProfile.profile, ScheduleFragment.OnScheduledEventClikedListener{
 
 
     private FrameLayout mainFrame;
@@ -309,5 +311,17 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
         if (likeFragment!=null && likeFragment.isVisible())
             likeFragment.likeChangedHandler();
 
+    }
+
+    @Override
+    public void openEvent(int id) {
+        SingleEvent singleEvent = myDb.getEvent(id);
+        if (!singleEvent.getType().equals("Bazaar")) {
+            Intent intent = new Intent(this, ArtistActivity.class);
+            intent.putExtra("artistID", -1);
+            intent.putExtra("artistName", singleEvent.getArtist());
+            intent.putExtra("highlight", id);
+            startActivity(intent);
+        }
     }
 }
