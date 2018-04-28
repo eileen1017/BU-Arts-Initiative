@@ -1,6 +1,7 @@
 package com.cs591.mooncake.explore;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -151,6 +152,8 @@ public class ExploreFragment extends Fragment {
 
         return objects;
     }
+
+
 
     /**
      * This interface must be implemented by activities that contain this

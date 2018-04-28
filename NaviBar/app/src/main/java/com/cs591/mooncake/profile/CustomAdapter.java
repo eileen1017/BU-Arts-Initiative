@@ -51,6 +51,8 @@ public class CustomAdapter extends ArrayAdapter<String> {
                 public void onClick(View v) {
                     switch(position) {
                         case 1:
+                            Intent inviteIntent = new Intent(getContext(),InvitePage.class);
+                            getContext().startActivity(inviteIntent);
                             share.inviteFriend();
                             break;
                         case 2:
