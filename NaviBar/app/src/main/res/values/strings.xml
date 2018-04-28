@@ -7,10 +7,16 @@
     <string name="title_profile">Profile</string>
 
     <!--Like Page Strings-->
-    <string name="unlike_check">Are you sure you want to remove </string>
+    <string name="unlike_check">Are you sure you want to remove\u0020</string>
     <string name="question_mark">\?</string>
     <string name="txtEmptyLike">Start adding your favorite music events! Tap the heart on any event page to start saving your favorites here.</string>
 
+
+    <!--Share Function Strings-->
+    <string name="shareSms">Check out this great event:\u0020</string>
+    <string name="hashTag">\! \#BUGlobablMusicFestival</string>
+    <string name="chooser">Choose app to share</string>
+    <string name="appUrl">Check out BUGMF App at: https://play.google.com/store/apps</string>
 
     <string name="twitter_consumer_key" translatable="false">riVQO4XGOSDVQOlVC452KOQJA</string>
     <string name="twitter_consumer_secret" translatable="false">PqlE1QGltlR2OuK996PJJypwDKk4FxDBanSorjIGOCJ7dFuRTJ</string>
