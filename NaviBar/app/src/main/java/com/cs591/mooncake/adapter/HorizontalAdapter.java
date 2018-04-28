@@ -34,6 +34,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //Called when RecyclerView needs a new RecyclerView.ViewHolder of the given type to represent an item.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.horizental_single_row,
                 parent, false);
         return new MyViewHolder(view);
@@ -41,6 +42,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull HorizontalAdapter.MyViewHolder holder, int position) {
+        //Called by RecyclerView to display the data at the specified position. This method should update the contents of the itemView to reflect the item at the given position.
 
         if (data.get(position) instanceof SingleEvent) {
             final SingleEvent singleEvent = (SingleEvent)data.get(position);
@@ -81,12 +83,14 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
     public int getItemCount() {
         return data.size();
     }
+        //Get the size of data that you input
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView title, description, pubDate;
         ImageView image;
 
         public MyViewHolder(View itemView) {
+            //Set the view
             super(itemView);
             image = itemView.findViewById(R.id.image_view);
             description = itemView.findViewById(R.id.description);
