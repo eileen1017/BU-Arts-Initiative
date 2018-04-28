@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleUser;
+import com.cs591.mooncake.profile.ProfileFragment;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -142,6 +143,11 @@ public class FirebaseProfile {
 
                         }
                     });
+            SingleUser singleUser = myDb.getProfile();
+            if (singleUser.getPicUrl() != null) {
+                singleUser.setPic(ProfileFragment.downloadImage(singleUser.getPicUrl().toString()));
+                myDb.addProfile(singleUser);
+            }
 
         }
     }

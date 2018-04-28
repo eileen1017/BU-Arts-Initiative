@@ -19,7 +19,8 @@
     <string name="facebook_app_id">2102038940033779</string>
     <string name="fb_login_protocol_scheme">fb2102038940033779</string>
 
-    <string name="banner_ad_unit_id">ca-app-pub-4149307760842545/7262330703</string>
+    <string name="banner_app_id">ca-app-pub-6996605839799649~8321977534</string>
+    <string name="banner_ad_unit_id">ca-app-pub-6996605839799649/5756168140</string>
 
     <!--About Page Strings-->
     <string name="aboutheader">“Artistic engagement brings immeasurable value to our social and academic development, impacting not only the way we perceive the world but how we approach so many disciplines, from the sciences to the humanities. The Boston University Arts Initiative ensures that the arts are fundamental to the BU student experience inside and outside of the classroom.”\n\n<b>— Jean Morrison, University Provost and Chief Academic Officer</b></string>

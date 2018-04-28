@@ -34,16 +34,43 @@
         android:layout_alignParentTop="true">
 
 
-    </FrameLayout>
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView_bottom"
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="bottom">-->
+
+
+        <!--</RelativeLayout>-->
+
+
+    </FrameLayout>
+    <Button
+        android:id="@+id/closeAds"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="bottom|right"
+        android:layout_above="@id/navigation"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="27dp"
+        android:background="@drawable/cross" />
+
+
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_above="@+id/navigation"
-        android:layout_alignParentStart="true"
-        android:layout_gravity="bottom"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id" />
+        android:layout_height="45dp"
+        android:src="@drawable/bupardeelogo"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/adView"
+        android:layout_above="@id/navigation"
+        android:scaleType="fitXY"
+        android:layout_gravity="bottom"/>
+
+
+
+    <!--</RelativeLayout>-->
+
 
 </RelativeLayout>

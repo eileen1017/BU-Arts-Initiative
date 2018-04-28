@@ -26,7 +26,8 @@
             android:text="Schedule"
             android:textColor="#fff"
             android:layout_alignParentLeft="true"
-            android:textSize="36sp"/>
+            android:textSize="36sp"
+            android:id="@+id/schedule"/>
 
         <Button
             android:layout_width="32dp"
@@ -35,6 +36,19 @@
             android:id="@+id/menubtn"
             android:layout_alignParentRight="true"
             android:background="@drawable/myschedule"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/addEvent"
+                android:text="Add"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/addEvent"
+                android:id="@+id/delete"
+                android:text="Delete"/>
 
         </RelativeLayout>
 
@@ -64,37 +78,36 @@
                     android:layout_height="wrap_content">
 
                     <LinearLayout
-                        android:orientation="horizontal"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="top">
+                        android:orientation="horizontal"
+                        android:paddingLeft="20dp"
 
+                        android:layout_gravity="top"
+                        android:paddingRight="20dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Friday"
-                            android:textSize="20sp"
                             android:fontFamily="@font/lato_bold"
                             android:paddingRight="15dp"
-                            android:textColor="#FFFFFF"/>
+                            android:text="Friday"
+                            android:textColor="#FFFFFF"
+                            android:textSize="20sp" />
 
                         <ImageView
                             android:layout_width="15dp"
                             android:layout_height="15dp"
-                            android:scaleType="centerCrop"
                             android:layout_gravity="center"
-                            android:src="@drawable/circle_ffffff"
-                            />
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/circle_ffffff" />
+
                         <ImageView
-                            android:scaleType="center"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
                             android:layout_gravity="center_vertical"
                             android:paddingRight="10dp"
-                            android:src="@drawable/whiteline"
-                            />
+                            android:scaleType="center"
+                            android:src="@drawable/whiteline" />
                     </LinearLayout>
 
                     <android.support.v7.widget.RecyclerView

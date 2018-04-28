@@ -145,7 +145,6 @@ public class ExploreFragment extends Fragment {
         }
 
         objects.add(artists);
-        objects.add(performances);
         objects.add(workshops);
         objects.add(bazaar);
 

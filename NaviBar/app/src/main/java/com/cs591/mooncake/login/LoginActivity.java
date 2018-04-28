@@ -13,6 +13,9 @@ import android.widget.Toast;
 
 import com.cs591.mooncake.MainActivity;
 import com.cs591.mooncake.R;
+import com.cs591.mooncake.SQLite.DataBaseUtil;
+import com.cs591.mooncake.SQLite.MySQLiteHelper;
+import com.cs591.mooncake.SQLite.SingleUser;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -44,6 +47,8 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
+import java.io.IOException;
+
 public class LoginActivity extends AppCompatActivity {
 
 
@@ -64,13 +69,24 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-
+        copyDataBaseToPhone();
         // FirebaseInitialize Firebase auth
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser() != null) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                MySQLiteHelper myDb = new MySQLiteHelper(LoginActivity.this);
+                SingleUser singleUser = myDb.getProfile();
+
+                if (user != null) {
+                    if (user.getDisplayName() != null) {
+                        singleUser.setUserName(user.getDisplayName());
+                    }
+                    if (user.getPhotoUrl() != null) {
+                        singleUser.setPicUrl(user.getPhotoUrl());
+                    }
+                    myDb.addProfile(singleUser);
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("UID", mAuth.getCurrentUser().getUid());
                     startActivity(intent);
@@ -123,6 +139,22 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
 
         mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    private void copyDataBaseToPhone() {
+        DataBaseUtil util = new DataBaseUtil(this);
+
+        boolean dbExist = util.checkDataBase();
+
+        if (dbExist) {
+            Log.i("tag", "The database is exist.");
+        } else {
+            try {
+                util.copyDataBase();
+            } catch (IOException e) {
+                throw new Error("Error copying database");
+            }
+        }
     }
 
     @Override
