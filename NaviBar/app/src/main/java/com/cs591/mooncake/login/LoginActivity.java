@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.cs591.mooncake.MainActivity;
 import com.cs591.mooncake.R;
+import com.cs591.mooncake.SQLite.MySQLiteHelper;
+import com.cs591.mooncake.SQLite.SingleUser;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -70,7 +72,17 @@ public class LoginActivity extends AppCompatActivity {
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser() != null) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                MySQLiteHelper myDb = new MySQLiteHelper(LoginActivity.this);
+                SingleUser singleUser = myDb.getProfile();
+                if (user != null) {
+                    if (user.getDisplayName() != null) {
+                        singleUser.setUserName(user.getDisplayName());
+                    }
+                    if (user.getPhotoUrl() != null) {
+                        singleUser.setPicUrl(user.getPhotoUrl());
+                    }
+                    myDb.addProfile(singleUser);
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("UID", mAuth.getCurrentUser().getUid());
                     startActivity(intent);

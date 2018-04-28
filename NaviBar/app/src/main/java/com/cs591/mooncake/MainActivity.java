@@ -158,9 +158,6 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
             }
         });
 
-        SingleUser singleUser = myDb.getProfile();
-        singleUser.setPic(downloadImage("https://www.reka.in/pres/1258167031.jpg"));
-        myDb.addProfile(singleUser);
 
 
     }

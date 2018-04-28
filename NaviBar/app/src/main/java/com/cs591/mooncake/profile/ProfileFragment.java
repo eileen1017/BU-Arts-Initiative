@@ -42,6 +42,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileFragment extends Fragment {
 
 
+    public static final String GUEST = "guest";
+
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -79,10 +81,15 @@ public class ProfileFragment extends Fragment {
         MySQLiteHelper mydb = new MySQLiteHelper(getActivity());
         SingleUser singleUser = mydb.getProfile();
 
-        username.setText(singleUser.getUserName());
+        if (singleUser.getUserName() == null || singleUser.getUserName().isEmpty())
+            username.setText(GUEST);
+        else
+            username.setText(singleUser.getUserName());
 
-
-        userPic.setImageBitmap(singleUser.getPic());
+        if (singleUser.getPic() != null)
+            userPic.setImageBitmap(singleUser.getPic());
+        else
+            userPic.setImageResource(R.drawable.profilepic);
 
 
         mListView = (ListView) view.findViewById(R.id.item_menu);
