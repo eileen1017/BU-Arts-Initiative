@@ -2,10 +2,15 @@ package com.cs591.mooncake.explore;
 
 import android.content.Intent;
 import android.media.Image;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,6 +33,7 @@ public class ArtistActivity extends AppCompatActivity {
     private boolean expanded;
     MySQLiteHelper myDb;
     SingleArtist singleArtist;
+    private int pY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +49,24 @@ public class ArtistActivity extends AppCompatActivity {
         myDb = new MySQLiteHelper(this);
         expanded = false;
 
-        singleArtist = myDb.getArtist(extras.getInt("artistID"));
+        int artistID = extras.getInt("artistID");
+        if (artistID != -1) {
+            Log.i("Workshop artist id", "" + artistID);
+            singleArtist = myDb.getArtist(artistID);
+        } else {
+            String artistName = extras.getString("artistName");
+            Log.i("Workshop artist name", artistName);
+            for (int i : myDb.getArtistList()) {
+                if (myDb.getArtist(i).getName().equals(artistName)) {
+                    singleArtist = myDb.getArtist(i);
+                    break;
+                }
+            }
+        }
+
         boolean workshopAtTop = extras.getBoolean("workshopOnTop");
 
         generateContent(workshopAtTop);
-
-
-
     }
 
     private void generateContent(boolean workshopAtTop) {
@@ -107,27 +124,32 @@ public class ArtistActivity extends AppCompatActivity {
                     //((TextView) (workshopView.findViewById(R.id.event_card_description))).setText();
                     workshopViews.add(currentView);
                 } else {
-                    performanceViews.add(currentView);
+                    ((TextView) (currentView.findViewById(R.id.event_card_description))).setText("");
+                    ((TextView) (currentView.findViewById(R.id.event_card_description))).setVisibility(View.GONE);                   performanceViews.add(currentView);
                 }
 
             }
         }
 
         LinearLayout llArtistEvents = findViewById(R.id.llArtistEvents);
-        llArtistEvents.addView(biosView);
 
         if (workshopAtTop) {
+
             for (View v : workshopViews) {
                 llArtistEvents.addView(v);
             }
+            llArtistEvents.addView(biosView);
             for (View v : performanceViews) {
+                pY = v.getScrollX();
                 llArtistEvents.addView(v);
             }
         } else {
+            llArtistEvents.addView(biosView);
             for (View v : performanceViews) {
                 llArtistEvents.addView(v);
             }
             for (View v : workshopViews) {
+                pY = v.getScrollX();
                 llArtistEvents.addView(v);
             }
         }

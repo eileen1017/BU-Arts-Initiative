@@ -29,6 +29,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     private static final String COLUMN_EVENT_END = "End";
     private static final String COLUMN_EVENT_PIC = "Pic";
     private static final String COLUMN_EVENT_TYPE = "Type";
+    private static final String COLUMN_EVENT_VENUE = "Venue";
+    private static final String COLUMN_EVENT_BUILDING = "Building";
+    private static final String COLUMN_EVENT_LEVEL = "Level";
 
     private static final String ARTIST_TABLE_NAME = "Artist";
     private static final String COLUMN_ARTIST_ID = "ID";
@@ -97,7 +100,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.query(EVENT_TABLE_NAME, new String[] { COLUMN_EVENT_ID, COLUMN_EVENT_NAME,
                         COLUMN_EVENT_ADDRESS, COLUMN_EVENT_ARTIST, COLUMN_EVENT_PIC, COLUMN_EVENT_TYPE,
-                        COLUMN_EVENT_DATE, COLUMN_EVENT_START, COLUMN_EVENT_END}, COLUMN_EVENT_ID + "=?",
+                        COLUMN_EVENT_DATE, COLUMN_EVENT_START, COLUMN_EVENT_END, COLUMN_EVENT_BUILDING,
+                        COLUMN_EVENT_VENUE, COLUMN_EVENT_LEVEL}, COLUMN_EVENT_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null) cursor.moveToFirst();
 
@@ -110,7 +114,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         singleEvent.setType(cursor.getString(5));
         singleEvent.setDate(cursor.getInt(6));
         singleEvent.setStart(cursor.getString(7));
-        singleEvent.setEnd(cursor.getString(8));
+        singleEvent.setBuilding(cursor.getString(8));
+        singleEvent.setVenue(cursor.getString(9));
+        singleEvent.setLevel(cursor.getString(10));
+
 
         byte[] image = cursor.getBlob(4);
         ByteArrayInputStream imageStream = new ByteArrayInputStream(image);

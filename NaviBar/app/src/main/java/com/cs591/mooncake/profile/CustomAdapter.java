@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cs591.mooncake.R;
+import com.cs591.mooncake.explore.ShareUtil;
 
 
 public class CustomAdapter extends ArrayAdapter<String> {
@@ -40,6 +41,7 @@ public class CustomAdapter extends ArrayAdapter<String> {
     @NonNull
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        final ShareUtil share = new ShareUtil(mContext);
         ViewHolder mViewHolder = new ViewHolder();
         if(convertView == null) {
             LayoutInflater mInflator = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -49,8 +51,12 @@ public class CustomAdapter extends ArrayAdapter<String> {
                 public void onClick(View v) {
                     switch(position) {
                         case 1:
+<<<<<<< HEAD
                             Intent inviteIntent = new Intent(getContext(),InvitePage.class);
                             getContext().startActivity(inviteIntent);
+=======
+                            share.inviteFriend();
+>>>>>>> 195f7ceeba532c4b0cde3ca8681c315b5739afda
                             break;
                         case 2:
                             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.surveymonkey.com/r/523GWBK"));

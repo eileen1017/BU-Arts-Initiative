@@ -11,6 +11,13 @@
         app:cardCornerRadius="15dp"
         android:background="@color/red"
         >
+
+        <FrameLayout
+            android:id="@+id/event_card_highlight"
+            android:visibility="invisible"
+            android:background="#FF0000"
+            android:layout_width="6dp"
+            android:layout_height="match_parent"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,6 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/lightRed"
+                android:elevation="4dp"
                 android:orientation="horizontal">
 
                 <ImageButton

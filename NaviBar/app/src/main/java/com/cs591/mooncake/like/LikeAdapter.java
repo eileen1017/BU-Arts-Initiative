@@ -90,6 +90,7 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
             @Override
             public void onClick(View view){
 
+                // get SQLite DB
                 final MySQLiteHelper mydb = new MySQLiteHelper(view.getContext());
                // final SingleUser singleUser = mydb.getProfile();
 
