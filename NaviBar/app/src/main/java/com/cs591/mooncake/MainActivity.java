@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        copyDataBaseToPhone();
         myDb = new MySQLiteHelper(this);
 
 
@@ -191,21 +190,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
 
     }
 
-    private void copyDataBaseToPhone() {
-        DataBaseUtil util = new DataBaseUtil(this);
 
-        boolean dbExist = util.checkDataBase();
-
-        if (dbExist) {
-            Log.i("tag", "The database is exist.");
-        } else {
-            try {
-                util.copyDataBase();
-            } catch (IOException e) {
-                throw new Error("Error copying database");
-            }
-        }
-    }
 
 
 
