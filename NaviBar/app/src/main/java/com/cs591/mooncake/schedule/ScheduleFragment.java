@@ -66,14 +66,8 @@ public class ScheduleFragment extends Fragment {
     private int currentPage = ALL_SCHEDULE;
 
 
-<<<<<<< HEAD
     static long starttime = 0;
     static long endtime = 0;
-=======
-    long starttime = 0;
-    long endtime = 0;
->>>>>>> 955f01a5ddac8aaba6496361585e604f7b3d0bcc
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,10 +79,7 @@ public class ScheduleFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rv);
         recyclerView2 = view.findViewById(R.id.rv2);
         menubtn = view.findViewById(R.id.menubtn);
-<<<<<<< HEAD
 
-=======
->>>>>>> 955f01a5ddac8aaba6496361585e604f7b3d0bcc
         scheduleslist = new ArrayList<>();
         scheduleslist2 = new ArrayList<>();
         scheduleslist3 = new ArrayList<>();

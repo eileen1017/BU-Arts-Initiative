@@ -135,9 +135,9 @@ public class ArtistActivity extends AppCompatActivity {
                 }
 
                 if (singleUser.getLiked().contains(singleEvent.getID())) {
-                    likeButton.setImageResource(R.drawable.ic_event_card_liked);
-                } else {
                     likeButton.setImageResource(R.drawable.ic_event_card_like);
+                } else {
+                    likeButton.setImageResource(R.drawable.ic_event_card_liked);
                 }
 
                 addButton.setOnClickListener(new View.OnClickListener() {
@@ -162,10 +162,10 @@ public class ArtistActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         ImageButton b = (ImageButton) view;
                         if (singleUser.getLiked().contains(singleEvent.getID())) {
-                            b.setImageResource(R.drawable.ic_event_card_like);
+                            b.setImageResource(R.drawable.ic_event_card_liked);
                             singleUser.removeLiked(singleEvent.getID());
                         } else {
-                            b.setImageResource(R.drawable.ic_event_card_liked);
+                            b.setImageResource(R.drawable.ic_event_card_like);
                             singleUser.addLiked(singleEvent.getID());
                         }
                         myDb.addProfile(singleUser);
