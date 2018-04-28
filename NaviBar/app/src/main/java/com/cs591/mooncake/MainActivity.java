@@ -55,7 +55,8 @@ import static com.cs591.mooncake.profile.ProfileFragment.downloadImage;
 
 public class MainActivity extends AppCompatActivity implements FirebaseProfile.profile,
         ScheduleFragment.OnScheduledEventClikedListener,
-        LikeFragment.OnLikedEventClickedListener{
+        LikeFragment.OnLikedEventClickedListener,
+        ExploreFragment.ExploreInteractionListener{
 
 
     private FrameLayout mainFrame;
@@ -317,7 +318,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
     }
 
     @Override
-    public void openEvent(int id) {
+    public void openLikeEvent(int id) {
         SingleEvent singleEvent = myDb.getEvent(id);
         if (!singleEvent.getType().equals("Bazaar")) {
             Intent intent = new Intent(this, ArtistActivity.class);
@@ -326,5 +327,22 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
             intent.putExtra("highlight", id);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void openScheduleEvent(int id) {
+        SingleEvent singleEvent = myDb.getEvent(id);
+        if (!singleEvent.getType().equals("Bazaar")) {
+            Intent intent = new Intent(this, ArtistActivity.class);
+            intent.putExtra("artistID", -1);
+            intent.putExtra("artistName", singleEvent.getArtist());
+            intent.putExtra("highlight", id);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

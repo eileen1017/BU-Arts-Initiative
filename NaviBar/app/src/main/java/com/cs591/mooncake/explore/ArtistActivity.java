@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -23,6 +24,8 @@ import com.cs591.mooncake.R;
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleArtist;
 import com.cs591.mooncake.SQLite.SingleEvent;
+import com.cs591.mooncake.SQLite.SingleUser;
+import com.cs591.mooncake.schedule.ScheduleFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +110,7 @@ public class ArtistActivity extends AppCompatActivity {
         List<Integer> events = myDb.getEventList();
 
         for (Integer event : events) {
-            SingleEvent singleEvent = myDb.getEvent(event);
+            final SingleEvent singleEvent = myDb.getEvent(event);
             if (singleEvent.getArtist().equals(singleArtist.getName())) {
                 View currentView = LayoutInflater.from(this).inflate(R.layout.event_card, null);
                 ((TextView)(currentView.findViewById(R.id.event_card_type))).setText(singleEvent.getType());
@@ -118,6 +121,59 @@ public class ArtistActivity extends AppCompatActivity {
                     date = DATE_6;
                 }
 
+                // Buttons:
+                final SingleUser singleUser = myDb.getProfile();
+                ImageButton shareButton = currentView.findViewById(R.id.event_card_share_button);
+                ImageButton likeButton = currentView.findViewById(R.id.event_card_like_button);
+                ImageButton addButton = currentView.findViewById(R.id.event_card_add_button);
+                ImageButton locButton = currentView.findViewById(R.id.event_card_location_button);
+
+                if (singleUser.getScheduled().contains(singleEvent.getID())) {
+                    addButton.setImageResource(R.drawable.ic_event_card_added);
+                } else {
+                    addButton.setImageResource(R.drawable.ic_event_card_add);
+                }
+
+                if (singleUser.getLiked().contains(singleEvent.getID())) {
+                    likeButton.setImageResource(R.drawable.ic_event_card_liked);
+                } else {
+                    likeButton.setImageResource(R.drawable.ic_event_card_like);
+                }
+
+                addButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ImageButton b = (ImageButton) view;
+                        if (singleUser.getScheduled().contains(singleEvent.getID())) {
+                            b.setImageResource(R.drawable.ic_event_card_add);
+                            singleUser.removeScheduled(singleEvent.getID());
+                            ScheduleFragment.removeCalenderHandler(singleEvent.getID(), ArtistActivity.this);
+                        } else {
+                            b.setImageResource(R.drawable.ic_event_card_added);
+                            singleUser.addScheduled(singleEvent.getID());
+                            ScheduleFragment.addToCalenderHandler(singleEvent.getID(),ArtistActivity.this);
+                        }
+                        myDb.addProfile(singleUser);
+                    }
+                });
+
+                likeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ImageButton b = (ImageButton) view;
+                        if (singleUser.getLiked().contains(singleEvent.getID())) {
+                            b.setImageResource(R.drawable.ic_event_card_like);
+                            singleUser.removeLiked(singleEvent.getID());
+                        } else {
+                            b.setImageResource(R.drawable.ic_event_card_liked);
+                            singleUser.addLiked(singleEvent.getID());
+                        }
+                        myDb.addProfile(singleUser);
+                    }
+                });
+
+
+                // TextViews:
                 ((TextView) (currentView.findViewById(R.id.event_card_date))).setText(date);
                 String time = singleEvent.getStart();
                 if (singleEvent.getEnd() != null) time += (" : " + singleEvent.getEnd());

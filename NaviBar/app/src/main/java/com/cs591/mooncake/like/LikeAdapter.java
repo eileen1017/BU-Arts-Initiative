@@ -3,9 +3,7 @@ package com.cs591.mooncake.like;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -22,7 +20,7 @@ import com.cs591.mooncake.R;
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleEvent;
 import com.cs591.mooncake.SQLite.SingleUser;
-import com.cs591.mooncake.explore.EventActivity;
+
 import java.util.List;
 
 /**
@@ -82,7 +80,7 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                olcl.openEvent(singleEvent.getID());
+                olcl.openLikeEvent(singleEvent.getID());
             }
         });
 

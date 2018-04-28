@@ -1,8 +1,6 @@
 package com.cs591.mooncake.schedule;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cs591.mooncake.FirebaseUtils.FirebaseProfile;
-import com.cs591.mooncake.MainActivity;
 import com.cs591.mooncake.R;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +19,6 @@ import java.util.List;
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleEvent;
 import com.cs591.mooncake.SQLite.SingleUser;
-import com.cs591.mooncake.explore.EventActivity;
-import com.cs591.mooncake.schedule.ScheduleFragment;
-
 
 
 public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHolder> {
@@ -141,7 +135,7 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    oscl.openEvent(singleEvent.getID());
+                    oscl.openScheduleEvent(singleEvent.getID());
                 }
             });
         }

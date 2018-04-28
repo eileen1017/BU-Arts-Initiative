@@ -35,7 +35,7 @@ public class LikeFragment extends Fragment {
 
     private  OnLikedEventClickedListener OLCL;
     public interface OnLikedEventClickedListener {
-        void openEvent(int id);
+        void openLikeEvent(int id);
     }
 
     TextView txtEmptyLike;
