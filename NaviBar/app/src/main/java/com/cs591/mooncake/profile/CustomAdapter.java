@@ -51,7 +51,12 @@ public class CustomAdapter extends ArrayAdapter<String> {
                 public void onClick(View v) {
                     switch(position) {
                         case 1:
+<<<<<<< HEAD
+                            Intent inviteIntent = new Intent(getContext(),InvitePage.class);
+                            getContext().startActivity(inviteIntent);
+=======
                             share.inviteFriend();
+>>>>>>> 195f7ceeba532c4b0cde3ca8681c315b5739afda
                             break;
                         case 2:
                             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.surveymonkey.com/r/523GWBK"));
