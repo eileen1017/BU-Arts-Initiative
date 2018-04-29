@@ -159,19 +159,8 @@ public class ScheduleFragment extends Fragment {
             String st = singleEvent.getStart();
             String et = singleEvent.getEnd();
 
-            Log.i("end time ", et);
-            String [] stringSTime =  getTimeString(st).split(":");
-            String [] stringETime = getTimeString(et).split(":");
-
-            int[] startt = {actualdate,Integer.parseInt(stringSTime[0]),Integer.parseInt(stringSTime[1])};
-            int[] endt = {actualdate,Integer.parseInt(stringETime[0]),Integer.parseInt(stringETime[1])};
-
-            Calendar beginTime = Calendar.getInstance();
-            beginTime.set(2018,Calendar.OCTOBER,startt[0],startt[1],startt[2]);
-            Calendar endTime = Calendar.getInstance();
-            endTime.set(2018,Calendar.OCTOBER,endt[0],endt[1],endt[2]);
-            starttime = beginTime.getTimeInMillis();
-            endtime = endTime.getTimeInMillis();
+            starttime = fieldToTimestamp(actualdate,st);
+            endtime = fieldToTimestamp(actualdate,et);
 
 
             TimeZone timeZone = TimeZone.getDefault();
@@ -314,6 +303,47 @@ public class ScheduleFragment extends Fragment {
         }
         return TimeString;
     }
+
+    private static long fieldToTimestamp(int day, String date) {
+
+        String [] stringSTime =  getTimeString(date).split(":");
+        int[] time = {Integer.parseInt(stringSTime[0]),Integer.parseInt(stringSTime[1])};
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2018,Calendar.OCTOBER,day,time[0],time[1]);
+        return calendar.getTimeInMillis();
+    }
+
+//    private static List<Long> getAllTimeStrings(String eventStartTime){
+//        List<Long> times = new ArrayList<Long>();
+//        times.add(fieldToTimestamp(eventStartTime));
+//        return times;
+//    }
+//
+//    public void setEventOrder(int day, List<String> times,List<Object> allscheduleslist) {
+//        // sort people into buckets by the first letter of last name
+//        long smallest = 0;
+//        allscheduleslist.clear();
+//        List<Object> currentSchedulelist = null;
+//        for (String i : times) {
+//            if (fieldToTimestamp(day,i) != smallest) {
+//                if (allscheduleslist != null) {
+//                    allscheduleslist.add(allscheduleslist);
+//                }
+//
+//                currentSchedulelist = new ArrayList<>();;
+//                smallest = fieldToTimestamp(day,i);
+//                currentSchedulelist.smallest = String.valueOf(smallest);
+//            }
+//        }
+//
+//            if (currentSection != null) {
+//                currentSection.people.add(person);
+//            }
+//        }
+//
+//        sections.add(currentSection);
+//        notifyAllSectionsDataSetChanged();
+//    }
 
 
 }
