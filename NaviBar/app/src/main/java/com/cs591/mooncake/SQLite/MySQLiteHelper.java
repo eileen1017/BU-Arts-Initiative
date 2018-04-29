@@ -69,7 +69,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public List<Integer> getEventList() {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("select * from " + EVENT_TABLE_NAME, null);
+        Cursor cursor = db.rawQuery("select * from " + EVENT_TABLE_NAME , null);
 
         List<Integer> res = new ArrayList<>();
 

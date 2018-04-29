@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
                         getApplicationContext().startActivity(browserIntent);
                     }
                 });
-                handler.postDelayed(this,10000);
+                handler.postDelayed(this,30000);
             }
         },0);
 

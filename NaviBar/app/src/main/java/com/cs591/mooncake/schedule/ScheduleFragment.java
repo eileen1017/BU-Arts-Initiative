@@ -313,37 +313,13 @@ public class ScheduleFragment extends Fragment {
         return calendar.getTimeInMillis();
     }
 
-//    private static List<Long> getAllTimeStrings(String eventStartTime){
-//        List<Long> times = new ArrayList<Long>();
-//        times.add(fieldToTimestamp(eventStartTime));
-//        return times;
-//    }
-//
-//    public void setEventOrder(int day, List<String> times,List<Object> allscheduleslist) {
-//        // sort people into buckets by the first letter of last name
-//        long smallest = 0;
-//        allscheduleslist.clear();
-//        List<Object> currentSchedulelist = null;
-//        for (String i : times) {
-//            if (fieldToTimestamp(day,i) != smallest) {
-//                if (allscheduleslist != null) {
-//                    allscheduleslist.add(allscheduleslist);
-//                }
-//
-//                currentSchedulelist = new ArrayList<>();;
-//                smallest = fieldToTimestamp(day,i);
-//                currentSchedulelist.smallest = String.valueOf(smallest);
-//            }
-//        }
-//
-//            if (currentSection != null) {
-//                currentSection.people.add(person);
-//            }
-//        }
-//
-//        sections.add(currentSection);
-//        notifyAllSectionsDataSetChanged();
-//    }
+    private static List<Long> getAllTimeStrings(int day, String eventStartTime){
+        List<Long> times = new ArrayList<Long>();
+        times.add(fieldToTimestamp(day, eventStartTime));
+        return times;
+    }
+
+    
 
 
 }
