@@ -11,6 +11,8 @@ import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +32,7 @@ import java.util.List;
 public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
 
     private Context mContext;
+    private int lastPosition = -1;
     private List<Object> mList;
     LikeFragment.OnLikedEventClickedListener olcl;
 
@@ -132,9 +135,10 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
                 AlertDialog alert = altUnlike.create();
                 alert.show();
 
-
             }
         });
+        setAnimation(holder.itemView, position);
+
 
     }
 
@@ -142,6 +146,18 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
     public int getItemCount() {
         return mList.size();
     }
+
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(mContext, android.R.anim.slide_in_left);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
+    }
+
 
 
 

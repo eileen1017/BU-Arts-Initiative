@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.TimeZone;
 
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
-import com.cs591.mooncake.SQLite.SingleArtist;
 import com.cs591.mooncake.SQLite.SingleEvent;
 import com.cs591.mooncake.SQLite.SingleUser;
 
@@ -103,9 +102,9 @@ public class ScheduleFragment extends Fragment {
             refreshMySchedulePage();
 
 
-        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist,OSCL);
+        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist,OSCL, true);
         recyclerView.setAdapter(adapter);
-        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2,OSCL);
+        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2,OSCL, true);
         recyclerView2.setAdapter(adapter2);
 
 
@@ -247,9 +246,9 @@ public class ScheduleFragment extends Fragment {
             }
         }
 
-        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist, OSCL);
+        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist, OSCL, false);
         recyclerView.setAdapter(adapter);
-        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2, OSCL);
+        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2, OSCL, false);
         recyclerView2.setAdapter(adapter2);
     }
 
@@ -268,9 +267,9 @@ public class ScheduleFragment extends Fragment {
                     scheduleslist4.add(singleSchedule);
             }
         }
-        scheduleAdapter adapter3 = new scheduleAdapter(getActivity(), scheduleslist3,OSCL);
+        scheduleAdapter adapter3 = new scheduleAdapter(getActivity(), scheduleslist3,OSCL, false);
         recyclerView.setAdapter(adapter3);
-        scheduleAdapter adapter4 = new scheduleAdapter(getActivity(), scheduleslist4,OSCL);
+        scheduleAdapter adapter4 = new scheduleAdapter(getActivity(), scheduleslist4,OSCL, false);
         recyclerView2.setAdapter(adapter4);
     }
 
