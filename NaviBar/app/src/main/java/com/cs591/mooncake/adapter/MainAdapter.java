@@ -9,7 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,13 +25,18 @@ import java.util.List;
 
 
 
+
 public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private int lastPosition = -1;
 
     private Context context;
     private List<List<Object>> items;
     private final int BAZAAR = 1;
     private final int OTHER = 2;
     private final int WORKSHOP = 3;
+    private boolean artistVerticalView = false;
+    private boolean workshopVerticalView = false;
 
     private final String[] types = new String[]{"Artists", "Workshops", "Bazaar"};
 
@@ -88,7 +96,16 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ((TextView)itemView.findViewById(R.id.type)).setText(types[position]);
     }
 
-    private void horizontalView(HorizontalViewHolder holder, int position) {
+    private void verticalView(VerticalViewHolder holder, int position) {
+        VerticalAdapter adapter1 = new VerticalAdapter(context, items.get(position));
+        holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        holder.recyclerView.setAdapter(adapter1);
+        //holder.type.setText(types[position]);
+
+    }
+
+
+    private void horizontalView(final HorizontalViewHolder holder, final int position) {
 //        Layout container for a view hierarchy that can be scrolled by the user, allowing it to be larger than the physical display.
 //        A HorizontalScrollView is a FrameLayout, meaning you should place one child in it containing the entire contents to scroll
         HorizontalAdapter adapter = new HorizontalAdapter(context, items.get(position));
@@ -96,6 +113,28 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 LinearLayoutManager.HORIZONTAL, false));
         holder.recyclerView.setAdapter(adapter);
         holder.type.setText(types[position]);
+        holder.btnChangeViewType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (artistVerticalView) {
+                    HorizontalAdapter adapter = new HorizontalAdapter(context, items.get(position));
+                    holder.recyclerView.setLayoutManager(new LinearLayoutManager(context,
+                            LinearLayoutManager.HORIZONTAL, false));
+                    holder.recyclerView.setAdapter(adapter);
+                    artistVerticalView = false;
+                    ImageButton b = (ImageButton)view;
+                    b.setImageResource(R.drawable.ic_list_type);
+                } else {
+                    VerticalAdapter adapter1 = new VerticalAdapter(context, items.get(position));
+                    holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                    holder.recyclerView.setAdapter(adapter1);
+                    artistVerticalView = true;
+                    ImageButton b = (ImageButton)view;
+                    b.setImageResource(R.drawable.ic_array_type);
+                }
+            }
+        });
+
         //holder.btnShowAll.setText("Show All " + types[position]);
     }
 
@@ -126,11 +165,13 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         RecyclerView recyclerView;
         TextView type;
         Button btnShowAll;
+        ImageButton btnChangeViewType;
 
         HorizontalViewHolder(View itemView) {
             super(itemView);
             type = itemView.findViewById(R.id.type);
             recyclerView =  itemView.findViewById(R.id.inner_recyclerView);
+            btnChangeViewType = itemView.findViewById(R.id.btnChangeViewType);
             //btnShowAll = itemView.findViewById(R.id.btnShowAll);
         }
     }
@@ -144,6 +185,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             recyclerView =  itemView.findViewById(R.id.inner_recyclerView);
         }
     }
+
 
 
 }

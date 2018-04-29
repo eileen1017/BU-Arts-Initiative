@@ -1,9 +1,11 @@
 package com.cs591.mooncake.adapter;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,20 +18,19 @@ import com.cs591.mooncake.R;
 import com.cs591.mooncake.SQLite.SingleArtist;
 import com.cs591.mooncake.SQLite.SingleEvent;
 import com.cs591.mooncake.explore.ArtistActivity;
-import com.cs591.mooncake.explore.EventActivity;
-import com.cs591.mooncake.explore.SingleHorizontal;
-
+import com.cs591.mooncake.explore.SingleVertical;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.MyViewHolder> {
+public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyViewHolder> {
 
-    List<Object> data;
+    public static final String TAG = "Explore";
+    private List<Object> data;
     Context context;
     private int lastPosition = -1;
 
-    public HorizontalAdapter(Context context, List<Object> data) {
+    public VerticalAdapter(Context context, List<Object> data) {
         this.context = context;
         this.data = data;
     }
@@ -37,21 +38,17 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //Called when RecyclerView needs a new RecyclerView.ViewHolder of the given type to represent an item.
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.horizental_single_row,
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.vertical_single_row,
                 parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HorizontalAdapter.MyViewHolder holder, int position) {
-        //Called by RecyclerView to display the data at the specified position. This method should update the contents of the itemView to reflect the item at the given position.
-
+    public void onBindViewHolder(MyViewHolder holder, int position) {
         if (data.get(position) instanceof SingleEvent) {
             final SingleEvent singleEvent = (SingleEvent)data.get(position);
             holder.description.setText(singleEvent.getAddress());
             holder.title.setText(singleEvent.getName());
-            holder.pubDate.setText(singleEvent.getStart());
             holder.image.setImageBitmap(singleEvent.getPic());
             if (singleEvent.getType().equals("Workshop")) {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +67,6 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
             final SingleArtist singleArtist = (SingleArtist)data.get(position);
             holder.description.setText(singleArtist.getCountry());
             holder.title.setText(singleArtist.getName());
-            holder.pubDate.setText(singleArtist.getWebsite());
             holder.image.setImageBitmap(singleArtist.getPic());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -83,7 +79,24 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
             });
         }
         setAnimation(holder.itemView, position);
+    }
 
+    @Override
+    public int getItemCount() {
+        return data.size();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        ImageView image;
+        TextView title, description;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            image = itemView.findViewById(R.id.image);
+            title = itemView.findViewById(R.id.title);
+            description = itemView.findViewById(R.id.description);
+            Log.i(TAG, ""+title);
+        }
     }
 
     private void setAnimation(View viewToAnimate, int position)
@@ -91,30 +104,11 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
         // If the bound view wasn't previously displayed on screen, it's animated
         if (position > lastPosition)
         {
-            Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
+            Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
             viewToAnimate.startAnimation(animation);
             lastPosition = position;
         }
     }
 
 
-    @Override
-    public int getItemCount() {
-        return data.size();
-    }
-        //Get the size of data that you input
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView title, description, pubDate;
-        ImageView image;
-
-        public MyViewHolder(View itemView) {
-            //Set the view
-            super(itemView);
-            image = itemView.findViewById(R.id.image_view);
-            description = itemView.findViewById(R.id.description);
-            title = itemView.findViewById(R.id.title);
-            pubDate = itemView.findViewById(R.id.published_date);
-        }
-    }
 }
