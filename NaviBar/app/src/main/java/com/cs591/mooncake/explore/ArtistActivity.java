@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
+import com.cs591.mooncake.FirebaseUtils.FirebaseProfile;
 import com.cs591.mooncake.R;
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleArtist;
@@ -153,6 +154,7 @@ public class ArtistActivity extends AppCompatActivity {
                             singleUser.addScheduled(singleEvent.getID());
                             ScheduleFragment.addToCalenderHandler(singleEvent.getID(),ArtistActivity.this);
                         }
+                        new FirebaseProfile().updateLikedScheduled(singleUser);
                         myDb.addProfile(singleUser);
                     }
                 });
@@ -176,6 +178,7 @@ public class ArtistActivity extends AppCompatActivity {
                             singleUser.addLiked(singleEvent.getID());
                         }
                         myDb.addProfile(singleUser);
+                        new FirebaseProfile().updateLikedScheduled(singleUser);
                     }
                 });
 
