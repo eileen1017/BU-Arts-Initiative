@@ -6,6 +6,7 @@
     android:layout_margin="4dp"
     android:background="#ccc"
     app:cardCornerRadius="6dp"
+    app:cardBackgroundColor="#fa6f57"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -34,12 +35,14 @@
                 android:id="@+id/title"
                 android:textStyle="bold"
                 android:textSize="18dp"
+                android:textColor="@color/white"
                 android:text="Title"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/description"
+                android:textColor="@color/white"
                 android:text="This is description"/>
 
 

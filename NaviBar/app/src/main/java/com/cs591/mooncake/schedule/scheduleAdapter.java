@@ -19,6 +19,7 @@ import java.util.List;
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleEvent;
 import com.cs591.mooncake.SQLite.SingleUser;
+import com.cs591.mooncake.explore.ArtistActivity;
 
 
 public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHolder> {
@@ -122,10 +123,12 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
                     SingleUser singleUser = mydb.getProfile();
                     if (singleUser.getScheduled().contains(singleEvent.getID())) {
                         singleUser.removeScheduled(singleEvent.getID());
+                        ScheduleFragment.removeCalenderHandler(singleEvent.getID(), mContext);
                         v.setBackgroundResource(R.drawable.add);
                     } else {
                         v.setBackgroundResource(R.drawable.ischecked);
                         singleUser.addScheduled(singleEvent.getID());
+                        ScheduleFragment.addToCalenderHandler(singleEvent.getID(),mContext);
                     }
                     new FirebaseProfile().updateLikedScheduled(singleUser);
                     mydb.addProfile(singleUser);
