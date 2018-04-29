@@ -1,21 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/type"
-        android:text="Artists"
-        android:textStyle="bold"
-        android:gravity="bottom"
-        android:textColor="@color/red"
-        android:textSize="30sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_height="wrap_content">
+
+
+
+
+        <TextView
+            android:layout_weight="9"
+            android:id="@+id/type"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="bottom"
+            android:text="Artists"
+            android:textColor="@color/red"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+        <ImageButton
+            android:layout_gravity="bottom"
+            android:id="@+id/btnChangeViewType"
+            android:layout_marginRight="15dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/ic_list_type" />
+
+    </LinearLayout>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/inner_recyclerView"

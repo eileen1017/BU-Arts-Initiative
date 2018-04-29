@@ -157,6 +157,13 @@ public class ArtistActivity extends AppCompatActivity {
                     }
                 });
 
+                shareButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        new ShareUtil(ArtistActivity.this).share(singleEvent.getID());
+                    }
+                });
+
                 likeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
