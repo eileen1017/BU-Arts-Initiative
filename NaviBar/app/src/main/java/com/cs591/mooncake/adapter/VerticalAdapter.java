@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +28,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     public static final String TAG = "Explore";
     private List<Object> data;
     Context context;
+    private int lastPosition = -1;
 
     public VerticalAdapter(Context context, List<Object> data) {
         this.context = context;
@@ -75,6 +78,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                 }
             });
         }
+        setAnimation(holder.itemView, position);
     }
 
     @Override
@@ -94,5 +98,17 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
             Log.i(TAG, ""+title);
         }
     }
+
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
+    }
+
 
 }
