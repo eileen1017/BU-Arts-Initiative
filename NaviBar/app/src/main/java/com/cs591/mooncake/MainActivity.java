@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
 
 
         final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        handler.post(new Runnable() {
             @Override
             public void run() {
                 Random random = new Random();
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
                 });
                 handler.postDelayed(this,30000);
             }
-        },0);
+        });
 
         findViewById(R.id.closeAds).setOnClickListener(new View.OnClickListener() {
             @Override
