@@ -82,6 +82,21 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             singleCardView(holder, position);
         } else
             horizontalView((HorizontalViewHolder) holder, position);
+
+        setAnimation(holder.itemView, position);
+
+    }
+
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
+            viewToAnimate.startAnimation(animation);
+            animation.setStartOffset(position * 100);
+            lastPosition = position;
+        }
     }
 
     private void singleCardView(RecyclerView.ViewHolder holder, int position) {

@@ -158,6 +158,7 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
         {
             Animation animation = AnimationUtils.loadAnimation(mContext, android.R.anim.slide_in_left);
             viewToAnimate.startAnimation(animation);
+            animation.setDuration(400 + position * 130);
             lastPosition = position;
         }
     }
