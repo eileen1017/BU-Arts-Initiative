@@ -26,6 +26,8 @@ import com.cs591.mooncake.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -64,6 +66,8 @@ public class ScheduleFragment extends Fragment {
     private final int ALL_SCHEDULE = 0;
     private final int MY_SCHEDULE = 1;
     private int currentPage = ALL_SCHEDULE;
+
+    ModelSchedule modelSchedule;
 
 
     static long starttime = 0;
@@ -247,6 +251,7 @@ public class ScheduleFragment extends Fragment {
             }
         }
 
+
         scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist, OSCL);
         recyclerView.setAdapter(adapter);
         scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2, OSCL);
@@ -313,13 +318,8 @@ public class ScheduleFragment extends Fragment {
         return calendar.getTimeInMillis();
     }
 
-    private static List<Long> getAllTimeStrings(int day, String eventStartTime){
-        List<Long> times = new ArrayList<Long>();
-        times.add(fieldToTimestamp(day, eventStartTime));
-        return times;
-    }
 
-    
+
 
 
 }

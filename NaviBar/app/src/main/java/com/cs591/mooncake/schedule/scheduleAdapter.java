@@ -92,6 +92,7 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
             holder.item_from_time.setText(singleEvent.getStart());
             holder.item_location.setText(singleEvent.getAddress());
             holder.item_at.setText("To");
+            holder.item_to_time.setText(singleEvent.getEnd());
 
             String currentType = singleEvent.getType();
 

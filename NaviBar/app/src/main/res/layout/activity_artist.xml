@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#ff9f8e"
     tools:context=".explore.EventActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -19,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="350dp"
             android:fitsSystemWindows="true"
-            app:contentScrim="@color/red"
+            app:contentScrim="@color/darkred"
             app:expandedTitleTextAppearance="@android:color/transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 

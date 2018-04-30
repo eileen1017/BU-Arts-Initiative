@@ -4,9 +4,9 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="4dp"
-    android:background="#ccc"
+    android:background="@drawable/list_rounded_corner"
     app:cardCornerRadius="6dp"
-    app:cardBackgroundColor="#fa6f57"
+    app:cardBackgroundColor="#ff9f8e"
     android:orientation="horizontal">
 
     <LinearLayout

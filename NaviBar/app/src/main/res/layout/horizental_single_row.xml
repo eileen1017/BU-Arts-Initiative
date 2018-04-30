@@ -13,7 +13,7 @@
     app:cardMaxElevation="8dp">
 
     <LinearLayout
-        android:background="@color/titleBarBkg"
+        android:background="#ff9f8e"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">

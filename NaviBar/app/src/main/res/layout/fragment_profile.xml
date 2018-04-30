@@ -53,16 +53,16 @@
             android:layout_marginLeft="30dp"
             android:fontFamily="@font/lato_bold"
             android:text="Profile Name"
-            android:textColor="@color/red"
+            android:textColor="@color/darkred"
             android:textSize="30sp" />
 
         <Button
             android:id="@+id/logout"
-            android:layout_width="28dp"
+            android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/logout" />
 
 

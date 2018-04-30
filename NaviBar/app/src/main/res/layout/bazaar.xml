@@ -12,7 +12,7 @@
         android:text="Artists"
         android:textStyle="bold"
         android:gravity="bottom"
-        android:textColor="@color/red"
+        android:textColor="#ff9f8e"
         android:textSize="30sp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"/>
@@ -32,7 +32,7 @@
         app:cardMaxElevation="8dp">
 
         <LinearLayout
-            android:background="@color/titleBarBkg"
+            android:background="#ff9f8e"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">

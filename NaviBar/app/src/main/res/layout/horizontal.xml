@@ -21,7 +21,7 @@
             android:layout_marginTop="10dp"
             android:gravity="bottom"
             android:text="Artists"
-            android:textColor="@color/red"
+            android:textColor="#ff9f8e"
             android:textSize="30sp"
             android:textStyle="bold" />
         <ImageButton
@@ -30,7 +30,8 @@
             android:layout_marginRight="15dp"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:layout_height="32dp"
             android:background="@android:color/transparent"
             app:srcCompat="@drawable/ic_list_type" />
 

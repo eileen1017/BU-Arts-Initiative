@@ -17,12 +17,12 @@
         <ImageView
             android:id="@+id/item_image"
             android:layout_width="match_parent"
-            android:layout_height="136dp"
+            android:layout_height="180dp"
             android:scaleType="centerCrop"
             />
 
         <RelativeLayout
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -31,11 +31,11 @@
                 android:id="@+id/item_name"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
                 android:fontFamily="@font/lato_bold"
                 android:layout_alignParentLeft="true"
                 android:textColor="#FFFFFF"
-                android:textSize="23.5sp" />
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/likebtn"
@@ -43,7 +43,7 @@
                 android:layout_height="33dp"
                 android:layout_gravity="right"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="5dp"
                 android:background="@drawable/liked" />
 
 

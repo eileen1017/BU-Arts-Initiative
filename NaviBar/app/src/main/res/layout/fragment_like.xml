@@ -5,50 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:background="@color/white">
 
-    <!--<android.support.design.widget.AppBarLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="#F64E46"-->
-        <!--android:fitsSystemWindows="true"-->
-        <!--android:showDividers="end"-->
-        <!--android:theme="@style/AppTheme">-->
-
-        <!--<android.support.design.widget.CollapsingToolbarLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="104dp"-->
-            <!--android:background="#E01111"-->
-            <!--android:elevation="10dp"-->
-            <!--android:fitsSystemWindows="true"-->
-            <!--app:contentScrim="?attr/colorAccent"-->
-            <!--app:expandedTitleTextAppearance="@android:color/transparent"-->
-            <!--app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
-            <!--&gt;-->
-
-
-            <!--<TextView-->
-                <!--android:layout_width="69dp"-->
-                <!--android:layout_height="49dp"-->
-                <!--android:layout_marginLeft="46dp"-->
-                <!--android:layout_marginTop="40dp"-->
-                <!--android:fitsSystemWindows="true"-->
-                <!--android:fontFamily="@font/lato_bold"-->
-                <!--android:scaleType="centerCrop"-->
-                <!--android:text="Like"-->
-                <!--android:textColor="@android:color/white"-->
-                <!--android:textSize="36sp" />-->
-
-
-        <!--</android.support.design.widget.CollapsingToolbarLayout>-->
-
-    <!--</android.support.design.widget.AppBarLayout>-->
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@color/red"
+        android:background="@color/darkred"
         android:elevation="16dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"

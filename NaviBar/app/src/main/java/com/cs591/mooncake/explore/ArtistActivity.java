@@ -33,8 +33,9 @@ import java.util.List;
 
 public class ArtistActivity extends AppCompatActivity {
 
-    public static final String DATE_5 = "5th, Friday";
-    public static final String DATE_6 = "6th, Saturday";
+    public static final String DATE_5 = "5";
+    public static final String DATE_6 = "6";
+    public static final String MONTH = "OCT";
     private boolean expanded;
     MySQLiteHelper myDb;
     SingleArtist singleArtist;
@@ -83,10 +84,12 @@ public class ArtistActivity extends AppCompatActivity {
         // generate bios
         final View biosView = LayoutInflater.from(this).inflate(R.layout.description_card, null);
         final String content = singleArtist.getBios();
-        if (content.length() < 500) {
+        if ((content).length() < 500) {
             ((biosView.findViewById(R.id.description_card_collapse_layout))).setVisibility(View.INVISIBLE);
+            ((TextView) (biosView.findViewById(R.id.artist_website))).setText("Website: "+singleArtist.getWebsite());
             ((TextView)(biosView.findViewById(R.id.description_card_text))).setText(content);
         } else {
+            ((TextView) (biosView.findViewById(R.id.artist_website))).setText("Website: "+singleArtist.getWebsite());
             ((TextView)(biosView.findViewById(R.id.description_card_text))).setText(content.substring(0, 500) + " ...");
             (biosView.findViewById(R.id.description_card_button)).setBackgroundResource(R.drawable.ic_description_card_expand);
             (biosView.findViewById(R.id.description_card_button)).setOnClickListener(new View.OnClickListener() {
@@ -136,9 +139,9 @@ public class ArtistActivity extends AppCompatActivity {
                 }
 
                 if (singleUser.getLiked().contains(singleEvent.getID())) {
-                    likeButton.setImageResource(R.drawable.ic_event_card_like);
-                } else {
                     likeButton.setImageResource(R.drawable.ic_event_card_liked);
+                } else {
+                    likeButton.setImageResource(R.drawable.ic_event_card_like);
                 }
 
                 addButton.setOnClickListener(new View.OnClickListener() {
@@ -171,10 +174,10 @@ public class ArtistActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         ImageButton b = (ImageButton) view;
                         if (singleUser.getLiked().contains(singleEvent.getID())) {
-                            b.setImageResource(R.drawable.ic_event_card_liked);
+                            b.setImageResource(R.drawable.ic_event_card_like);
                             singleUser.removeLiked(singleEvent.getID());
                         } else {
-                            b.setImageResource(R.drawable.ic_event_card_like);
+                            b.setImageResource(R.drawable.ic_event_card_liked);
                             singleUser.addLiked(singleEvent.getID());
                         }
                         myDb.addProfile(singleUser);
@@ -184,7 +187,10 @@ public class ArtistActivity extends AppCompatActivity {
 
 
                 // TextViews:
+                ((TextView) (currentView.findViewById(R.id.month))).setText(MONTH);
                 ((TextView) (currentView.findViewById(R.id.event_card_date))).setText(date);
+                ((TextView) (currentView.findViewById(R.id.event_card_location))).setText(singleEvent.getVenue()+", "+singleEvent.getBuilding()+" "+singleEvent.getLevel());
+                ((TextView) (currentView.findViewById(R.id.event_card_address))).setText(singleEvent.getAddress());
                 String time = singleEvent.getStart();
                 if (singleEvent.getEnd() != null) time += (" : " + singleEvent.getEnd());
                 ((TextView) (currentView.findViewById(R.id.event_card_time))).setText(time);
@@ -236,10 +242,12 @@ public class ArtistActivity extends AppCompatActivity {
 
         if (expanded) {
             view.findViewById(R.id.description_card_button).setBackgroundResource(R.drawable.ic_description_card_expand);
+            ((TextView) (findViewById(R.id.artist_website))).setText("Website: "+singleArtist.getWebsite());
             ((TextView)(view.findViewById(R.id.description_card_text))).setText(content.substring(0, 500) + " ...");
             expanded = false;
         } else {
             view.findViewById(R.id.description_card_button).setBackgroundResource(R.drawable.ic_description_card_collapse);
+            ((TextView) (findViewById(R.id.artist_website))).setText("Website: "+singleArtist.getWebsite());
             ((TextView)(view.findViewById(R.id.description_card_text))).setText(content);
             expanded = true;
         }
