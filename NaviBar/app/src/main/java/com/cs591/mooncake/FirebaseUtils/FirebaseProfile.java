@@ -144,7 +144,7 @@ public class FirebaseProfile {
                         }
                     });
             SingleUser singleUser = myDb.getProfile();
-            if (singleUser.getPicUrl() != null) {
+            if (singleUser.getPicUrl() != null && singleUser.getPic() == null) {
                 singleUser.setPic(ProfileFragment.downloadImage(singleUser.getPicUrl().toString()));
                 myDb.addProfile(singleUser);
             }

@@ -7,7 +7,9 @@ import android.util.Log;
 
 import com.cs591.mooncake.R;
 
-public class MapActivity extends AppCompatActivity{
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
+
+public class MapActivity extends SwipeBackActivity{
     public MapFragment mapFragment;
 
     @Override

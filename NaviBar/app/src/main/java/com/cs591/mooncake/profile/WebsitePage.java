@@ -4,7 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.cs591.mooncake.R;
 
-public class WebsitePage extends AppCompatActivity {
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
+
+public class WebsitePage extends SwipeBackActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
