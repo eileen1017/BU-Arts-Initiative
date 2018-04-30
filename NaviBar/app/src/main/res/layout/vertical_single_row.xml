@@ -7,6 +7,7 @@
     android:background="@drawable/list_rounded_corner"
     app:cardCornerRadius="6dp"
     app:cardBackgroundColor="#ff9f8e"
+    android:stateListAnimator="@animator/card_view_ontouch"
     android:orientation="horizontal">
 
     <LinearLayout

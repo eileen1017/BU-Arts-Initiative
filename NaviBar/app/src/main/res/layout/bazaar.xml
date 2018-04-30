@@ -21,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="320dp"
         android:layout_marginTop="5dp"
+        android:stateListAnimator="@animator/card_view_ontouch"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="#FFFFFF"

@@ -5,6 +5,7 @@
     android:layout_height="320dp"
     android:layout_margin="5dp"
     android:background="#FFFFFF"
+    android:stateListAnimator="@animator/card_view_ontouch"
     android:orientation="vertical"
     android:padding="5dp"
     app:cardCornerRadius="15dp"

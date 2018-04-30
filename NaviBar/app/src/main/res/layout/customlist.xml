@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:layout_marginTop="30dp"
+    android:stateListAnimator="@animator/card_view_ontouch"
     android:background="#FFFFFF"
     android:orientation="horizontal">
 

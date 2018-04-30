@@ -6,6 +6,7 @@
     android:layout_margin="10dp"
     app:cardBackgroundColor="#ffbbaf"
     android:layout_height="wrap_content"
+    android:stateListAnimator="@animator/card_view_ontouch"
     android:id="@+id/schedule_event"
     android:background="@drawable/list_rounded_corner"
     >
