@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
     public MySQLiteHelper myDb;
     ImageView adView;
 
-    public Button btn1;
+
 
 
 
@@ -108,17 +108,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
         firebaseProfile = new FirebaseProfile(this);
         firebaseProfile.fetchProfile(this);
 
-        btn1 = (Button) findViewById(R.id.btn1);
 
-
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MapActivity.class);
-                intent.putExtra("eventId", 5);
-                startActivity(intent);
-            }
-        });
 
 
 

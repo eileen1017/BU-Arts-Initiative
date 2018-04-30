@@ -21,11 +21,13 @@ import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
 import com.cs591.mooncake.FirebaseUtils.FirebaseProfile;
+import com.cs591.mooncake.MainActivity;
 import com.cs591.mooncake.R;
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleArtist;
 import com.cs591.mooncake.SQLite.SingleEvent;
 import com.cs591.mooncake.SQLite.SingleUser;
+import com.cs591.mooncake.map.MapActivity;
 import com.cs591.mooncake.schedule.ScheduleFragment;
 
 import java.util.ArrayList;
@@ -147,6 +149,7 @@ public class ArtistActivity extends AppCompatActivity {
                 addButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        SingleUser singleUser = myDb.getProfile();
                         ImageButton b = (ImageButton) view;
                         if (singleUser.getScheduled().contains(singleEvent.getID())) {
                             b.setImageResource(R.drawable.ic_event_card_add);
@@ -157,8 +160,8 @@ public class ArtistActivity extends AppCompatActivity {
                             singleUser.addScheduled(singleEvent.getID());
                             ScheduleFragment.addToCalenderHandler(singleEvent.getID(),ArtistActivity.this);
                         }
-                        new FirebaseProfile().updateLikedScheduled(singleUser);
                         myDb.addProfile(singleUser);
+                        new FirebaseProfile().updateLikedScheduled(singleUser);
                     }
                 });
 
@@ -172,6 +175,7 @@ public class ArtistActivity extends AppCompatActivity {
                 likeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        SingleUser singleUser = myDb.getProfile();
                         ImageButton b = (ImageButton) view;
                         if (singleUser.getLiked().contains(singleEvent.getID())) {
                             b.setImageResource(R.drawable.ic_event_card_like);
@@ -182,6 +186,15 @@ public class ArtistActivity extends AppCompatActivity {
                         }
                         myDb.addProfile(singleUser);
                         new FirebaseProfile().updateLikedScheduled(singleUser);
+                    }
+                });
+
+                locButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ArtistActivity.this, MapActivity.class);
+                        intent.putExtra("eventId", singleEvent.getID());
+                        startActivity(intent);
                     }
                 });
 

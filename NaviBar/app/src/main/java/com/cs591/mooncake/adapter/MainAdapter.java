@@ -35,13 +35,14 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int BAZAAR = 1;
     private final int OTHER = 2;
     private final int WORKSHOP = 3;
-    private boolean artistVerticalView = false;
-    private boolean workshopVerticalView = false;
+
+    private boolean[] viewtype;
 
     private final String[] types = new String[]{"Artists", "Workshops", "Bazaar"};
 
 
     public MainAdapter(Context context, List<List<Object>> items) {
+        this.viewtype = new boolean[items.size()];
         this.context = context;
         this.items = items;
     }
@@ -116,19 +117,19 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         holder.btnChangeViewType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (artistVerticalView) {
+                if (viewtype[position]) {
                     HorizontalAdapter adapter = new HorizontalAdapter(context, items.get(position));
                     holder.recyclerView.setLayoutManager(new LinearLayoutManager(context,
                             LinearLayoutManager.HORIZONTAL, false));
                     holder.recyclerView.setAdapter(adapter);
-                    artistVerticalView = false;
+                    viewtype[position] = false;
                     ImageButton b = (ImageButton)view;
                     b.setImageResource(R.drawable.ic_list_type);
                 } else {
                     VerticalAdapter adapter1 = new VerticalAdapter(context, items.get(position));
                     holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
                     holder.recyclerView.setAdapter(adapter1);
-                    artistVerticalView = true;
+                    viewtype[position] = true;
                     ImageButton b = (ImageButton)view;
                     b.setImageResource(R.drawable.ic_array_type);
                 }

@@ -16,14 +16,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/event_border"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:textColor="@color/white"
                 android:text="Biography"
                 android:fontFamily="@font/lato_bold"
                 android:textSize="22sp" />
@@ -37,7 +35,6 @@
                 android:layout_marginBottom="8dp"
                 android:textSize="16sp"
                 android:fontFamily="@font/lato_italic"
-                android:textColor="@color/white"
                 android:text="Website: "
                 />
 
@@ -48,7 +45,6 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:fontFamily="@font/lato"
-                android:textColor="@color/white"
                 android:text="Zhou Family Band ( 周 家 班 ) plays traditional wind and percussion music which accompany birth and death celebrations of the people of Central-Eastern China for more than 600 years. Coming from Lingbi, Anhui Province, part of the Central Plain area which formed the cradle of Chinese civilization, the Zhou family have been musicians for seven generations, and are bearers of a tradition that represents the finest of Chinese folk music – Bolin Laba, a national intangible cultural heritage of China as declared by the Chinese government.
 
 The Zhou Family Band performs at weddings, funerals, and rituals of worship to their ancestors and welcoming deities. They play suona shawm, sheng mouth organ, dizi flute, Chinese drums and cymbals, kaxi (a combination of voice and blown instrument played by the same musician to imitate opera singing), and often blend theatrical stunts and music, to make their performance even more spectacular.
