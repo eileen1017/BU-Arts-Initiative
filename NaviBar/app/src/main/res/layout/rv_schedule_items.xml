@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_margin="10dp"
-    app:cardBackgroundColor="#ffbbaf"
+    app:cardBackgroundColor="@color/lightRed"
     android:layout_height="wrap_content"
     android:stateListAnimator="@animator/card_view_ontouch"
     android:id="@+id/schedule_event"
@@ -35,12 +35,13 @@
 
 
         <TextView
-                android:id="@+id/item_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Event One"
-                android:textSize="16sp"
-                android:textColor="@android:color/white"/>
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Event One"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"/>
 
         <LinearLayout
             android:layout_width="wrap_content"

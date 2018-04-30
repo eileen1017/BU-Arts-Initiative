@@ -4,9 +4,11 @@ package com.cs591.mooncake.schedule;
 
 import android.app.Fragment;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -175,14 +177,14 @@ public class ScheduleFragment extends Fragment {
                 }
 
             // Creating a Event table which contains details for individual events like calendar ID,
-
+                //calEvent.put(CalendarContract.Events._ID,singleEvent.getID());
             calEvent.put(CalendarContract.Events.TITLE, singleEvent.getName());             // Name of Event
             calEvent.put(CalendarContract.Events.DTSTART, starttime);          // Get the current time for starting time
             calEvent.put(CalendarContract.Events.DTEND, endtime);    // Get the ending time as 1 hr after starting time
             calEvent.put(CalendarContract.Events.HAS_ALARM, 1);                             // Whether the event has an alarm or not.
             calEvent.put(CalendarContract.Events.EVENT_LOCATION, singleEvent.getAddress());     // Give the location of Event
             calEvent.put(CalendarContract.Events.EVENT_TIMEZONE, timeZone.getID());    //Timezone for the Event
-
+            calEvent.put(CalendarContract.Events.DESCRIPTION,Integer.toString(singleEvent.getID()));
             Log.i("MyDelete", "My add: "+ cr.insert(CalendarContract.Events.CONTENT_URI, calEvent));
             Toast.makeText(context, "Added to Google calendar.", Toast.LENGTH_SHORT).show();
 
@@ -199,19 +201,14 @@ public class ScheduleFragment extends Fragment {
 
     public static void removeCalenderHandler(int eventID, Context context) {
         MySQLiteHelper myDb = new MySQLiteHelper(context);
-        if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_CALENDAR)!= PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.READ_CALENDAR)!= PackageManager.PERMISSION_GRANTED) {
         } else {
         SingleEvent singleEvent = myDb.getEvent(eventID);
 
 
-
-//        ContentResolver cr = getActivity().getApplicationContext().getContentResolver();
-//        // Creates an empty set to store a set of values that the ContentResolver can process
-//        ContentValues calEvent = new ContentValues();
-
         Uri uri = CalendarContract.Events.CONTENT_URI;
-        String mSelectionClause = CalendarContract.Events.TITLE + " = ?";
-        String[] mSelectionArgs = {singleEvent.getName()};
+        String mSelectionClause = CalendarContract.Events.DESCRIPTION + " = ?";
+        String[] mSelectionArgs = {Integer.toString(singleEvent.getID())};
         context.getContentResolver().delete(uri,mSelectionClause,mSelectionArgs);
 
 

@@ -22,8 +22,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Like"
-            android:textColor="#fff"
+            android:text="Liked"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="@color/white"
             android:textSize="36sp" />
 
 
@@ -48,7 +49,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="13dp"
             android:layout_marginTop="45dp"
-            android:fontFamily="serif"
+            android:fontFamily="@font/lato"
             android:lineSpacingExtra="3sp"
             android:text="@string/txtEmptyLike"
             android:textAlignment="viewStart"

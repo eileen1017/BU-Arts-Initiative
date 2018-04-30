@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ff9f8e">
+    android:background="@color/red">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="#fa6f57"
+        android:background="@color/darkred"
         android:elevation="16dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -24,7 +24,8 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="Schedule"
-            android:textColor="#fff"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="@color/white"
             android:layout_alignParentLeft="true"
             android:textSize="36sp"
             android:id="@+id/schedule"/>
@@ -80,7 +81,7 @@
                             android:fontFamily="@font/lato_bold"
                             android:paddingRight="15dp"
                             android:text="Friday"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/white"
                             android:textSize="20sp" />
 
                         <ImageView
@@ -139,7 +140,7 @@
                             android:textSize="20sp"
                             android:fontFamily="@font/lato_bold"
                             android:paddingRight="15dp"
-                            android:textColor="#FFFFFF"/>
+                            android:textColor="@color/white"/>
 
                         <ImageView
                             android:id="@+id/item_image"
