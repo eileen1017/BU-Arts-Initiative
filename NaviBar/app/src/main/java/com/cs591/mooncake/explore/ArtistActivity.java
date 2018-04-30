@@ -2,6 +2,7 @@ package com.cs591.mooncake.explore;
 
 import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.NestedScrollView;
@@ -86,12 +87,18 @@ public class ArtistActivity extends AppCompatActivity {
         // generate bios
         final View biosView = LayoutInflater.from(this).inflate(R.layout.description_card, null);
         final String content = singleArtist.getBios();
+        biosView.findViewById(R.id.btnDescriptionCardWebsite).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(singleArtist.getWebsite()
+                ));
+                startActivity(websiteIntent);
+            }
+        });
         if ((content).length() < 500) {
             ((biosView.findViewById(R.id.description_card_collapse_layout))).setVisibility(View.INVISIBLE);
-            ((TextView) (biosView.findViewById(R.id.artist_website))).setText("Website: "+singleArtist.getWebsite());
             ((TextView)(biosView.findViewById(R.id.description_card_text))).setText(content);
         } else {
-            ((TextView) (biosView.findViewById(R.id.artist_website))).setText("Website: "+singleArtist.getWebsite());
             ((TextView)(biosView.findViewById(R.id.description_card_text))).setText(content.substring(0, 500) + " ...");
             (biosView.findViewById(R.id.description_card_button)).setBackgroundResource(R.drawable.ic_description_card_expand);
             (biosView.findViewById(R.id.description_card_button)).setOnClickListener(new View.OnClickListener() {
@@ -255,12 +262,10 @@ public class ArtistActivity extends AppCompatActivity {
 
         if (expanded) {
             view.findViewById(R.id.description_card_button).setBackgroundResource(R.drawable.ic_description_card_expand);
-            ((TextView) (findViewById(R.id.artist_website))).setText("Website: "+singleArtist.getWebsite());
             ((TextView)(view.findViewById(R.id.description_card_text))).setText(content.substring(0, 500) + " ...");
             expanded = false;
         } else {
             view.findViewById(R.id.description_card_button).setBackgroundResource(R.drawable.ic_description_card_collapse);
-            ((TextView) (findViewById(R.id.artist_website))).setText("Website: "+singleArtist.getWebsite());
             ((TextView)(view.findViewById(R.id.description_card_text))).setText(content);
             expanded = true;
         }

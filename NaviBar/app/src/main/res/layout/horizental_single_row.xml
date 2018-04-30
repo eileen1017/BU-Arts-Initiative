@@ -5,11 +5,10 @@
     android:layout_height="320dp"
     android:layout_margin="5dp"
     android:background="#FFFFFF"
-    android:elevation="5dp"
     android:orientation="vertical"
     android:padding="5dp"
     app:cardCornerRadius="15dp"
-    app:cardElevation="8dp"
+    app:cardElevation="4dp"
     app:cardMaxElevation="8dp">
 
     <LinearLayout
