@@ -25,6 +25,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.cs591.mooncake.R;
 
+import com.cs591.mooncake.SQLite.MySQLiteHelper;
+import com.cs591.mooncake.SQLite.SingleEvent;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -62,11 +64,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     private String btn_location = null;
     private View mView = null;
 
+    public int currentEventID = 5;
+
+    private String ifShowWindow = "";
+
 
     public MapFragment() {
         // Required empty public constructor
 
     }
+
 
     @Override
     public void onPause() {
@@ -87,13 +94,32 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         super.onDestroy();
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if (isServicesOK()){
-            mView = inflater.inflate(R.layout.fragment_map, container, false);
-            getLocationPermission();
+            if (currentEventID == -1){
+                mView = inflater.inflate(R.layout.fragment_map, container, false);
+                getLocationPermission();
+            } else {
+                MySQLiteHelper myDb = new MySQLiteHelper(getActivity());
+                SingleEvent singleEvent = myDb.getEvent(currentEventID);
+
+                String buildInfo = singleEvent.getBuilding();
+                Log.w("heyo", buildInfo);
+
+                if (buildInfo.equals("CAS")){
+                    ifShowWindow = "CAS";
+                } else if (buildInfo.equals("GSU")){
+                    ifShowWindow = "GSU";
+                }
+
+                mView = inflater.inflate(R.layout.fragment_map, container, false);
+                getLocationPermission();
+            }
         }
 
 
@@ -144,10 +170,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         MarkerOptions gsu = new MarkerOptions().position(BU_GSU).title("BU_GSU").snippet("Click for indoor map");
-        mMap.addMarker(gsu);
+        if (ifShowWindow.equals("GSU")){
+            mMap.addMarker(gsu).showInfoWindow();
+        } else {
+            mMap.addMarker(gsu);
+        }
+
 
         MarkerOptions tsai = new MarkerOptions().position(BU_Tsai).title("BU_Tsai").snippet("Click for indoor map");
-        mMap.addMarker(tsai);
+        if (ifShowWindow.equals("CAS")){
+            mMap.addMarker(tsai).showInfoWindow();
+        } else {
+            mMap.addMarker(tsai);
+        }
 
         mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(getActivity()));
         mMap.setOnInfoWindowClickListener(this);
@@ -171,6 +206,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         }
         // move carmera to the center between GSU and Tsai
         moveCamera(new LatLng(42.3505165, -71.1067625), DEFAULT_ZOOM);
+
+        currentEventID = -1;
     }
 
 

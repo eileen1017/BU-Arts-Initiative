@@ -34,6 +34,7 @@ import com.cs591.mooncake.SQLite.SingleUser;
 import com.cs591.mooncake.explore.ArtistActivity;
 import com.cs591.mooncake.explore.ExploreFragment;
 import com.cs591.mooncake.like.LikeFragment;
+import com.cs591.mooncake.map.MapActivity;
 import com.cs591.mooncake.map.MapFragment;
 import com.cs591.mooncake.schedule.ScheduleFragment;
 import com.cs591.mooncake.profile.ProfileFragment;
@@ -73,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
     public MySQLiteHelper myDb;
     ImageView adView;
 
+    public Button btn1;
+
 
 
 
@@ -104,6 +107,18 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
         FirebaseInitialize.Initialize(this);
         firebaseProfile = new FirebaseProfile(this);
         firebaseProfile.fetchProfile(this);
+
+        btn1 = (Button) findViewById(R.id.btn1);
+
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                intent.putExtra("eventId", 5);
+                startActivity(intent);
+            }
+        });
 
 
 

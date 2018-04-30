@@ -72,9 +72,6 @@ public class ShowInfo extends AppCompatActivity{
         }
 
 
-        //myDb = new MySQLiteHelper(this);
-
-
     }
 
 }

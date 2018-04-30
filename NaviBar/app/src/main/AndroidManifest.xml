@@ -9,7 +9,6 @@
     <!-- allow access the user's location permission -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
@@ -45,7 +44,7 @@
             android:theme="@android:style/Theme.Translucent" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
         <activity android:name=".explore.EventActivity" />
         <activity android:name=".profile.AboutPage" />
         <activity android:name=".profile.WebsitePage" />
@@ -81,7 +80,8 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".explore.ArtistActivity"></activity>
+        <activity android:name=".explore.ArtistActivity" />
+        <activity android:name=".map.MapActivity"></activity>
     </application>
 
 </manifest>
