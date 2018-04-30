@@ -180,6 +180,7 @@ public class ScheduleFragment extends Fragment {
             calEvent.put(CalendarContract.Events.EVENT_TIMEZONE, timeZone.getID());    //Timezone for the Event
 
             Log.i("MyDelete", "My add: "+ cr.insert(CalendarContract.Events.CONTENT_URI, calEvent));
+            Toast.makeText(context, "Added to Google calendar.", Toast.LENGTH_SHORT).show();
 
 
 //        }
@@ -199,6 +200,7 @@ public class ScheduleFragment extends Fragment {
         SingleEvent singleEvent = myDb.getEvent(eventID);
 
 
+
 //        ContentResolver cr = getActivity().getApplicationContext().getContentResolver();
 //        // Creates an empty set to store a set of values that the ContentResolver can process
 //        ContentValues calEvent = new ContentValues();
@@ -209,7 +211,8 @@ public class ScheduleFragment extends Fragment {
         context.getContentResolver().delete(uri,mSelectionClause,mSelectionArgs);
 
 
-    }
+
+        }
     }
 
 
