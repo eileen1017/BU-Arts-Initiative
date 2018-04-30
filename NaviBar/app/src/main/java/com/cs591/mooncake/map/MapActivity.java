@@ -16,11 +16,9 @@ public class MapActivity extends AppCompatActivity{
         setContentView(R.layout.activity_map);
         Bundle extras = getIntent().getExtras();
         int result = extras.getInt("eventId");
-        mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapFrag);
 
+        mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapFrag);
         mapFragment.receiveMes(result);
-        //mapFragment.receiveMes(result);
-        Log.w("mapa", String.valueOf(result));
     }
 
 }

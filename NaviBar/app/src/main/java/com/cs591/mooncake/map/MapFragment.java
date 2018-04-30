@@ -104,7 +104,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if (isServicesOK()){
-            Log.w("qwe", String.valueOf(currentEventID));
                 mView = inflater.inflate(R.layout.fragment_map, container, false);
                 getLocationPermission();
         }
