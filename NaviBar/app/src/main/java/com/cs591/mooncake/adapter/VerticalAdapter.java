@@ -105,6 +105,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         if (position > lastPosition)
         {
             Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+            animation.setDuration(200 + position * 80);
             viewToAnimate.startAnimation(animation);
             lastPosition = position;
         }
