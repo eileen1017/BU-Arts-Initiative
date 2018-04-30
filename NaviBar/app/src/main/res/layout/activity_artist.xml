@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/artist_page_coordinate_layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".explore.ArtistActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ff9f8e"
-    tools:context=".explore.EventActivity">
+    android:background="#ff9f8e">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout"

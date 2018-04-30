@@ -37,6 +37,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:15.0.0'
     implementation 'com.google.android.gms:play-services-ads:15.0.0'
 
+
     // Add services to your project
     // Google play service set up and the line below is for google map especially
     implementation 'com.google.android.gms:play-services-maps:15.0.0'
@@ -47,7 +48,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:15.0.0'
     // zoom feature for map
     implementation 'com.github.chrisbanes:PhotoView:1.2.6'
-
+    implementation 'me.imid.swipebacklayout.lib:library:1.3.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

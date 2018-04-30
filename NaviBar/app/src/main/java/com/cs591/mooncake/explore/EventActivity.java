@@ -15,7 +15,9 @@ import com.cs591.mooncake.SQLite.MySQLiteHelper;
 import com.cs591.mooncake.SQLite.SingleEvent;
 import com.cs591.mooncake.SQLite.SingleUser;
 
-public class EventActivity extends AppCompatActivity {
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
+
+public class EventActivity extends SwipeBackActivity {
 
     MySQLiteHelper myDb;
     @Override
@@ -48,11 +50,11 @@ public class EventActivity extends AppCompatActivity {
     }
 
     private void populateUI(SingleEvent singleEvent) {
-        ImageView ivEvent = findViewById(R.id.ivEvent);
-        TextView tvEventType = findViewById(R.id.tvEventType);
-        TextView tvEventTime = findViewById(R.id.tvEventTime);
-        TextView tvEventArtist = findViewById(R.id.tvEventArtist);
-        Toolbar tbEventTitle = findViewById(R.id.tbEventTitle);
+        ImageView ivEvent = (ImageView)findViewById(R.id.ivEvent);
+        TextView tvEventType = (TextView)findViewById(R.id.tvEventType);
+        TextView tvEventTime = (TextView)findViewById(R.id.tvEventTime);
+        TextView tvEventArtist = (TextView)findViewById(R.id.tvEventArtist);
+        Toolbar tbEventTitle = (Toolbar)findViewById(R.id.tbEventTitle);
 
         tbEventTitle.setTitle(singleEvent.getName());
         tvEventType.setText(singleEvent.getType());

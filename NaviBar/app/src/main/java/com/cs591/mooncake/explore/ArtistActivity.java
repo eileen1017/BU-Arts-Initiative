@@ -34,7 +34,9 @@ import com.cs591.mooncake.schedule.ScheduleFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArtistActivity extends AppCompatActivity {
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
+
+public class ArtistActivity extends SwipeBackActivity {
 
     public static final String DATE_5 = "5";
     public static final String DATE_6 = "6";
@@ -233,7 +235,7 @@ public class ArtistActivity extends AppCompatActivity {
             }
         }
 
-        LinearLayout llArtistEvents = findViewById(R.id.llArtistEvents);
+        LinearLayout llArtistEvents = (LinearLayout)findViewById(R.id.llArtistEvents);
 
         if (highlight != -1) {
             llArtistEvents.addView(highlightView);
