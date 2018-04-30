@@ -90,9 +90,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         SingleEvent singleEvent = (SingleEvent) items.get(position).get(0);
 
         ((ImageView)itemView.findViewById(R.id.image_view)).setImageBitmap(singleEvent.getPic());
-        ((TextView)itemView.findViewById(R.id.description)).setText(singleEvent.getAddress());
+        ((TextView)itemView.findViewById(R.id.description)).setText(singleEvent.getVenue() + ", " + singleEvent.getBuilding());
         ((TextView)itemView.findViewById(R.id.title)).setText(singleEvent.getName());
-        ((TextView)itemView.findViewById(R.id.published_date)).setText(singleEvent.getStart());
+        ((TextView)itemView.findViewById(R.id.published_date)).setText(singleEvent.getStart() + " - " + singleEvent.getEnd());
         ((TextView)itemView.findViewById(R.id.type)).setText(types[position]);
     }
 

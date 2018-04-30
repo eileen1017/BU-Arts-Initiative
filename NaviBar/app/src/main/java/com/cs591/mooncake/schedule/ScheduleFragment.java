@@ -97,9 +97,9 @@ public class ScheduleFragment extends Fragment {
 
 
         if (currentPage == ALL_SCHEDULE)
-            refreshAllschedulePage();
+            refreshAllschedulePage(true);
         else
-            refreshMySchedulePage();
+            refreshMySchedulePage(true);
 
 
         scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist,OSCL, true);
@@ -115,11 +115,11 @@ public class ScheduleFragment extends Fragment {
                     if (currentPage == MY_SCHEDULE) {
                         currentPage = ALL_SCHEDULE;
                         v.setBackgroundResource(R.drawable.myschedule);
-                        refreshAllschedulePage();
+                        refreshAllschedulePage(true);
                     }else{
                         currentPage = MY_SCHEDULE;
                         v.setBackgroundResource(R.drawable.allschedule);
-                        refreshMySchedulePage();
+                        refreshMySchedulePage(true);
                     }
                 }
             }
@@ -132,9 +132,9 @@ public class ScheduleFragment extends Fragment {
 
     public void scheduleChangedHandler() {
         if (currentPage == ALL_SCHEDULE) {
-            refreshAllschedulePage();
+            refreshAllschedulePage(false);
         } else {
-            refreshMySchedulePage();
+            refreshMySchedulePage(false);
         }
     }
 
@@ -226,7 +226,7 @@ public class ScheduleFragment extends Fragment {
         }
     }
 
-    private void refreshAllschedulePage() {
+    private void refreshAllschedulePage(boolean anim) {
         if (scheduleslist == null) {
             return;
         }
@@ -246,13 +246,13 @@ public class ScheduleFragment extends Fragment {
             }
         }
 
-        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist, OSCL, false);
+        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist, OSCL, anim);
         recyclerView.setAdapter(adapter);
-        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2, OSCL, false);
+        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2, OSCL, anim);
         recyclerView2.setAdapter(adapter2);
     }
 
-    private void refreshMySchedulePage() {
+    private void refreshMySchedulePage(boolean anim) {
         if (scheduleslist3 == null) return;
         scheduleslist3.clear();
         scheduleslist4.clear();
@@ -267,9 +267,9 @@ public class ScheduleFragment extends Fragment {
                     scheduleslist4.add(singleSchedule);
             }
         }
-        scheduleAdapter adapter3 = new scheduleAdapter(getActivity(), scheduleslist3,OSCL, false);
+        scheduleAdapter adapter3 = new scheduleAdapter(getActivity(), scheduleslist3,OSCL, anim);
         recyclerView.setAdapter(adapter3);
-        scheduleAdapter adapter4 = new scheduleAdapter(getActivity(), scheduleslist4,OSCL, false);
+        scheduleAdapter adapter4 = new scheduleAdapter(getActivity(), scheduleslist4,OSCL, anim);
         recyclerView2.setAdapter(adapter4);
     }
 

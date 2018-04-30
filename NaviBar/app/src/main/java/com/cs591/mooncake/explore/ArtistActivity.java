@@ -189,6 +189,9 @@ public class ArtistActivity extends AppCompatActivity {
                 if (singleEvent.getEnd() != null) time += (" : " + singleEvent.getEnd());
                 ((TextView) (currentView.findViewById(R.id.event_card_time))).setText(time);
                 ((TextView) (currentView.findViewById(R.id.event_card_type))).setText(singleEvent.getType());
+                ((TextView) (currentView.findViewById(R.id.event_card_location))).setText(singleEvent.getVenue());
+                ((TextView) (currentView.findViewById(R.id.event_card_address))).setText(singleEvent.getLevel() + ", " +
+                    singleEvent.getBuilding() + ", " + singleEvent.getAddress());
                 if (singleEvent.getID() == highlight) {
                     highlightView = currentView;
                     ((currentView.findViewById(R.id.event_card_highlight)))

@@ -47,7 +47,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     public void onBindViewHolder(MyViewHolder holder, int position) {
         if (data.get(position) instanceof SingleEvent) {
             final SingleEvent singleEvent = (SingleEvent)data.get(position);
-            holder.description.setText(singleEvent.getAddress());
+            holder.description.setText(singleEvent.getVenue() + ", " + singleEvent.getBuilding());
             holder.title.setText(singleEvent.getName());
             holder.image.setImageBitmap(singleEvent.getPic());
             if (singleEvent.getType().equals("Workshop")) {

@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +27,7 @@ public class CustomAdapter extends ArrayAdapter<String> {
     String [] names;
     int [] icons;
     Context mContext;
+    private int lastPosition = -1;
 
     public CustomAdapter(Context context, int[] icons, String[] names){
         super(context,R.layout.customlist);
@@ -89,7 +92,7 @@ public class CustomAdapter extends ArrayAdapter<String> {
 
             mViewHolder.mIcon.setImageResource(icons[position]);
             mViewHolder.mName.setText(names[position]);
-
+        setAnimation(convertView, position);
         return convertView;
     }
 
@@ -97,4 +100,16 @@ public class CustomAdapter extends ArrayAdapter<String> {
         ImageView mIcon;
         TextView mName;
     }
+
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(mContext, android.R.anim.slide_in_left);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
+    }
+
 }
