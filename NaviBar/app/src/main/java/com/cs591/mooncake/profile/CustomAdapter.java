@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cs591.mooncake.R;
+import com.cs591.mooncake.explore.ArtistActivity;
 import com.cs591.mooncake.explore.ShareUtil;
 
 
@@ -58,8 +59,6 @@ public class CustomAdapter extends ArrayAdapter<String> {
                             getContext().startActivity(websiteIntent);
                             break;
                         case 1:
-                            Intent inviteIntent = new Intent(getContext(),InvitePage.class);
-                            getContext().startActivity(inviteIntent);
                             share.inviteFriend();
                             break;
                         case 2:
