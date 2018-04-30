@@ -58,6 +58,7 @@ Zhou Jingzhi, founder of the Zhou Family Band, played in the Royal Court of the 
                 android:id="@+id/description_card_collapse_layout"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
+                android:background="@color/lightRed"
                 android:orientation="horizontal">
 
                 <ImageButton
