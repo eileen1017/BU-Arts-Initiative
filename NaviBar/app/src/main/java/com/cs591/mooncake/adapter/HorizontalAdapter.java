@@ -117,4 +117,5 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
             pubDate = itemView.findViewById(R.id.published_date);
         }
     }
+
 }
