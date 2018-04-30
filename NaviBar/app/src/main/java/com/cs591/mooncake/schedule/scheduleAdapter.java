@@ -89,12 +89,11 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.ViewHo
 
 
         if (mList.get(position) instanceof  SingleEvent) {
-            String[] type = {"Workshop","Bazaar","Performance"};
             final SingleEvent singleEvent = (SingleEvent) mList.get(position);
 
             holder.item_name.setText(singleEvent.getName());
             holder.item_from_time.setText(singleEvent.getStart());
-            holder.item_location.setText(singleEvent.getAddress());
+            holder.item_location.setText(singleEvent.getVenue()+", "+singleEvent.getBuilding()+" "+singleEvent.getLevel());
             holder.item_at.setText("To");
             holder.item_to_time.setText(singleEvent.getEnd());
 
