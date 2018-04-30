@@ -57,14 +57,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    public static String TAG = "HEY";
     public final LatLng BU_GSU = new LatLng(42.350918, -71.108950);
     public final LatLng BU_Tsai = new LatLng(42.350115, -71.104575);
     private Activity context;
     private String btn_location = null;
     private View mView = null;
 
-    public int currentEventID = 5;
+    public int currentEventID = -1;
 
     private String ifShowWindow = "";
 
@@ -72,6 +71,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public MapFragment() {
         // Required empty public constructor
 
+    }
+
+    public void receiveMes(int value){
+        currentEventID = value;
     }
 
 
@@ -101,29 +104,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if (isServicesOK()){
-            if (currentEventID == -1){
                 mView = inflater.inflate(R.layout.fragment_map, container, false);
                 getLocationPermission();
-            } else {
-                MySQLiteHelper myDb = new MySQLiteHelper(getActivity());
-                SingleEvent singleEvent = myDb.getEvent(currentEventID);
-
-                String buildInfo = singleEvent.getBuilding();
-                Log.w("heyo", buildInfo);
-
-                if (buildInfo.equals("CAS")){
-                    ifShowWindow = "CAS";
-                } else if (buildInfo.equals("GSU")){
-                    ifShowWindow = "GSU";
-                }
-
-                mView = inflater.inflate(R.layout.fragment_map, container, false);
-                getLocationPermission();
-            }
         }
-
-
-
         return mView;
     }
 
@@ -169,6 +152,21 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+        if (currentEventID != -1) {
+
+            MySQLiteHelper myDb = new MySQLiteHelper(getActivity());
+            SingleEvent singleEvent = myDb.getEvent(currentEventID);
+
+            String buildInfo = singleEvent.getBuilding();
+
+            if (buildInfo.equals("CAS")) {
+                ifShowWindow = "CAS";
+            } else if (buildInfo.equals("GSU")) {
+                ifShowWindow = "GSU";
+            }
+        }
+
+
         MarkerOptions gsu = new MarkerOptions().position(BU_GSU).title("BU_GSU").snippet("Click for indoor map");
         if (ifShowWindow.equals("GSU")){
             mMap.addMarker(gsu).showInfoWindow();
@@ -204,10 +202,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             mMap.getUiSettings().setMapToolbarEnabled(true);
 
         }
+
         // move carmera to the center between GSU and Tsai
         moveCamera(new LatLng(42.3505165, -71.1067625), DEFAULT_ZOOM);
 
-        currentEventID = -1;
     }
 
 
@@ -229,14 +227,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                             Location currentLocation = (Location) task.getResult();
 
                             //moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM);
-                        } else {
-
                         }
                     }
                 });
             }
         } catch (SecurityException e){
-            Log.e("MapsActivity", "getDeviceLocation: SecurityException: " + e.getMessage());
+            Log.e("MapFragment", "getDeviceLocation: SecurityException: " + e.getMessage());
         }
     }
 
@@ -283,10 +279,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-        //Toast.makeText(getActivity(), "Info window clicked", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getActivity(), ShowInfo.class);
         String locationTitle = marker.getTitle();
-        //Log.w(TAG,locationTitle);
+
         intent.putExtra("location", locationTitle);
         startActivity(intent);
     }
