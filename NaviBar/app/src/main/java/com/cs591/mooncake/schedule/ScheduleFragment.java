@@ -253,12 +253,11 @@ public class ScheduleFragment extends Fragment {
             }
         }
 
-<<<<<<< HEAD
 
-        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist, OSCL);
-=======
+
+
         scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist, OSCL, anim);
->>>>>>> 94bd0b767b5fb886ebe7a5a850c33a91eba26653
+
         recyclerView.setAdapter(adapter);
         scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2, OSCL, anim);
         recyclerView2.setAdapter(adapter2);

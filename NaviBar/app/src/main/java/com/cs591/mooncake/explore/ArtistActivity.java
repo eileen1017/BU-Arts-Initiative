@@ -189,15 +189,12 @@ public class ArtistActivity extends AppCompatActivity {
                 // TextViews:
                 ((TextView) (currentView.findViewById(R.id.month))).setText(MONTH);
                 ((TextView) (currentView.findViewById(R.id.event_card_date))).setText(date);
-                ((TextView) (currentView.findViewById(R.id.event_card_location))).setText(singleEvent.getVenue()+", "+singleEvent.getBuilding()+" "+singleEvent.getLevel());
-                ((TextView) (currentView.findViewById(R.id.event_card_address))).setText(singleEvent.getAddress());
                 String time = singleEvent.getStart();
-                if (singleEvent.getEnd() != null) time += (" : " + singleEvent.getEnd());
+                if (singleEvent.getEnd() != null) time += (" - " + singleEvent.getEnd());
                 ((TextView) (currentView.findViewById(R.id.event_card_time))).setText(time);
                 ((TextView) (currentView.findViewById(R.id.event_card_type))).setText(singleEvent.getType());
-                ((TextView) (currentView.findViewById(R.id.event_card_location))).setText(singleEvent.getVenue());
-                ((TextView) (currentView.findViewById(R.id.event_card_address))).setText(singleEvent.getLevel() + ", " +
-                    singleEvent.getBuilding() + ", " + singleEvent.getAddress());
+                ((TextView) (currentView.findViewById(R.id.event_card_location))).setText(singleEvent.getVenue()+", "+singleEvent.getBuilding()+" "+singleEvent.getLevel());
+                ((TextView) (currentView.findViewById(R.id.event_card_address))).setText(singleEvent.getAddress());
                 if (singleEvent.getID() == highlight) {
                     highlightView = currentView;
                     ((currentView.findViewById(R.id.event_card_highlight)))
