@@ -3,10 +3,11 @@ package com.cs591.mooncake.map;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.cs591.mooncake.R;
 
-public class MapActivity extends AppCompatActivity {
+public class MapActivity extends AppCompatActivity{
     public MapFragment mapFragment;
 
     @Override
@@ -15,11 +16,11 @@ public class MapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_map);
         Bundle extras = getIntent().getExtras();
         int result = extras.getInt("eventId");
-        mapFragment = new MapFragment();
+        mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapFrag);
 
-        //mapFragment.currentEventID = 5;
-//        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//        fragmentTransaction.replace(R.id.mainFrame, mapFragment);
-//        fragmentTransaction.commit();
+        mapFragment.receiveMes(result);
+        //mapFragment.receiveMes(result);
+        Log.w("mapa", String.valueOf(result));
     }
+
 }

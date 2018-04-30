@@ -23,7 +23,6 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 
 
 public class ShowInfo extends AppCompatActivity{
-    public final String TAG = "SUP";
     ImageView mImageView;
     public Button btnBase;
     public Button btn2ndFloor;
@@ -35,7 +34,6 @@ public class ShowInfo extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
         String result = extras.getString("location");
-        Log.w(TAG,result);
 
         if (result.equals("BU_GSU")){
             setContentView(R.layout.fragment_map_gsu_2ndfloor);
