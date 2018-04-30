@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.TimeZone;
 
 import com.cs591.mooncake.SQLite.MySQLiteHelper;
-import com.cs591.mooncake.SQLite.SingleArtist;
 import com.cs591.mooncake.SQLite.SingleEvent;
 import com.cs591.mooncake.SQLite.SingleUser;
 
@@ -102,14 +101,14 @@ public class ScheduleFragment extends Fragment {
 
 
         if (currentPage == ALL_SCHEDULE)
-            refreshAllschedulePage();
+            refreshAllschedulePage(true);
         else
-            refreshMySchedulePage();
+            refreshMySchedulePage(true);
 
 
-        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist,OSCL);
+        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist,OSCL, true);
         recyclerView.setAdapter(adapter);
-        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2,OSCL);
+        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2,OSCL, true);
         recyclerView2.setAdapter(adapter2);
 
 
@@ -120,11 +119,11 @@ public class ScheduleFragment extends Fragment {
                     if (currentPage == MY_SCHEDULE) {
                         currentPage = ALL_SCHEDULE;
                         v.setBackgroundResource(R.drawable.myschedule);
-                        refreshAllschedulePage();
+                        refreshAllschedulePage(true);
                     }else{
                         currentPage = MY_SCHEDULE;
                         v.setBackgroundResource(R.drawable.allschedule);
-                        refreshMySchedulePage();
+                        refreshMySchedulePage(true);
                     }
                 }
             }
@@ -137,9 +136,9 @@ public class ScheduleFragment extends Fragment {
 
     public void scheduleChangedHandler() {
         if (currentPage == ALL_SCHEDULE) {
-            refreshAllschedulePage();
+            refreshAllschedulePage(false);
         } else {
-            refreshMySchedulePage();
+            refreshMySchedulePage(false);
         }
     }
 
@@ -185,6 +184,7 @@ public class ScheduleFragment extends Fragment {
             calEvent.put(CalendarContract.Events.EVENT_TIMEZONE, timeZone.getID());    //Timezone for the Event
 
             Log.i("MyDelete", "My add: "+ cr.insert(CalendarContract.Events.CONTENT_URI, calEvent));
+            Toast.makeText(context, "Added to Google calendar.", Toast.LENGTH_SHORT).show();
 
 
 //        }
@@ -204,6 +204,7 @@ public class ScheduleFragment extends Fragment {
         SingleEvent singleEvent = myDb.getEvent(eventID);
 
 
+
 //        ContentResolver cr = getActivity().getApplicationContext().getContentResolver();
 //        // Creates an empty set to store a set of values that the ContentResolver can process
 //        ContentValues calEvent = new ContentValues();
@@ -214,7 +215,8 @@ public class ScheduleFragment extends Fragment {
         context.getContentResolver().delete(uri,mSelectionClause,mSelectionArgs);
 
 
-    }
+
+        }
     }
 
 
@@ -231,7 +233,7 @@ public class ScheduleFragment extends Fragment {
         }
     }
 
-    private void refreshAllschedulePage() {
+    private void refreshAllschedulePage(boolean anim) {
         if (scheduleslist == null) {
             return;
         }
@@ -251,14 +253,18 @@ public class ScheduleFragment extends Fragment {
             }
         }
 
+<<<<<<< HEAD
 
         scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist, OSCL);
+=======
+        scheduleAdapter adapter = new scheduleAdapter(getActivity(), scheduleslist, OSCL, anim);
+>>>>>>> 94bd0b767b5fb886ebe7a5a850c33a91eba26653
         recyclerView.setAdapter(adapter);
-        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2, OSCL);
+        scheduleAdapter adapter2 = new scheduleAdapter(getActivity(), scheduleslist2, OSCL, anim);
         recyclerView2.setAdapter(adapter2);
     }
 
-    private void refreshMySchedulePage() {
+    private void refreshMySchedulePage(boolean anim) {
         if (scheduleslist3 == null) return;
         scheduleslist3.clear();
         scheduleslist4.clear();
@@ -273,9 +279,9 @@ public class ScheduleFragment extends Fragment {
                     scheduleslist4.add(singleSchedule);
             }
         }
-        scheduleAdapter adapter3 = new scheduleAdapter(getActivity(), scheduleslist3,OSCL);
+        scheduleAdapter adapter3 = new scheduleAdapter(getActivity(), scheduleslist3,OSCL, anim);
         recyclerView.setAdapter(adapter3);
-        scheduleAdapter adapter4 = new scheduleAdapter(getActivity(), scheduleslist4,OSCL);
+        scheduleAdapter adapter4 = new scheduleAdapter(getActivity(), scheduleslist4,OSCL, anim);
         recyclerView2.setAdapter(adapter4);
     }
 

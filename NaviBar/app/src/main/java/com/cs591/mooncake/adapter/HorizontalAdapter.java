@@ -49,9 +49,9 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
 
         if (data.get(position) instanceof SingleEvent) {
             final SingleEvent singleEvent = (SingleEvent)data.get(position);
-            holder.description.setText(singleEvent.getAddress());
+            holder.description.setText(singleEvent.getVenue() + ", " + singleEvent.getBuilding());
             holder.title.setText(singleEvent.getName());
-            holder.pubDate.setText(singleEvent.getStart());
+            holder.pubDate.setText(singleEvent.getStart() + " - " + singleEvent.getEnd());
             holder.image.setImageBitmap(singleEvent.getPic());
             if (singleEvent.getType().equals("Workshop")) {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +70,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
             final SingleArtist singleArtist = (SingleArtist)data.get(position);
             holder.description.setText(singleArtist.getCountry());
             holder.title.setText(singleArtist.getName());
-            holder.pubDate.setText(singleArtist.getWebsite());
+            holder.pubDate.setText("Artist single line bio goes here");
             holder.image.setImageBitmap(singleArtist.getPic());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
