@@ -54,9 +54,7 @@ public class ProfileFragment extends Fragment {
     TextView username;
     String[] Names = {"Website", "Invite Friends", "Feedback", "About", "Ticket"};
     int[] Icons = {R.drawable.website,R.drawable.invite_friend,R.drawable.feedback,R.drawable.about,R.drawable.ticket};
-    Class[] classes = {WebsitePage.class, InvitePage.class, FeedbackPage.class,AboutPage.class,TicketPage.class};
     CircleImageView userPic;
-    private MySQLiteHelper myDb;
 
 
 
@@ -112,17 +110,6 @@ public class ProfileFragment extends Fragment {
                 TwitterCore.getInstance().getSessionManager().clearActiveSession();
             }
         });
-
-        
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(getActivity(),classes[position]);
-                startActivity(i);
-
-            }
-        });
-
 
 
         return view;
