@@ -130,10 +130,7 @@ public class ProfileFragment extends Fragment {
 
         try {
             stream = getHttpConnection(url);
-//            Log.i("bitmap1",""+stream);
-//            Log.i("bitmap0",""+url);
             bitmap = BitmapFactory.decodeStream(stream);
-//            Log.i("bitmap2",""+bitmap);
 
             stream.close();
         }
