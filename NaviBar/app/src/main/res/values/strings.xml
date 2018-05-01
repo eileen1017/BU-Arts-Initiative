@@ -47,5 +47,6 @@
     <string name="facebooklogin">Login with Facebook</string>
     <string name="twitterlogin">Login with Twitter</string>
     <string name="guestlogin">Login with Guest</string>
+    <string name="exception">Exception</string>
 
 </resources>
