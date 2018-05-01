@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.cs591.mooncake.FirebaseUtils.FirebaseProfile;
 import com.cs591.mooncake.R;
-import java.util.ArrayList;
 import java.util.List;
 
 

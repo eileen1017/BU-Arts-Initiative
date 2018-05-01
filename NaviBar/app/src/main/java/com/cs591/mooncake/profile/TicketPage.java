@@ -10,6 +10,7 @@ public class TicketPage extends SwipeBackActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //  Set content view as layout activity_ticket_page
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket_page);
 

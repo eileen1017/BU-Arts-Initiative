@@ -10,6 +10,7 @@ public class FeedbackPage extends SwipeBackActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //  Set content view as layout activity_feedback_page
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback_page);
     }

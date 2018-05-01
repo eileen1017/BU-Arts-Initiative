@@ -8,6 +8,7 @@ public class InvitePage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //  Set content view as layout activity_invite_page
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invite_page);
     }
