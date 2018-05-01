@@ -138,27 +138,34 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
         });
 
 
+        //  Adding an advertisement banner at the bottom of main page using a Handler to execute runnables
         final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
             public void run() {
+                // Create an random int and initialize the sponsors in the arrays
                 Random random = new Random();
                 int i = random.nextInt(5);
                 int[] backg = {R.drawable.bufinearts,R.drawable.buglobalprogram,R.drawable.buhumanities,R.drawable.bupardeelogo,R.drawable.wbur_logo};
                 String[] link = {"http://www.bu.edu/cfa/","http://www.bu.edu/globalprograms/","http://www.bu.edu/humanities/","http://www.bu.edu/pardeeschool/","http://www.wbur.org/"};
+                // Set the image background of the random generated int and parse uri
                 adView.setImageResource(backg[i]);
                 final Uri uri = Uri.parse(link[i]);
+                // called when clicks on the ads
                 adView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        // lead users to the website by using intent
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
                         getApplicationContext().startActivity(browserIntent);
                     }
                 });
+                //  Ads will be refreshed every 30 seconds
                 handler.postDelayed(this,30000);
             }
         });
 
+        //  when press on close button, ads will disappear. Unless user restart the app, the ads will not show again
         findViewById(R.id.closeAds).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,37 +220,18 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
 
 
 
-
-//    private void showAds(){
-//        Random random = new Random();
-//        int i = random.nextInt(5);
-//        int[] backg = {R.drawable.bufinearts,R.drawable.buglobalprogram,R.drawable.buhumanities,R.drawable.bupardeelogo,R.drawable.wbur_logo};
-//        String[] link = {"http://www.bu.edu/cfa/","http://www.bu.edu/globalprograms/","http://www.bu.edu/humanities/","http://www.bu.edu/pardeeschool/","http://www.wbur.org/"};
-//        adView.setImageResource(backg[i]);
-//        final Uri uri = Uri.parse(link[i]);
-//        adView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
-//                getApplicationContext().startActivity(browserIntent);
-//            }
-//        });
-//
-//    }
-
-
-
     //  Check for Permission Request
     private void AskPermissions(){
         List<String> permissionsNeeded = new ArrayList<String>();
         final List<String> permissionsList = new ArrayList<String>();
 
-
+        // Check the permission for Calendar usage
         if (!addPermission(permissionsList, Manifest.permission.WRITE_CALENDAR))
             permissionsNeeded.add("Write Calendars");
         if (!addPermission(permissionsList, Manifest.permission.READ_CALENDAR))
             permissionsNeeded.add("Read Calendars");
 
+        //  Add an explanation for calendar permission to users
         if (permissionsList.size() > 0) {
             if (permissionsNeeded.size() > 0) {
                 String message = "You need to grant access to " + permissionsNeeded.get(0) + " and " + permissionsNeeded.get(1) + " to Sync your schedule to Calendars.";
@@ -253,12 +241,15 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
+                                    // ask permission
                                     ActivityCompat.requestPermissions(MainActivity.this,permissionsList.toArray(new String[permissionsList.size()]),
                                             REQUEST_CODE_ASK_PERMISSIONS);
                                 }
                             });
                 return;
             }
+            //This is called if user has denied the permission before
+            //In this case I am just asking the permission again
             ActivityCompat.requestPermissions(MainActivity.this,permissionsList.toArray(new String[permissionsList.size()]),
                     REQUEST_CODE_ASK_PERMISSIONS);
             return;
@@ -268,6 +259,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
     private boolean addPermission(List<String> permissionsList, String permission){
         if (ContextCompat.checkSelfPermission(MainActivity.this,permission) != PackageManager.PERMISSION_GRANTED) {
             permissionsList.add(permission);
+            // if permission not granted, ask permissions
             if (!ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,permission))
                 return false;
         }
@@ -275,7 +267,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
     }
 
 
-
+    // Creating a dialogInterface for user for the explanation.
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener){
         new AlertDialog.Builder(MainActivity.this)
                 .setMessage(message)
@@ -291,16 +283,14 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
             case REQUEST_CODE_ASK_PERMISSIONS: {
                 Map<String, Integer> perms = new HashMap<String, Integer>();
                 // Initial
-                perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
-                perms.put(Manifest.permission.READ_CONTACTS, PackageManager.PERMISSION_GRANTED);
-                perms.put(Manifest.permission.WRITE_CONTACTS, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.READ_CALENDAR, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.WRITE_CALENDAR, PackageManager.PERMISSION_GRANTED);
                 // Fill with results
                 for (int i = 0; i < permissions.length; i++)
                     perms.put(permissions[i], grantResults[i]);
                 // Check for ACCESS_FINE_LOCATION
-                if (perms.get(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                        && perms.get(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED
-                        && perms.get(Manifest.permission.WRITE_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+                if (perms.get(Manifest.permission.READ_CALENDAR) == PackageManager.PERMISSION_GRANTED
+                        && perms.get(Manifest.permission.WRITE_CALENDAR) == PackageManager.PERMISSION_GRANTED) {
                     // All Permissions Granted
 
                 } else {
