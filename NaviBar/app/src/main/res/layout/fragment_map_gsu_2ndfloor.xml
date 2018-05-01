@@ -15,14 +15,14 @@
             android:layout_width="208dp"
             android:layout_height="55dp"
             android:layout_margin="5dp"
-            android:text="GSU_Basement"
+            android:text="GSU Lower Floor"
             android:textAlignment="viewStart"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="15sp"
             android:paddingLeft="55dp"
             android:background="@drawable/basement"
-
+            android:fontFamily="@font/lato_bold"
             android:id="@+id/btnGSUBase"/>
         
         <Button
@@ -30,7 +30,8 @@
             android:layout_width="208dp"
             android:layout_height="55dp"
             android:layout_margin="5dp"
-            android:text="GSU_2ndFloor"
+            android:text="GSU 2nd Floor"
+            android:fontFamily="@font/lato_bold"
             android:textAlignment="viewStart"
             android:textAllCaps="false"
             android:textColor="@color/white"

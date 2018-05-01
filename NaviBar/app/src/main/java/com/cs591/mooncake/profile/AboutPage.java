@@ -11,6 +11,7 @@ public class AboutPage extends SwipeBackActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //  Set content view as layout activity_about_page
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_page);
     }

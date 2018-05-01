@@ -10,6 +10,7 @@ public class WebsitePage extends SwipeBackActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //  Set content view as layout activity_website_page
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_website_page);
     }

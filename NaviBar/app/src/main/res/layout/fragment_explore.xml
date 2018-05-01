@@ -22,7 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Explore"
-            android:textColor="#fff"
+            android:textColor="@color/white"
+            android:fontFamily="@font/lato_bold"
             android:textSize="36sp" />
 
 
@@ -35,5 +36,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        android:background="#fff" />
+        android:background="@color/white" />
 </LinearLayout>

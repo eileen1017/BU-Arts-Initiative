@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ff9f8e"
+    android:background="@color/red"
     tools:context=".explore.EventActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -85,7 +85,8 @@
                         android:layout_marginTop="12dp"
                         android:padding="12dp"
                         android:text="Performance"
-                        android:textColor="#4c4b4b"
+                        android:fontFamily="@font/lato"
+                        android:textColor="@color/textgrey"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -102,6 +103,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="9"
                             android:padding="12dp"
+                            android:fontFamily="@font/lato"
                             android:text="10/5 Fri. 08:00 pm"
                             android:textAlignment="textStart"
                             android:textColor="@color/colorPrimaryText"
@@ -133,6 +135,7 @@
                         android:layout_marginTop="12dp"
                         android:padding="12dp"
                         android:text="Artist"
+                        android:fontFamily="@font/lato"
                         android:textColor="@color/colorPrimaryText"
                         android:textSize="24sp"
                         android:textStyle="bold" />
@@ -151,6 +154,7 @@
                             android:padding="12dp"
                             android:id="@+id/tvEventArtist"
                             android:text="Mr. Bean"
+                            android:fontFamily="@font/lato"
                             android:textAlignment="textStart"
                             android:textColor="@color/colorPrimaryText"
                             android:textSize="18sp"
@@ -180,6 +184,7 @@
                         android:layout_marginTop="12dp"
                         android:padding="12dp"
                         android:text="Location"
+                        android:fontFamily="@font/lato"
                         android:textColor="@color/colorPrimaryText"
                         android:textSize="24sp"
                         android:textStyle="bold" />
@@ -200,6 +205,7 @@
                                 android:layout_height="wrap_content"
                                 android:padding="12dp"
                                 android:text="Metcalf Ballroom"
+                                android:fontFamily="@font/lato"
                                 android:id="@+id/tvEventLocationRoom"
                                 android:textAlignment="textStart"
                                 android:textColor="@color/colorPrimaryText"
@@ -210,6 +216,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="12dp"
+                                android:fontFamily="@font/lato"
                                 android:id="@+id/tvEventLocationAddress"
                                 android:text="775 Commonwealth Avenue, Floor 2\nBoston, MA 02215"
                                 android:textAlignment="textStart"

@@ -118,10 +118,12 @@ public class LoginActivity extends AppCompatActivity {
         btnGuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                showProgressDialog();
                 mAuth.signInAnonymously()
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
+                                hideProgressDialog();
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "signInAnonymously:success");
@@ -333,6 +335,8 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
     private void handleFacebookAccessToken(AccessToken token) {
+        showProgressDialog();
+
         Log.d(TAG, "handleFacebookAccessToken:" + token);
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
@@ -355,8 +359,10 @@ public class LoginActivity extends AppCompatActivity {
                         // ...
                     }
                 });
+        hideProgressDialog();
     }
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+        showProgressDialog();
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -381,6 +387,7 @@ public class LoginActivity extends AppCompatActivity {
                         // ...
                     }
                 });
+        hideProgressDialog();
     }
     private void googleSignIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();

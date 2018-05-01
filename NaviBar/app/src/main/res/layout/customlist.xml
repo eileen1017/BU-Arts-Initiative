@@ -5,7 +5,7 @@
     android:layout_margin="10dp"
     android:layout_marginTop="30dp"
     android:stateListAnimator="@animator/card_view_ontouch"
-    android:background="#FFFFFF"
+    android:background="@color/white"
     android:orientation="horizontal">
 
     <!-- icon -->
@@ -26,8 +26,9 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/item_icon"
         android:text="Settings"
-        android:textColor="#111111"
+        android:textColor="@color/black"
         android:layout_margin="10dp"
+        android:fontFamily="@font/lato"
         android:textSize="22dp" />
 
     <!-- counter -->

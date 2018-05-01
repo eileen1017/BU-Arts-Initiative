@@ -13,6 +13,7 @@
         android:layout_weight="1"
         android:text="This is Ticket Page, TO BE CONTINUE..."
         android:textSize="24sp"
+        android:fontFamily="@font/lato"
         android:textStyle="bold" />
 
 </LinearLayout>

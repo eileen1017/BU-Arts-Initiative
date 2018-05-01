@@ -35,7 +35,7 @@
                 android:layout_marginLeft="5dp"
                 android:fontFamily="@font/lato_bold"
                 android:layout_alignParentLeft="true"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="24sp" />
 
             <Button

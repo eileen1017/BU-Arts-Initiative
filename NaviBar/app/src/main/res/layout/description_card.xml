@@ -52,6 +52,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_margin="5dp"
                             android:gravity="center_vertical"
+                            android:fontFamily="@font/lato"
                             android:text="Browse"
                             android:textSize="14sp" />
 

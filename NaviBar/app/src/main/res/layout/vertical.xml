@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="Events"
+        android:fontFamily="@font/lato_bold"
         android:textSize="30sp"/>
 
     <android.support.v7.widget.RecyclerView

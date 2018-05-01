@@ -48,18 +48,13 @@ public class ProfileFragment extends Fragment {
         // Required empty public constructor
     }
 
-
-    Button settings, feedback, invite, about, ticket;
-    Button logout;
-    Intent i;
+    //  field for initialization
     ListView mListView;
     CustomAdapter adapter;
     TextView username;
     String[] Names = {"Website", "Invite Friends", "Feedback", "About", "Ticket"};
     int[] Icons = {R.drawable.website,R.drawable.invite_friend,R.drawable.feedback,R.drawable.about,R.drawable.ticket};
-    Class[] classes = {WebsitePage.class, InvitePage.class, FeedbackPage.class,AboutPage.class,TicketPage.class};
     CircleImageView userPic;
-    private MySQLiteHelper myDb;
 
 
 
@@ -71,33 +66,41 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-
+        //  inflate layout
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-
+        //  give reference to the object
         userPic = (CircleImageView) view.findViewById(R.id.profile_image);
         username = (TextView) view.findViewById(R.id.profile_name);
 
+        //  get the database
         MySQLiteHelper mydb = new MySQLiteHelper(getActivity());
+        //  get singleUser's profile from database
         SingleUser singleUser = mydb.getProfile();
 
+        //  check if no name in singleUser database
         if (singleUser.getUserName() == null || singleUser.getUserName().isEmpty())
+            //  set username as GUEST
             username.setText(GUEST);
         else
+            //  Else, set username as what shown in singleUser database
             username.setText(singleUser.getUserName());
 
+        //  check if there is a profile picture in database
         if (singleUser.getPic() != null)
+            //  set the profile picture as what shown in singleUser database
             userPic.setImageBitmap(singleUser.getPic());
         else
+            //  set profile picture as default picture
             userPic.setImageResource(R.drawable.profilepic);
 
-
+        //  Give reference to ListView and set adapter to it
         mListView = (ListView) view.findViewById(R.id.item_menu);
         CustomAdapter customAdapter = new CustomAdapter(getActivity(), Icons, Names);
         mListView.setAdapter(customAdapter);
 
 
-
+        //  called when user clicks on logout button and log out to login page
         view.findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,16 +110,6 @@ public class ProfileFragment extends Fragment {
                 TwitterCore.getInstance().getSessionManager().clearActiveSession();
             }
         });
-
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(getActivity(),classes[position]);
-                startActivity(i);
-
-            }
-        });
-
 
 
         return view;

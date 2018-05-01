@@ -21,7 +21,8 @@
             android:layout_marginTop="10dp"
             android:gravity="bottom"
             android:text="Artists"
-            android:textColor="#ff9f8e"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="@color/red"
             android:textSize="30sp"
             android:textStyle="bold" />
         <ImageButton

@@ -4,7 +4,7 @@
     android:layout_width="320dp"
     android:layout_height="320dp"
     android:layout_margin="5dp"
-    android:background="#FFFFFF"
+    android:background="@color/white"
     android:stateListAnimator="@animator/card_view_ontouch"
     android:orientation="vertical"
     android:padding="5dp"
@@ -13,7 +13,7 @@
     app:cardMaxElevation="8dp">
 
     <LinearLayout
-        android:background="#ff9f8e"
+        android:background="@color/red"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -37,7 +37,8 @@
                 android:layout_gravity="bottom"
                 android:layout_margin="5dp"
                 android:text="Title"
-                android:textColor="#fff"
+                android:fontFamily="@font/lato_bold"
+                android:textColor="@color/white"
                 android:textSize="28sp" />
 
             <View
@@ -59,6 +60,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
+                android:fontFamily="@font/lato_bold"
                 android:text="This is the description"
                 android:textColor="@color/white"
                 android:textSize="18sp"
@@ -70,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/lato"
                 android:text="2018/10/10"
                 android:textColor="@color/white" />
 
