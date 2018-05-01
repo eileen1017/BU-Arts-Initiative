@@ -47,8 +47,10 @@ public class CustomAdapter extends ArrayAdapter<String> {
     @NonNull
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        //  called to get view when click on item in the ListView
+
+        // utilize the share function in ShareUtil under explore folder
         final ShareUtil share = new ShareUtil(mContext);
+        //  called to get view when click on item in the ListView
         ViewHolder mViewHolder = new ViewHolder();
         if(convertView == null) {
             //  Inflate the layout and set layout
