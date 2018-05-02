@@ -60,6 +60,13 @@
     <string name="comma">\,\u0020</string>
     <string name="dash">\u0020\-\u0020</string>
     <string name="Bazaar">Bazaar</string>
+    <string name="eventId">eventId</string>
+    <string name="EmptyString" />
+    <string name="space">\u0020</string>
+    <string name="Extra">\u0020\.\.\.</string>
+    <string name="DATE_5">5</string>
+    <string name="DATE_6">6</string>
+    <string name="MONTH">OCT</string>
 
 
 </resources>

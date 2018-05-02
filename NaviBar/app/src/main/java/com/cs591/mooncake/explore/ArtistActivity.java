@@ -38,9 +38,6 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 public class ArtistActivity extends SwipeBackActivity {
 
-    public static final String DATE_5 = "5";
-    public static final String DATE_6 = "6";
-    public static final String MONTH = "OCT";
     private boolean expanded;
     MySQLiteHelper myDb;
     SingleArtist singleArtist;
@@ -60,23 +57,23 @@ public class ArtistActivity extends SwipeBackActivity {
         myDb = new MySQLiteHelper(this);
         expanded = false;
 
-        int artistID = extras.getInt("artistID");
+        int artistID = extras.getInt(getString(R.string.artistID));
         if (artistID != -1) {
-            Log.i("Workshop artist id", "" + artistID);
+            //Log.i("Workshop artist id", "" + artistID);
             singleArtist = myDb.getArtist(artistID);
         } else {
-            String artistName = extras.getString("artistName");
-            Log.i("Workshop artist name", artistName);
+            String artistName = extras.getString(getString(R.string.artistName));
+            //Log.i("Workshop artist name", artistName);
             for (int i : myDb.getArtistList()) {
                 if (myDb.getArtist(i).getName().equals(artistName)) {
                     singleArtist = myDb.getArtist(i);
                     break;
                 }
             }
-            highlight = extras.getInt("highlight");
+            highlight = extras.getInt(getString(R.string.highlight));
         }
 
-        boolean workshopAtTop = extras.getBoolean("workshopOnTop");
+        boolean workshopAtTop = extras.getBoolean(getString(R.string.workshopOnTop));
 
         generateContent(workshopAtTop);
     }
@@ -131,9 +128,9 @@ public class ArtistActivity extends SwipeBackActivity {
                 ((TextView)(currentView.findViewById(R.id.event_card_type))).setText(singleEvent.getType());
                 String date;
                 if (singleEvent.getDate() == 5) {
-                    date = DATE_5;
+                    date = getString(R.string.DATE_5);
                 } else {
-                    date = DATE_6;
+                    date = getString(R.string.DATE_6);
                 }
 
                 // Buttons:
@@ -202,31 +199,31 @@ public class ArtistActivity extends SwipeBackActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(ArtistActivity.this, MapActivity.class);
-                        intent.putExtra("eventId", singleEvent.getID());
+                        intent.putExtra(getString(R.string.eventId), singleEvent.getID());
                         startActivity(intent);
                     }
                 });
 
 
                 // TextViews:
-                ((TextView) (currentView.findViewById(R.id.month))).setText(MONTH);
+                ((TextView) (currentView.findViewById(R.id.month))).setText(getString(R.string.MONTH));
                 ((TextView) (currentView.findViewById(R.id.event_card_date))).setText(date);
                 String time = singleEvent.getStart();
-                if (singleEvent.getEnd() != null) time += (" - " + singleEvent.getEnd());
+                if (singleEvent.getEnd() != null) time += (getString(R.string.dash) + singleEvent.getEnd());
                 ((TextView) (currentView.findViewById(R.id.event_card_time))).setText(time);
                 ((TextView) (currentView.findViewById(R.id.event_card_type))).setText(singleEvent.getType());
-                ((TextView) (currentView.findViewById(R.id.event_card_location))).setText(singleEvent.getVenue()+", "+singleEvent.getBuilding()+" "+singleEvent.getLevel());
+                ((TextView) (currentView.findViewById(R.id.event_card_location))).setText(singleEvent.getVenue()+getString(R.string.comma)+singleEvent.getBuilding()+getString(R.string.space)+singleEvent.getLevel());
                 ((TextView) (currentView.findViewById(R.id.event_card_address))).setText(singleEvent.getAddress());
                 if (singleEvent.getID() == highlight) {
                     highlightView = currentView;
                     ((currentView.findViewById(R.id.event_card_highlight)))
                             .setVisibility(View.VISIBLE);
                 } else {
-                    if (singleEvent.getType().equals("Workshop")) {
+                    if (singleEvent.getType().equals(getString(R.string.Workshop))) {
                         //((TextView) (workshopView.findViewById(R.id.event_card_description))).setText();
                         workshopViews.add(currentView);
                     } else {
-                        ((TextView) (currentView.findViewById(R.id.event_card_description))).setText("");
+                        ((TextView) (currentView.findViewById(R.id.event_card_description))).setText(R.string.EmptyString);
                         ((TextView) (currentView.findViewById(R.id.event_card_description))).setVisibility(View.GONE);
                         performanceViews.add(currentView);
                     }
@@ -264,7 +261,7 @@ public class ArtistActivity extends SwipeBackActivity {
 
         if (expanded) {
             view.findViewById(R.id.description_card_button).setBackgroundResource(R.drawable.ic_description_card_expand);
-            ((TextView)(view.findViewById(R.id.description_card_text))).setText(content.substring(0, 500) + " ...");
+            ((TextView)(view.findViewById(R.id.description_card_text))).setText(content.substring(0, 500) + getString(R.string.Extra));
             expanded = false;
         } else {
             view.findViewById(R.id.description_card_button).setBackgroundResource(R.drawable.ic_description_card_collapse);
