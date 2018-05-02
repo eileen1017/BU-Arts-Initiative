@@ -25,7 +25,7 @@ import java.util.List;
 
 public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyViewHolder> {
 
-    public static final String TAG = "Explore";
+    //public static final String TAG = "Explore";
     private List<Object> data;
     Context context;
     private int lastPosition = -1;
@@ -47,18 +47,18 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     public void onBindViewHolder(MyViewHolder holder, int position) {
         if (data.get(position) instanceof SingleEvent) {
             final SingleEvent singleEvent = (SingleEvent)data.get(position);
-            holder.description.setText(singleEvent.getVenue() + ", " + singleEvent.getBuilding());
+            holder.description.setText(singleEvent.getVenue() + context.getString(R.string.comma) + singleEvent.getBuilding());
             holder.title.setText(singleEvent.getName());
             holder.image.setImageBitmap(singleEvent.getPic());
-            if (singleEvent.getType().equals("Workshop")) {
+            if (singleEvent.getType().equals(context.getString(R.string.Workshop))) {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(context, ArtistActivity.class);
-                        intent.putExtra("workshopOnTop", true);
-                        intent.putExtra("artistID", -1);
-                        intent.putExtra("highlight", singleEvent.getID());
-                        intent.putExtra("artistName", singleEvent.getArtist());
+                        intent.putExtra(context.getString(R.string.workshopOnTop), true);
+                        intent.putExtra(context.getString(R.string.artistID), -1);
+                        intent.putExtra(context.getString(R.string.highlight), singleEvent.getID());
+                        intent.putExtra(context.getString(R.string.artistName), singleEvent.getArtist());
                         context.startActivity(intent);
                     }
                 });
@@ -72,8 +72,8 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, ArtistActivity.class);
-                    intent.putExtra("artistID", singleArtist.getId());
-                    intent.putExtra("highlight", -1);
+                    intent.putExtra(context.getString(R.string.artistID), singleArtist.getId());
+                    intent.putExtra(context.getString(R.string.highlight), -1);
                     context.startActivity(intent);
                 }
             });
@@ -95,7 +95,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
             image = itemView.findViewById(R.id.image);
             title = itemView.findViewById(R.id.title);
             description = itemView.findViewById(R.id.description);
-            Log.i(TAG, ""+title);
+            //Log.i(TAG, ""+title);
         }
     }
 

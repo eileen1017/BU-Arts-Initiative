@@ -106,9 +106,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         SingleEvent singleEvent = (SingleEvent) items.get(position).get(0);
 
         ((ImageView)itemView.findViewById(R.id.image_view)).setImageBitmap(singleEvent.getPic());
-        ((TextView)itemView.findViewById(R.id.description)).setText(singleEvent.getVenue() + ", " + singleEvent.getBuilding());
+        ((TextView)itemView.findViewById(R.id.description)).setText(singleEvent.getVenue() + context.getString(R.string.comma) + singleEvent.getBuilding());
         ((TextView)itemView.findViewById(R.id.title)).setText(singleEvent.getName());
-        ((TextView)itemView.findViewById(R.id.published_date)).setText(singleEvent.getStart() + " - " + singleEvent.getEnd());
+        ((TextView)itemView.findViewById(R.id.published_date)).setText(singleEvent.getStart() + context.getString(R.string.dash) + singleEvent.getEnd());
         ((TextView)itemView.findViewById(R.id.type)).setText(types[position]);
     }
 
@@ -167,7 +167,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
         if (items.get(position).get(0) instanceof SingleEvent) {
 
-            if (((SingleEvent)(items.get(position).get(0))).getType().equals("Bazaar")) {
+            if (((SingleEvent)(items.get(position).get(0))).getType().equals(context.getString(R.string.Bazaar))) {
                 return 1;
             } else {
                 return 2;

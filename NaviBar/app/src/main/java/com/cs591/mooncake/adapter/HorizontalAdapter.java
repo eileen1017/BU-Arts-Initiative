@@ -49,19 +49,19 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
 
         if (data.get(position) instanceof SingleEvent) {
             final SingleEvent singleEvent = (SingleEvent)data.get(position);
-            holder.description.setText(singleEvent.getVenue() + ", " + singleEvent.getBuilding());
+            holder.description.setText(singleEvent.getVenue() + context.getString(R.string.comma) + singleEvent.getBuilding());
             holder.title.setText(singleEvent.getName());
-            holder.pubDate.setText(singleEvent.getStart() + " - " + singleEvent.getEnd());
+            holder.pubDate.setText(singleEvent.getStart() + context.getString(R.string.dash) + singleEvent.getEnd());
             holder.image.setImageBitmap(singleEvent.getPic());
-            if (singleEvent.getType().equals("Workshop")) {
+            if (singleEvent.getType().equals(context.getString(R.string.Workshop))) {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(context, ArtistActivity.class);
-                        intent.putExtra("workshopOnTop", true);
-                        intent.putExtra("artistID", -1);
-                        intent.putExtra("highlight", singleEvent.getID());
-                        intent.putExtra("artistName", singleEvent.getArtist());
+                        intent.putExtra(context.getString(R.string.workshopOnTop), true);
+                        intent.putExtra(context.getString(R.string.artistID), -1);
+                        intent.putExtra(context.getString(R.string.highlight), singleEvent.getID());
+                        intent.putExtra(context.getString(R.string.artistName), singleEvent.getArtist());
                         context.startActivity(intent);
                     }
                 });
@@ -70,14 +70,14 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
             final SingleArtist singleArtist = (SingleArtist)data.get(position);
             holder.description.setText(singleArtist.getCountry());
             holder.title.setText(singleArtist.getName());
-            holder.pubDate.setText("Artist single line bio goes here");
+            holder.pubDate.setText(R.string.ArtistSingle);
             holder.image.setImageBitmap(singleArtist.getPic());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, ArtistActivity.class);
-                    intent.putExtra("artistID", singleArtist.getId());
-                    intent.putExtra("highlight", -1);
+                    intent.putExtra(context.getString(R.string.artistID), singleArtist.getId());
+                    intent.putExtra(context.getString(R.string.highlight), -1);
                     context.startActivity(intent);
                 }
             });

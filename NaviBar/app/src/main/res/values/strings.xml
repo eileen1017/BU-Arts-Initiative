@@ -49,4 +49,17 @@
     <string name="guestlogin">Login with Guest</string>
     <string name="exception">Exception</string>
 
+
+
+    <string name="Workshop">Workshop</string>
+    <string name="workshopOnTop">workshopOnTop</string>
+    <string name="artistID">artistID</string>
+    <string name="highlight">highlight</string>
+    <string name="artistName">artistName</string>
+    <string name="ArtistSingle">Artist single line bio goes here</string>
+    <string name="comma">\,\u0020</string>
+    <string name="dash">\u0020\-\u0020</string>
+    <string name="Bazaar">Bazaar</string>
+
+
 </resources>
