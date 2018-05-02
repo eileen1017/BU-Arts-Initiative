@@ -59,7 +59,7 @@ public class ShareUtil {
         // ACTION_SEND: Deliver text content to other apps.
         sendIntent.setAction(Intent.ACTION_SEND);
         // Set the type to be plain text.
-        sendIntent.setType("text/plain");
+        sendIntent.setType(mContext.getString(R.string.textPlain));
 
         // Get all the app infos.
         List<ResolveInfo> resInfos = mContext.getPackageManager().queryIntentActivities(sendIntent, 0);
@@ -67,8 +67,8 @@ public class ShareUtil {
             // Check all the app's packageName to select from just twitter, facebook, gmail, and sms.
             for(ResolveInfo resInfo : resInfos){
                 String pacName=resInfo.activityInfo.packageName;
-                if(pacName.contains("com.twitter.android") || pacName.contains("com.facebook")
-                        || pacName.contains("com.google.android.gm") || pacName.contains("messaging")) {
+                if(pacName.contains(mContext.getString(R.string.twitterApk)) || pacName.contains(mContext.getString(R.string.facebookApk))
+                        || pacName.contains(mContext.getString(R.string.gmApk)) || pacName.contains(mContext.getString(R.string.messaging))) {
 
                     Intent intent = new Intent();
                     // Explicitly set the component to handle the intent.
@@ -76,7 +76,7 @@ public class ShareUtil {
                     intent.setAction(Intent.ACTION_SEND);
                     intent.putExtra(Intent.EXTRA_TEXT, text);
 
-                    intent.setType("text/plain");
+                    intent.setType(mContext.getString(R.string.textPlain));
                     // Set the app package name that limits the components this intent will resolve to.
                     intent.setPackage(pacName);
                     shareList.add(intent);

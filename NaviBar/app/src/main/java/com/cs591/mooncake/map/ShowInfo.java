@@ -33,9 +33,9 @@ public class ShowInfo extends AppCompatActivity{
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
-        String result = extras.getString("location");
+        String result = extras.getString(getString(R.string.Location));
 
-        if (result.equals("BU_GSU")){
+        if (result.equals(getString(R.string.BU_GSU))){
             setContentView(R.layout.fragment_map_gsu_2ndfloor);
 
             btnBase = (Button) findViewById(R.id.btnGSUBase);
@@ -60,7 +60,7 @@ public class ShowInfo extends AppCompatActivity{
                 }
             });
 
-        } else if (result.equals("BU_Tsai")){
+        } else if (result.equals(getString(R.string.BU_Tsai))){
             setContentView(R.layout.fragment_map_tsai);
 
             //zoom in and out feature

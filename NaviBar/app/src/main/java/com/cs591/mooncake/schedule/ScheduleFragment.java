@@ -198,13 +198,13 @@ public class ScheduleFragment extends Fragment {
             calEvent.put(CalendarContract.Events.EVENT_TIMEZONE, timeZone.getID());    //Timezone for the Event
             calEvent.put(CalendarContract.Events.DESCRIPTION,Integer.toString(singleEvent.getID()));    //  Set an unique description of the event
             Log.i("MyDelete", "My add: "+ cr.insert(CalendarContract.Events.CONTENT_URI, calEvent));
-            Toast.makeText(context, "Added to Google calendar.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.AddedTo, Toast.LENGTH_SHORT).show();
 
 
             //  called when catch exception
         } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(context, "Exception: " + e.getMessage(),
+                Toast.makeText(context, context.getString(R.string.Exception2) + e.getMessage(),
                         Toast.LENGTH_SHORT).show();
             }
         }
@@ -220,7 +220,7 @@ public class ScheduleFragment extends Fragment {
 
 
         Uri uri = CalendarContract.Events.CONTENT_URI;
-        String mSelectionClause = CalendarContract.Events.DESCRIPTION + " = ?";
+        String mSelectionClause = CalendarContract.Events.DESCRIPTION + context.getString(R.string.equal);
         String[] mSelectionArgs = {Integer.toString(singleEvent.getID())};
         context.getContentResolver().delete(uri,mSelectionClause,mSelectionArgs);
 

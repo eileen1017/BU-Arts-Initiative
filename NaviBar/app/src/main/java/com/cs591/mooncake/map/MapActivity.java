@@ -17,7 +17,7 @@ public class MapActivity extends SwipeBackActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         Bundle extras = getIntent().getExtras();
-        int result = extras.getInt("eventId");
+        int result = extras.getInt(getString(R.string.eventId));
 
         mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapFrag);
         mapFragment.receiveMes(result);

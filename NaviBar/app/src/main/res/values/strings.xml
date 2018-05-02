@@ -71,6 +71,44 @@
     <string name="Added">Added</string>
     <string name="date1">10/5 Fri.\u0020</string>
     <string name="date2">10/6 Sat.\u0020</string>
+    <string name="twitterApk">com.twitter.android</string>
+    <string name="facebookApk">com.facebook</string>
+    <string name="gmApk">com.google.android.gm</string>
+    <string name="messaging">messaging</string>
+    <string name="textPlain">text/plain</string>
+    <string name="Except">\u0020must implement ExploreInteractionListener</string>
+    <string name="AuthenticationFailed">Authentication failed.</string>
+    <string name="Error1">Error copying database</string>
+    <string name="email">email</string>
+    <string name="public_profile">public_profile</string>
+    <string name="SigninSuc">Signin Successful</string>
+    <string name="SignFail">Signin failed</string>
+    <string name="cant">You can\'t make map requests</string>
+    <string name="CAS">CAS</string>
+    <string name="GSU">GSU</string>
+    <string name="BU_GSU">BU_GSU</string>
+    <string name="BU_Tsai">BU_Tsai</string>
+    <string name="Location">location</string>
+    <string name="gmfUrl">https://www.bu.edu/gmf</string>
+    <string name="surveymonkey">https://www.surveymonkey.com/r/523GWBK</string>
+    <string name="concert"><![CDATA[https://concerts1.livenation.com/event/01005383E6B14115?crosssite=TM_US:734408:9044&_ga=2.245148812.888577874.1524944987-1940939807.1522715659]]></string>
+    <string name="To">To</string>
+    <string name="AddedTo">Added to Google calendar.</string>
+    <string name="Exception2">Exception:</string>
+    <string name="equal">\u0020\= \?</string>
+    <string name="cfa">http://www.bu.edu/cfa/</string>
+    <string name="global">http://www.bu.edu/globalprograms/</string>
+    <string name="human">http://www.bu.edu/humanities/</string>
+    <string name="school">http://www.bu.edu/pardeeschool/</string>
+    <string name="wbur">http://www.wbur.org/</string>
+    <string name="write">Write Calendars</string>
+    <string name="read">Read Calendars</string>
+    <string name="grant">You need to grant access to\u0020</string>
+    <string name="and">\u0020and\u0020</string>
+    <string name="sync">\u0020to Sync your schedule to Calendars.</string>
+    <string name="OK">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="some">Some Permission is Denied</string>
 
 
 </resources>

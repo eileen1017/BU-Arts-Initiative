@@ -77,8 +77,6 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
 
 
 
-
-
     final private int REQUEST_CODE_ASK_PERMISSIONS = 124;
 
     @Override
@@ -147,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
                 Random random = new Random();
                 int i = random.nextInt(5);
                 int[] backg = {R.drawable.bufinearts,R.drawable.buglobalprogram,R.drawable.buhumanities,R.drawable.bupardeelogo,R.drawable.wbur_logo};
-                String[] link = {"http://www.bu.edu/cfa/","http://www.bu.edu/globalprograms/","http://www.bu.edu/humanities/","http://www.bu.edu/pardeeschool/","http://www.wbur.org/"};
+                String[] link = {getString(R.string.cfa),getString(R.string.global),getString(R.string.human),getString(R.string.school),getString(R.string.wbur)};
                 // Set the image background of the random generated int and parse uri
                 adView.setImageResource(backg[i]);
                 final Uri uri = Uri.parse(link[i]);
@@ -203,12 +201,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
 
         AskPermissions();
 
-
-
     }
-
-
-
 
 
     @Override
@@ -219,7 +212,6 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
 
 
 
-
     //  Check for Permission Request
     private void AskPermissions(){
         List<String> permissionsNeeded = new ArrayList<String>();
@@ -227,14 +219,14 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
 
         // Check the permission for Calendar usage
         if (!addPermission(permissionsList, Manifest.permission.WRITE_CALENDAR))
-            permissionsNeeded.add("Write Calendars");
+            permissionsNeeded.add(getString(R.string.write));
         if (!addPermission(permissionsList, Manifest.permission.READ_CALENDAR))
-            permissionsNeeded.add("Read Calendars");
+            permissionsNeeded.add(getString(R.string.read));
 
         //  Add an explanation for calendar permission to users
         if (permissionsList.size() > 0) {
             if (permissionsNeeded.size() > 0) {
-                String message = "You need to grant access to " + permissionsNeeded.get(0) + " and " + permissionsNeeded.get(1) + " to Sync your schedule to Calendars.";
+                String message = getString(R.string.grant) + permissionsNeeded.get(0) + getString(R.string.and) + permissionsNeeded.get(1) + getString(R.string.sync);
 
                 for (int i = 1; i < permissionsNeeded.size(); i++)
                     showMessageOKCancel(message,
@@ -271,8 +263,8 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener){
         new AlertDialog.Builder(MainActivity.this)
                 .setMessage(message)
-                .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancel",null)
+                .setPositiveButton(R.string.OK, okListener)
+                .setNegativeButton(R.string.cancel,null)
                 .create()
                 .show();
     }
@@ -295,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
 
                 } else {
                     // Permission Denied
-                    Toast.makeText(MainActivity.this, "Some Permission is Denied", Toast.LENGTH_SHORT)
+                    Toast.makeText(MainActivity.this, R.string.some, Toast.LENGTH_SHORT)
                             .show();
                 }
             }
@@ -317,11 +309,11 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
     @Override
     public void openLikeEvent(int id) {
         SingleEvent singleEvent = myDb.getEvent(id);
-        if (!singleEvent.getType().equals("Bazaar")) {
+        if (!singleEvent.getType().equals(getString(R.string.Bazaar))) {
             Intent intent = new Intent(this, ArtistActivity.class);
-            intent.putExtra("artistID", -1);
-            intent.putExtra("artistName", singleEvent.getArtist());
-            intent.putExtra("highlight", id);
+            intent.putExtra(getString(R.string.artistID), -1);
+            intent.putExtra(getString(R.string.artistName), singleEvent.getArtist());
+            intent.putExtra(getString(R.string.highlight), id);
             startActivity(intent);
         }
     }
@@ -329,11 +321,11 @@ public class MainActivity extends AppCompatActivity implements FirebaseProfile.p
     @Override
     public void openScheduleEvent(int id) {
         SingleEvent singleEvent = myDb.getEvent(id);
-        if (!singleEvent.getType().equals("Bazaar")) {
+        if (!singleEvent.getType().equals(getString(R.string.Bazaar))) {
             Intent intent = new Intent(this, ArtistActivity.class);
-            intent.putExtra("artistID", -1);
-            intent.putExtra("artistName", singleEvent.getArtist());
-            intent.putExtra("highlight", id);
+            intent.putExtra(getString(R.string.artistID), -1);
+            intent.putExtra(getString(R.string.artistName), singleEvent.getArtist());
+            intent.putExtra(getString(R.string.highlight), id);
             startActivity(intent);
         }
     }

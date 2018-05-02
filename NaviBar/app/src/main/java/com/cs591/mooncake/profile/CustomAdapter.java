@@ -64,7 +64,7 @@ public class CustomAdapter extends ArrayAdapter<String> {
                     switch(position) {
                         case 0:
                             //  called when click on Website and lead to BU global Music Festival website
-                            Intent websiteIntent = new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.bu.edu/gmf"));
+                            Intent websiteIntent = new Intent(Intent.ACTION_VIEW,Uri.parse(mContext.getString(R.string.gmfUrl)));
                             getContext().startActivity(websiteIntent);
                             break;
                         case 1:
@@ -73,7 +73,7 @@ public class CustomAdapter extends ArrayAdapter<String> {
                             break;
                         case 2:
                             //  called when click on Feedback and open BU global festival survey link
-                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.surveymonkey.com/r/523GWBK"));
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mContext.getString(R.string.surveymonkey)));
                             getContext().startActivity(browserIntent);
                             break;
                         case 3:
@@ -83,7 +83,7 @@ public class CustomAdapter extends ArrayAdapter<String> {
                             break;
                         case 4:
                             //  called when click on Ticket and buy ticket in TicketMaster website
-                            Intent browserTic = new Intent(Intent.ACTION_VIEW, Uri.parse("https://concerts1.livenation.com/event/01005383E6B14115?crosssite=TM_US:734408:9044&_ga=2.245148812.888577874.1524944987-1940939807.1522715659"));
+                            Intent browserTic = new Intent(Intent.ACTION_VIEW, Uri.parse(mContext.getString(R.string.concert)));
                             getContext().startActivity(browserTic);
                             break;
 

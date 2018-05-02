@@ -70,7 +70,7 @@ public class ExploreFragment extends Fragment {
             EIL = (ExploreInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement ExploreInteractionListener");
+                    + getString(R.string.Except));
         }
     }
 

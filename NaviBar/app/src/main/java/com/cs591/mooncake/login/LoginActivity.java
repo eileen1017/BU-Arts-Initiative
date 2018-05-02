@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w(TAG, "signInAnonymously:failure", task.getException());
-                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.makeText(LoginActivity.this, R.string.AuthenticationFailed,
                                             Toast.LENGTH_SHORT).show();
                                 }
 
@@ -163,7 +163,7 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 util.copyDataBase();
             } catch (IOException e) {
-                throw new Error("Error copying database");
+                throw new Error(getString(R.string.Error1));
             }
         }
     }
@@ -244,7 +244,7 @@ public class LoginActivity extends AppCompatActivity {
         mCallbackManager = CallbackManager.Factory.create();
         fb = findViewById(R.id.fb);
         loginButton = findViewById(R.id.btnFacebookLogin);
-        loginButton.setReadPermissions("email", "public_profile");
+        loginButton.setReadPermissions(getString(R.string.email), getString(R.string.public_profile));
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -323,7 +323,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, getString(R.string.AuthenticationFailed),
                                     Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }
@@ -352,7 +352,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, getString(R.string.AuthenticationFailed),
                                     Toast.LENGTH_SHORT).show();
                         }
 
@@ -374,12 +374,12 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(LoginActivity.this, "SIgnin Successful", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, R.string.SigninSuc, Toast.LENGTH_LONG).show();
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Signin failed", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, R.string.SignFail, Toast.LENGTH_LONG).show();
                             //Snackbar.make(findViewById(R.id.main_layout), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
                             //updateUI(null);
                         }

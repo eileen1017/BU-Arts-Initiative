@@ -140,7 +140,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(getActivity(), available, ERROR_DIALOG_REQUEST);
             dialog.show();
         }else{
-            Toast.makeText(getActivity(), "You can't make map requests", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.cant, Toast.LENGTH_SHORT).show();
         }
         return false;
     }
@@ -159,24 +159,24 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
             String buildInfo = singleEvent.getBuilding();
 
-            if (buildInfo.equals("CAS")) {
-                ifShowWindow = "CAS";
-            } else if (buildInfo.equals("GSU")) {
-                ifShowWindow = "GSU";
+            if (buildInfo.equals(getString(R.string.CAS))) {
+                ifShowWindow = getString(R.string.CAS);
+            } else if (buildInfo.equals(getString(R.string.GSU))) {
+                ifShowWindow = getString(R.string.GSU);
             }
         }
 
 
-        MarkerOptions gsu = new MarkerOptions().position(BU_GSU).title("BU_GSU").snippet("Click for indoor map");
-        if (ifShowWindow.equals("GSU")){
+        MarkerOptions gsu = new MarkerOptions().position(BU_GSU).title(getString(R.string.BU_GSU)).snippet("Click for indoor map");
+        if (ifShowWindow.equals(getString(R.string.GSU))){
             mMap.addMarker(gsu).showInfoWindow();
         } else {
             mMap.addMarker(gsu);
         }
 
 
-        MarkerOptions tsai = new MarkerOptions().position(BU_Tsai).title("BU_Tsai").snippet("Click for indoor map");
-        if (ifShowWindow.equals("CAS")){
+        MarkerOptions tsai = new MarkerOptions().position(BU_Tsai).title(getString(R.string.BU_Tsai)).snippet("Click for indoor map");
+        if (ifShowWindow.equals(getString(R.string.CAS))){
             mMap.addMarker(tsai).showInfoWindow();
         } else {
             mMap.addMarker(tsai);
@@ -282,7 +282,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         Intent intent = new Intent(getActivity(), ShowInfo.class);
         String locationTitle = marker.getTitle();
 
-        intent.putExtra("location", locationTitle);
+        intent.putExtra(getString(R.string.Location), locationTitle);
         startActivity(intent);
     }
 
