@@ -31,11 +31,13 @@ import java.util.List;
 
 public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
 
+    //  field for initialization
     private Context mContext;
     private int lastPosition = -1;
     private List<Object> mList;
     LikeFragment.OnLikedEventClickedListener olcl;
 
+    //  initialization of LikeAdaptor
     LikeAdapter(Context context, List<Object> list, LikeFragment.OnLikedEventClickedListener OLCL){
         this.olcl = OLCL;
         mContext = context;
@@ -44,6 +46,7 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
+        // fields for initialization on rv_like_items.xml
         ImageView item_image;
         TextView item_name;
         Button likebtn;
@@ -51,6 +54,7 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             super(itemView);
 
+            //  give the references for TextView, Button and ImageView
             likebtn = itemView.findViewById(R.id.likebtn);
             item_image = itemView.findViewById(R.id.item_image);
             item_name = itemView.findViewById(R.id.item_name);
@@ -58,6 +62,8 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
         }
     }
 
+    //  Called when RecyclerView needs a new RecyclerView.ViewHolder of the given type to represent an item.
+    //  Set up viewHolder
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
@@ -72,10 +78,13 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
+        //  Called to display the data at the specified position in RecyclerView.
+        //  This method should update the contents of the itemView to reflect the item at the given position.
 
+        //  Connection to SingleEvent database
         final SingleEvent singleEvent = (SingleEvent) mList.get(position);
 
-
+        //  Set text and image from database to cardView holder
         holder.item_name.setText(singleEvent.getName());
         holder.item_image.setImageBitmap(singleEvent.getPic());
 
@@ -87,15 +96,16 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
             }
         });
 
-
+        //
         holder.likebtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
 
                 // get SQLite DB
                 final MySQLiteHelper mydb = new MySQLiteHelper(view.getContext());
-               // final SingleUser singleUser = mydb.getProfile();
+                //final SingleUser singleUser = mydb.getProfile();
 
+                // set the message with the event name
                 String normalText1 = mContext.getString(R.string.unlike_check);
                 String boldText = singleEvent.getName();
                 String normalText2 = mContext.getString(R.string.question_mark);
@@ -137,8 +147,8 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
 
             }
         });
+        // call the function to give animation when go to the like fragment from other fragments
         setAnimation(holder.itemView, position);
-
 
     }
 
@@ -157,9 +167,7 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.ViewHolder> {
             lastPosition = position;
             animation.setDuration(200 + position * 80);
         }
+
     }
-
-
-
 
 }
