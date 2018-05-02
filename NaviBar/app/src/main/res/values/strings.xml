@@ -67,6 +67,10 @@
     <string name="DATE_5">5</string>
     <string name="DATE_6">6</string>
     <string name="MONTH">OCT</string>
+    <string name="Removed">Removed</string>
+    <string name="Added">Added</string>
+    <string name="date1">10/5 Fri.\u0020</string>
+    <string name="date2">10/6 Sat.\u0020</string>
 
 
 </resources>

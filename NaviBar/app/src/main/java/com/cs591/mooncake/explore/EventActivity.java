@@ -30,7 +30,7 @@ public class EventActivity extends SwipeBackActivity {
 
         Intent extras = getIntent();
         Bundle bundle = extras.getExtras();
-        final int eventID = bundle.getInt("eventID");
+        final int eventID = bundle.getInt(getString(R.string.eventId));
         populateUI(myDb.getEvent(eventID));
         findViewById(R.id.btnAddEventSchedule).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,10 +38,10 @@ public class EventActivity extends SwipeBackActivity {
                 SingleUser singleUser = myDb.getProfile();
                 if (singleUser.getScheduled().contains(eventID)) {
                     singleUser.removeScheduled(eventID);
-                    Toast.makeText(EventActivity.this,"Removed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EventActivity.this, R.string.Removed, Toast.LENGTH_SHORT).show();
                 } else {
                     singleUser.addScheduled(eventID);
-                    Toast.makeText(EventActivity.this,"Added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EventActivity.this, R.string.Added, Toast.LENGTH_SHORT).show();
                 }
                 new FirebaseProfile().updateLikedScheduled(singleUser);
                 myDb.addProfile(singleUser);
@@ -63,9 +63,9 @@ public class EventActivity extends SwipeBackActivity {
 
         String date;
         if (singleEvent.getDate() == 5) {
-            date = "10/5 Fri. ";
+            date = getString(R.string.date1);
         } else {
-            date = "10/6 Sat. ";
+            date = getString(R.string.date2);
         }
 
         tvEventTime.setText(date + singleEvent.getStart());
