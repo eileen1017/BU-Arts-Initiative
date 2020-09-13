@@ -1,4 +1,4 @@
-# CS591_FinalProject(Team Mooncake 9.0)
+# CS591_FinalProject
 
 an Android event scheduler app  
 Implemented user account module to manage user registered events, integrated with Google Map API to navigate or locate users’ events’ addresses, integrated with Google Calendar and Android Calendar to synchronize users’ favorite events.   
